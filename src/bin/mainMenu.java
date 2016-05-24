@@ -20,6 +20,7 @@ public class mainMenu {
 		btnPnl.setLayout(new BoxLayout(btnPnl, BoxLayout.Y_AXIS));
 		
 		JButton btnNewGame = new JButton("New Game");
+		btnNewGame.setPreferredSize(new Dimension());
 		btnNewGame.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnPnl.add(btnNewGame);
 		
@@ -31,7 +32,7 @@ public class mainMenu {
 		btnLeaderboards.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnPnl.add(btnLeaderboards);
 		
-		JLabel lblTitle = new JLabel("Prison Break");
+		JLabel lblTitle = new JLabel("On The Run");
 		lblTitle.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 38));
 		namePnl.add(lblTitle);
 		
