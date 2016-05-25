@@ -1,12 +1,14 @@
 package bin;
+import javax.imageio.*;
 import javax.swing.*;
 import java.awt.*;
+import java.io.*;
 
 public class mainMenu {
 	JFrame main = new JFrame("Prison Break - Main Menu");
 	
 	public mainMenu(){
-		main.setBounds(0,0,600,500);
+		main.setBounds(300,100,600,450);
 		main.getContentPane().setLayout(new BorderLayout(0, 0));
 
 		JPanel namePnl = new JPanel();
@@ -20,7 +22,6 @@ public class mainMenu {
 		btnPnl.setLayout(new BoxLayout(btnPnl, BoxLayout.Y_AXIS));
 		
 		JButton btnNewGame = new JButton("New Game");
-		btnNewGame.setPreferredSize(new Dimension());
 		btnNewGame.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnPnl.add(btnNewGame);
 		
@@ -37,8 +38,7 @@ public class mainMenu {
 		namePnl.add(lblTitle);
 		
 		JLabel lblNewLabel = new JLabel("");
-		ImageIcon image = new ImageIcon(getClass().getResource("/mainMenuIcon.jpg"));
-		lblNewLabel.setIcon(image);
+		lblNewLabel.setIcon(new ImageIcon("src/img/mainMenuIcon.jpg"));
 		centerPnl.add(lblNewLabel);
 		
 		main.setResizable(false);
