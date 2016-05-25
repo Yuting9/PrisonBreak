@@ -37,7 +37,8 @@ public class mainMenu {
 		namePnl.add(lblTitle);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("mainMenuIcon.jpg"));
+		ImageIcon image = new ImageIcon(getClass().getResource("/mainMenuIcon.jpg"));
+		lblNewLabel.setIcon(image);
 		centerPnl.add(lblNewLabel);
 		
 		main.setResizable(false);
