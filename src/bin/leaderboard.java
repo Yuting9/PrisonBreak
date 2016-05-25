@@ -1,5 +1,6 @@
 package bin;
 
-public class leaderboard {
+public class leaderboard 
+{
 
 }
