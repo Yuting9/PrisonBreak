@@ -40,7 +40,7 @@ public class mainMenu {
 	    namePnl.add(lblTitle);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon("src/img/mainMenuIcon.jpg"));
+		lblNewLabel.setIcon(new ImageIcon(mainMenu.class.getResource("/img/mainMenuIcon.jpg")));
 		centerPnl.add(lblNewLabel);
 		
 		main.setResizable(false);
