@@ -61,14 +61,18 @@ public class PrisonBreak implements ActionListener
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnNew){
+		if(e.getSource() == btnNew)
+		{
 			
 		}
-		if(e.getSource() == btnHow){
+		if(e.getSource() == btnHow)
+		{
 			
 		}
-		if(e.getSource() == btnLead){
-			
+		if(e.getSource() == btnLead)
+		{
+			main.setVisible(false);
+			leaderboard second = new leaderboard();
 		}
 	}
   public static void main(String[] args) 
