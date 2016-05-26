@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 public class PrisonBreak implements ActionListener
 {
 	JFrame main = new JFrame("Prison Break - Main Menu");
+	JButton btnNew,btnLead,btnHow;
 	
 	public PrisonBreak(){
 		main.setBounds(300,100,600,450);
@@ -32,19 +33,19 @@ public class PrisonBreak implements ActionListener
 	    btnPnl.setLayout(new GridLayout(1, 3));
 	    btnPnl.setPreferredSize(new Dimension(0, 40));
 	    
-	    JButton btnNewGame = new JButton("New Game");
-	    btnNewGame.addActionListener(this);
-	    btnNewGame.setPreferredSize(new Dimension());
-	    btnPnl.add(btnNewGame);
+	    btnNew = new JButton("New Game");
+	    btnNew.addActionListener(this);
+	    btnNew.setPreferredSize(new Dimension());
+	    btnPnl.add(btnNew);
 	   
-	    JButton btnHowToPlay = new JButton("How to Play");
-	    btnHowToPlay.addActionListener(this);
-	    btnPnl.add(btnHowToPlay);
+	    btnHow = new JButton("How to Play");
+	    btnHow.addActionListener(this);
+	    btnPnl.add(btnHow);
 	    
-	    JButton btnLeaderboards = new JButton("Leaderboards");
-	    btnLeaderboards.addActionListener(this);
-	    btnLeaderboards.setAlignmentX(Component.CENTER_ALIGNMENT);
-	    btnPnl.add(btnLeaderboards);
+	    btnLead = new JButton("Leaderboards");
+	    btnLead.addActionListener(this);
+	    btnLead.setAlignmentX(Component.CENTER_ALIGNMENT);
+	    btnPnl.add(btnLead);
 	    
 	    JLabel lblTitle = new JLabel("On The Run");
 	    lblTitle.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 38));
@@ -59,9 +60,16 @@ public class PrisonBreak implements ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) {
-		// TODO Auto-generated method stub
-		
+	public void actionPerformed(ActionEvent e) {
+		if(e.getSource() == btnNew){
+			
+		}
+		if(e.getSource() == btnHow){
+			
+		}
+		if(e.getSource() == btnLead){
+			
+		}
 	}
   public static void main(String[] args) 
   {
