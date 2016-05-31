@@ -7,12 +7,13 @@ public class Animation extends JPanel implements ActionListener
   JFrame f = new JFrame();
   ImageIcon anima;
   int i = 0;
-  JLabel holder = new JLabel;
+  JLabel holder = new JLabel();
   Timer clock = new Timer(100, this);
   
   public static void main (String[] args)
   {
-    
+    Animation test = new Animation();
+    test.Window();
   }
   
   public void Window()
@@ -24,7 +25,7 @@ public class Animation extends JPanel implements ActionListener
     f.setVisible(true);
   }
   
-  @override
+  @Override
   public void actionPerformed(ActionEvent e)
   {
     i++;
@@ -32,5 +33,10 @@ public class Animation extends JPanel implements ActionListener
     this.remove(holder);
     holder = new JLabel(anima);
     add(holder);
+    if (i == 6 /*number of images*/ )
+    {
+      i = 0;
+    }
+    revalidate();
   }
 }

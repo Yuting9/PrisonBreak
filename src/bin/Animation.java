@@ -29,11 +29,11 @@ public class Animation extends JPanel implements ActionListener
   public void actionPerformed(ActionEvent e)
   {
     i++;
-    anima = new ImageIcon();
+    anima = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
     this.remove(holder);
     holder = new JLabel(anima);
     add(holder);
-    if (i == 6 /*number of images*/ )
+    if (i == 6 )
     {
       i = 0;
     }
