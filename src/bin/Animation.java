@@ -1,8 +1,12 @@
+package bin;
+
 import javax.swing.*;
 import java.awt.event.*;
 
 public class Animation extends JPanel implements ActionListener
 {
+	public Animation() {
+	}
   
   JFrame f = new JFrame();
   ImageIcon anima;
@@ -21,7 +25,7 @@ public class Animation extends JPanel implements ActionListener
     add(holder);
     clock.start();
     f.setSize(800, 800);
-    f.add(this);
+    f.getContentPane().add(this);
     f.setVisible(true);
   }
   

@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 
 public class PrisonBreak implements ActionListener
 {
-	JFrame main = new JFrame("Prison Break - Main Menu");
+	JFrame main = new JFrame("On the Run - Main Menu");
 	JButton btnNew,btnLead,btnHow;
 	
 	public PrisonBreak(){
@@ -72,7 +72,7 @@ public class PrisonBreak implements ActionListener
 		if(e.getSource() == btnLead)
 		{
 			main.setVisible(false);
-			leaderboard second = new leaderboard();
+			leaderboard second = new leaderboard(main);
 		}
 	}
   public static void main(String[] args) 
