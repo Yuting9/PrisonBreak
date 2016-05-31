@@ -12,7 +12,7 @@ public class Animation extends JPanel implements ActionListener
   ImageIcon anima;
   int i = 0;
   JLabel holder = new JLabel();
-  Timer clock = new Timer(100, this);
+  Timer clock = new Timer(40, this);
   
   public static void main (String[] args)
   {

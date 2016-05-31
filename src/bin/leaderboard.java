@@ -21,6 +21,8 @@ public class leaderboard
 	JFrame lead = new JFrame("On the Run - Leaderboards");
 	leaderboard(JFrame main){
 		lead.getContentPane().setLayout(new BoxLayout(lead.getContentPane(), BoxLayout.X_AXIS));
+		lead.setVisible(true);
+		lead.setBounds(300,100,600,450);
 		
 		JPanel pnlTime = new JPanel();
 		lead.getContentPane().add(pnlTime);
