@@ -18,35 +18,35 @@ import java.awt.FlowLayout;
 
 public class leaderboard 
 {
-	JFrame lead = new JFrame("On the Run - Leaderboards");
-	leaderboard(JFrame main){
-		lead.getContentPane().setLayout(new BoxLayout(lead.getContentPane(), BoxLayout.X_AXIS));
-		lead.setVisible(true);
-		lead.setBounds(300,100,600,450);
-		
-		JPanel pnlTime = new JPanel();
-		lead.getContentPane().add(pnlTime);
-		pnlTime.setLayout(new BorderLayout(0, 0));
-		
-		JLabel lblHiScore = new JLabel("Leaderboards - High Score");
-		lblHiScore.setHorizontalAlignment(SwingConstants.CENTER);
-		pnlTime.add(lblHiScore, BorderLayout.NORTH);
-		
-		JLabel lblScores = new JLabel("");
-		pnlTime.add(lblScores, BorderLayout.CENTER);
-		
-		JPanel pnlBtn = new JPanel();
-		pnlTime.add(pnlBtn, BorderLayout.SOUTH);
-		pnlBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		
-		JButton btnRtn = new JButton("Return to Menu");
-		btnRtn.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				main.setVisible(true);
-				lead.dispose();
-			}
-		});
-		pnlBtn.add(btnRtn);
-		
-	}
+ final JFrame lead = new JFrame("On the Run - Leaderboards");
+ leaderboard(final JFrame main){
+  lead.getContentPane().setLayout(new BoxLayout(lead.getContentPane(), BoxLayout.X_AXIS));
+  lead.setVisible(true);
+  lead.setBounds(300,100,600,450);
+  
+  JPanel pnlTime = new JPanel();
+  lead.getContentPane().add(pnlTime);
+  pnlTime.setLayout(new BorderLayout(0, 0));
+  
+  JLabel lblHiScore = new JLabel("Leaderboards - High Score");
+  lblHiScore.setHorizontalAlignment(SwingConstants.CENTER);
+  pnlTime.add(lblHiScore, BorderLayout.NORTH);
+  
+  JLabel lblScores = new JLabel("");
+  pnlTime.add(lblScores, BorderLayout.CENTER);
+  
+  JPanel pnlBtn = new JPanel();
+  pnlTime.add(pnlBtn, BorderLayout.SOUTH);
+  pnlBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+  
+  JButton btnRtn = new JButton("Return to Menu");
+  btnRtn.addActionListener(new ActionListener() {
+   public void actionPerformed(ActionEvent e) {
+    main.setVisible(true);
+    lead.dispose();
+   }
+  });
+  pnlBtn.add(btnRtn);
+  
+ }
 }
