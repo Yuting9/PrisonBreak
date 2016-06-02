@@ -23,7 +23,7 @@ public class howToPlay
     final JFrame howTo = new JFrame("On the Run - How To Play");
     howTo.setLayout(new BorderLayout() );
     howTo.setVisible(true);
-    howTo.setBounds(300,100,600,450);
+    howTo.setBounds(300,100,700,550);
     
     JPanel pnlInstructions = new JPanel();
     pnlInstructions.setLayout(new GridLayout(2, 2) );
@@ -32,6 +32,25 @@ public class howToPlay
     JLabel lblTitle = new JLabel("How To Play");
     lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     howTo.add(lblTitle, BorderLayout.NORTH);
+    
+    JPanel pnlObjective = new JPanel();
+    pnlObjective.setLayout(new GridLayout(2, 1) );
+    JLabel lblObjective = new JLabel("The objective of the game is to catch the prisoner.");
+    JLabel prisonerImage = new JLabel();
+    ImageIcon icon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
+    prisonerImage.setIcon(icon);
+    pnlObjective.add(lblObjective);
+    pnlObjective.add(prisonerImage);
+    pnlInstructions.add(pnlObjective);
+    
+    JLabel lblJump = new JLabel("You will use the spacebar to jump.");
+    pnlInstructions.add(lblJump);
+    
+    JLabel lblDonut = new JLabel("slow");
+    pnlInstructions.add(lblDonut);
+    
+    JLabel lblCoffee = new JLabel("fast");
+    pnlInstructions.add(lblCoffee);
     
     JPanel pnlBtn = new JPanel();
     howTo.add(pnlBtn, BorderLayout.SOUTH);
