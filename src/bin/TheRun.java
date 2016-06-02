@@ -1,21 +1,41 @@
 package bin;
 
+import javax.swing.*;
+import java.awt.event.*;
 
-import java.awt.BorderLayout;
-import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
-import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-
-public class TheRun {
-	JFrame game = new JFrame("On the Run");
-	
+public class TheRun extends JPanel implements ActionListener
+{
+	JFrame f = new JFrame();
+	ImageIcon anima;
+	int i = 0, d = 500;
+    JLabel holder = new JLabel();
+    Timer clock = new Timer(40, this);
+    
+    public void Window()
+    {
+    	f.setResizable(false);
+        add(holder);
+        clock.start();
+        f.setSize(600,450);
+        f.getContentPane().add(this);
+        f.setVisible(true);
+    }
+    
+    @Override
+    public void actionPerformed(ActionEvent e)
+    {
+        i++;
+        clock.setDelay(d);
+        if(d>=42)
+        	d-=(d/10);
+        anima = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
+        this.remove(holder);
+        holder = new JLabel(anima);
+        add(holder);
+        if (i == 6 )
+        {
+            i = 0;
+        }
+        revalidate();
+    }
 }

@@ -63,7 +63,9 @@ public class PrisonBreak implements ActionListener
 	public void actionPerformed(ActionEvent e) {
 		if(e.getSource() == btnNew)
 		{
-			
+			main.setVisible(false);
+			TheRun game = new TheRun();
+			game.Window();
 		}
 		if(e.getSource() == btnHow)
 		{
