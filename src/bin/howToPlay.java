@@ -36,20 +36,28 @@ public class howToPlay
     JPanel pnlObjective = new JPanel();
     pnlObjective.setLayout(new GridLayout(2, 1) );
     JLabel lblObjective = new JLabel("The objective of the game is to catch the prisoner.");
-    JLabel prisonerImage = new JLabel();
-    ImageIcon icon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
-    prisonerImage.setIcon(icon);
+    JLabel prisonerImg = new JLabel();
+    ImageIcon objectiveIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
+    prisonerImg.setIcon(objectiveIcon);
     pnlObjective.add(lblObjective);
-    pnlObjective.add(prisonerImage);
+    pnlObjective.add(prisonerImg);
     pnlInstructions.add(pnlObjective);
     
+    JPanel pnlJump = new JPanel();
+    pnlJump.setLayout(new GridLayout(2, 1) );
     JLabel lblJump = new JLabel("You will use the spacebar to jump.");
-    pnlInstructions.add(lblJump);
+    JLabel jumpImg = new JLabel();
+    ImageIcon jumpIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
+    jumpImg.setIcon(jumpIcon);
+    pnlJump.add(lblJump);
+    pnlJump.add(jumpImg);
+    pnlInstructions.add(pnlJump);
     
-    JLabel lblDonut = new JLabel("slow");
+    
+    JLabel lblDonut = new JLabel("Donuts will slow you down.");
     pnlInstructions.add(lblDonut);
     
-    JLabel lblCoffee = new JLabel("fast");
+    JLabel lblCoffee = new JLabel("Coffee will speed you up.");
     pnlInstructions.add(lblCoffee);
     
     JPanel pnlBtn = new JPanel();
