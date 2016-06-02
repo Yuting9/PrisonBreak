@@ -69,7 +69,8 @@ public class PrisonBreak implements ActionListener
 		}
 		if(e.getSource() == btnHow)
 		{
-			
+			main.setVisible(false);
+			howToPlay how = new howToPlay(main);
 		}
 		if(e.getSource() == btnLead)
 		{
