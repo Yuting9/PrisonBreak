@@ -22,6 +22,8 @@ public class PrisonBreak implements ActionListener
 		main.setBounds(300,100,600,450);
 	    main.getContentPane().setLayout(new BorderLayout(0, 0));
 	    
+	    new Character();
+	    
 	    JPanel namePnl = new JPanel();
 	    main.getContentPane().add(namePnl, BorderLayout.NORTH);
 	    
