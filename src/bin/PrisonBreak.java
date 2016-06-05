@@ -22,6 +22,8 @@ public class PrisonBreak implements ActionListener
 		main.setBounds(300,100,600,450);
 	    main.getContentPane().setLayout(new BorderLayout(0, 0));
 	    
+	    new Character();
+	    
 	    JPanel namePnl = new JPanel();
 	    main.getContentPane().add(namePnl, BorderLayout.NORTH);
 	    
@@ -52,7 +54,7 @@ public class PrisonBreak implements ActionListener
 	    namePnl.add(lblTitle);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(PrisonBreak.class.getResource("/mainMenuIcon.jpg")));
 		centerPnl.add(lblNewLabel);
 		
 		main.setResizable(false);
