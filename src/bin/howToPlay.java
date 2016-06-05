@@ -63,8 +63,15 @@ public class howToPlay
     pnlDonut.add(donutImg);
     pnlInstructions.add(pnlDonut);
     
+    JPanel pnlCoffee = new JPanel();
+    pnlCoffee.setLayout(new GridLayout(2, 1) );
     JLabel lblCoffee = new JLabel("Coffee will speed you up.");
-    pnlInstructions.add(lblCoffee);
+    JLabel coffeeImg = new JLabel();
+    ImageIcon coffeeIcon = new ImageIcon(PrisonBreak.class.getResource("/img/coffee.png"));
+    coffeeImg.setIcon(coffeeIcon);
+    pnlCoffee.add(lblCoffee);
+    pnlCoffee.add(coffeeImg);
+    pnlInstructions.add(pnlCoffee);
     
     JPanel pnlBtn = new JPanel();
     howTo.add(pnlBtn, BorderLayout.SOUTH);

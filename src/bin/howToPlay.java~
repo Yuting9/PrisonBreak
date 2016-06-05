@@ -23,7 +23,7 @@ public class howToPlay
     final JFrame howTo = new JFrame("On the Run - How To Play");
     howTo.setLayout(new BorderLayout() );
     howTo.setVisible(true);
-    howTo.setBounds(300,100,600,450);
+    howTo.setBounds(300,100,700,550);
     
     JPanel pnlInstructions = new JPanel();
     pnlInstructions.setLayout(new GridLayout(2, 2) );
@@ -32,6 +32,46 @@ public class howToPlay
     JLabel lblTitle = new JLabel("How To Play");
     lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
     howTo.add(lblTitle, BorderLayout.NORTH);
+    
+    JPanel pnlObjective = new JPanel();
+    pnlObjective.setLayout(new GridLayout(2, 1) );
+    JLabel lblObjective = new JLabel("The objective of the game is to catch the prisoner.");
+    JLabel prisonerImg = new JLabel();
+    ImageIcon objectiveIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
+    prisonerImg.setIcon(objectiveIcon);
+    pnlObjective.add(lblObjective);
+    pnlObjective.add(prisonerImg);
+    pnlInstructions.add(pnlObjective);
+    
+    JPanel pnlJump = new JPanel();
+    pnlJump.setLayout(new GridLayout(2, 1) );
+    JLabel lblJump = new JLabel("You will use the spacebar to jump.");
+    JLabel jumpImg = new JLabel();
+    ImageIcon jumpIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
+    jumpImg.setIcon(jumpIcon);
+    pnlJump.add(lblJump);
+    pnlJump.add(jumpImg);
+    pnlInstructions.add(pnlJump);
+    
+    JPanel pnlDonut = new JPanel();
+    pnlDonut.setLayout(new GridLayout(2, 1) );
+    JLabel lblDonut = new JLabel("Donuts will slow you down.");
+    JLabel donutImg = new JLabel();
+    ImageIcon donutIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png"));
+    donutImg.setIcon(donutIcon);
+    pnlDonut.add(lblDonut);
+    pnlDonut.add(donutImg);
+    pnlInstructions.add(pnlDonut);
+    
+    JPanel pnlCoffee = new JPanel();
+    pnlCoffee.setLayout(new GridLayout(2, 1) );
+    JLabel lblCoffee = new JLabel("Coffee will speed you up.");
+    JLabel coffeeImg = new JLabel();
+    ImageIcon coffeeIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png"));
+    coffeeImg.setIcon(coffeeIcon);
+    pnlCoffee.add(lblCoffee);
+    pnlCoffee.add(coffeeImg);
+    pnlInstructions.add(pnlCoffee);
     
     JPanel pnlBtn = new JPanel();
     howTo.add(pnlBtn, BorderLayout.SOUTH);
