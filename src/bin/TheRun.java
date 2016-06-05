@@ -32,14 +32,15 @@ public class TheRun extends JPanel implements ActionListener
     @Override
     public void actionPerformed(ActionEvent e)
     {
-        i++;
+        
         clock.setDelay(d);
         if(d>=42)
         	d-=(d/10);
-        anima = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
+        anima = Character.getPrison(i);
         this.remove(holder);
         holder = new JLabel(anima);
         add(holder);
+        i++;
         if (i == 6 )
         {
             i = 0;

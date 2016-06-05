@@ -54,7 +54,7 @@ public class PrisonBreak implements ActionListener
 	    namePnl.add(lblTitle);
 		
 		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
+		lblNewLabel.setIcon(new ImageIcon(PrisonBreak.class.getResource("/mainMenuIcon.jpg")));
 		centerPnl.add(lblNewLabel);
 		
 		main.setResizable(false);

@@ -5,12 +5,20 @@ import javax.swing.ImageIcon;
 public class Character {
 	private int invSpeed = 500, accel = 0;
 	
-	ImageIcon[] prison = new ImageIcon[6];
-	ImageIcon[] player = new ImageIcon[6];
+	static ImageIcon[] prison = new ImageIcon[6];
+	static ImageIcon[] player = new ImageIcon[6];
 	Character(){
-		for(int i = 0; i<6; i++){
-			prison[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
-			player[i] = new ImageIcon(PrisonBreak.class.getResource("/img/cop" + i + ".png"));
+		for(int i = 1; i<7; i++){
+			prison[i-1] = new ImageIcon(PrisonBreak.class.getResource("/prisoner" + i + ".png"));
+			player[i-1] = new ImageIcon(PrisonBreak.class.getResource("/cop" + i + ".png"));
 		}
 	}
+	
+	public static ImageIcon getPrison(int i){
+		return prison[i];
+	}
+	public static ImageIcon getPlayer(int i){
+		return player[i];
+	}
+	
 }
