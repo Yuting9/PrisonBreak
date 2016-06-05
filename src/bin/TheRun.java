@@ -21,14 +21,6 @@ public class TheRun extends JPanel implements ActionListener
         f.setVisible(true);
     }
     
-    public void setPlayer(){
-    	
-    }
-    
-    public void setChase(){
-    	
-    }
-    
     @Override
     public void actionPerformed(ActionEvent e)
     {
