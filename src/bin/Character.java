@@ -9,8 +9,8 @@ public class Character {
 	static ImageIcon[] player = new ImageIcon[6];
 	Character(){
 		for(int i = 1; i<7; i++){
-			prison[i-1] = new ImageIcon(PrisonBreak.class.getResource("/prisoner" + i + ".png"));
-			player[i-1] = new ImageIcon(PrisonBreak.class.getResource("/cop" + i + ".png"));
+			prison[i-1] = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
+			player[i-1] = new ImageIcon(PrisonBreak.class.getResource("/img/cop" + i + ".png"));
 		}
 	}
 	
