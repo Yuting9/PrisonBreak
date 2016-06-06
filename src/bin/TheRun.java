@@ -15,6 +15,7 @@ public class TheRun extends JPanel implements ActionListener
     JLabel holder = new JLabel();
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
+    //int []bg = new int [10];
     ImageIcon test = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int)(Math.random()*2)+1) + ".png"));
     
  public TheRun() {
@@ -42,7 +43,8 @@ public class TheRun extends JPanel implements ActionListener
         {
           x--;
           super.paintComponent(g);
-          test.paintIcon(this,g,x,+100);
+          test.paintIcon(this, g, x, 100);
+          test.paintIcon(this,g,x+600,100);
           repaint();
         }
         
