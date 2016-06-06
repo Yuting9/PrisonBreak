@@ -11,14 +11,19 @@ public class TheRun extends JPanel implements ActionListener
  JFrame frame = new JFrame();
  ImageIcon prison, player;
  int pX = 100, pY = 100;
-  int i = 0, d = 500, x = 700;
+  int i = 0, d = 500, x = 700, t, v = 0;
     JLabel holder = new JLabel();
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
-    //int []bg = new int [10];
+    ImageIcon []bg = new ImageIcon [10];
     ImageIcon test = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int)(Math.random()*2)+1) + ".png"));
     
  public TheRun() {
+   v = v + 250;
+   for (int t = 0; t < 10; t++)
+          {
+            bg[t] = test;
+          }
   frame.setResizable(false);
   frame.setSize(900,500);
   DrawPanel panel = new DrawPanel();
@@ -35,16 +40,18 @@ public class TheRun extends JPanel implements ActionListener
         clock.start();
         frame.getContentPane().add(this);
         frame.setVisible(true);
-        //background = new JLabel();
-        //add(background);       
+        background = new JLabel();
+        add(background);       
     }
     
         public void paintComponent(Graphics g)
         {
           x--;
           super.paintComponent(g);
-          test.paintIcon(this, g, x, 100);
-          test.paintIcon(this,g,x+600,100);
+          //background.setIcon(bg[t]);
+            bg[t].paintIcon(this, g, 700 + x, 100);
+          //test.paintIcon(this, g, x, 100);
+          //test.paintIcon(this,g,x+600,100);
           repaint();
         }
         
