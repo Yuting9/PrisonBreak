@@ -2,26 +2,16 @@ package bin;
 
 import javax.swing.*;
 import java.awt.event.*;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> parent of 74d9a7f... Revert "Minor Edits to Formatting"
 import java.awt.BorderLayout;
+import java.awt.Graphics;
 
 public class TheRun extends JPanel implements ActionListener
 {
 	
 	JFrame frame = new JFrame();
-	ImageIcon prison;
-	int i = 0, d = 500;
+	ImageIcon prison, player;
 	int pX = 100, pY = 100;
-import java.awt.Graphics;
-
-public class TheRun extends JPanel implements ActionListener
-{
- JFrame f = new JFrame();
- ImageIcon anima;
- int i = 0, d = 500, x = 300;
+ 	int i = 0, d = 500, x = 300;
     JLabel holder = new JLabel();
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
@@ -39,12 +29,12 @@ public class TheRun extends JPanel implements ActionListener
     
     public void Window()
     {
-     f.setResizable(false);
+     frame.setResizable(false);
         add(holder);
         clock.start();
-        f.setSize(600,450);
-        f.getContentPane().add(this);
-        f.setVisible(true);
+        frame.setSize(600,450);
+        frame.getContentPane().add(this);
+        frame.setVisible(true);
        
         background = new JLabel(test);
         add(background);       
@@ -66,7 +56,7 @@ public class TheRun extends JPanel implements ActionListener
         	d-=(d/10);
         prison = Character.getPrison(i);
          d-=(d/10);
-        anima = Character.getPrison(i);
+        player = Character.getPlayer(i);
         this.remove(holder);
         holder = new JLabel(prison);
         add(holder);
