@@ -28,9 +28,10 @@ public class leaderboard
   
 		try {
 			in = new FileInputStream("lead.txt");
-		} catch (FileNotFoundException e1) {
-			// TODO Auto-generated catch block
-			e1.printStackTrace();
+			//in.read();
+		} catch (FileNotFoundException e) {
+			File leadFile = new File("/lead.txt");
+			e.printStackTrace();
 		}
   
 		JPanel pnlTime = new JPanel();
