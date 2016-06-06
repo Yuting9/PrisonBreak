@@ -5,7 +5,10 @@ import java.awt.event.*;
 <<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 import java.awt.BorderLayout;
+=======
+>>>>>>> parent of 2b83bec... Minor Edits to Formatting
 =======
 >>>>>>> parent of 2b83bec... Minor Edits to Formatting
 =======
@@ -16,6 +19,7 @@ public class TheRun extends JPanel implements ActionListener
 	JFrame f = new JFrame();
 	ImageIcon anima;
 	int i = 0, d = 500;
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	int pX = 100, pY = 100;
@@ -31,9 +35,12 @@ public class TheRun extends JPanel implements ActionListener
 >>>>>>> parent of 2b83bec... Minor Edits to Formatting
 =======
 >>>>>>> parent of 2b83bec... Minor Edits to Formatting
+=======
+>>>>>>> parent of 2b83bec... Minor Edits to Formatting
     JLabel holder = new JLabel();
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
+<<<<<<< HEAD
 <<<<<<< HEAD
 <<<<<<< HEAD
 	public TheRun() {
@@ -47,6 +54,18 @@ public class TheRun extends JPanel implements ActionListener
 	}
     ImageIcon test = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int)(Math.random()*2)+1) + ".png"));
 =======
+=======
+    
+    public void Window()
+    {
+    	f.setResizable(false);
+        add(holder);
+        clock.start();
+        f.setSize(600,450);
+        f.getContentPane().add(this);
+        f.setVisible(true);
+    }
+>>>>>>> parent of 2b83bec... Minor Edits to Formatting
     
     public void Window()
     {
@@ -98,8 +117,11 @@ public class TheRun extends JPanel implements ActionListener
         	d-=(d/10);
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
         prison = Character.getPrison(i);
          d-=(d/10);
+=======
+>>>>>>> parent of 2b83bec... Minor Edits to Formatting
 =======
 >>>>>>> parent of 2b83bec... Minor Edits to Formatting
 =======

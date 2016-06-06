@@ -26,6 +26,7 @@ public class leaderboard
   
 <<<<<<< HEAD
 <<<<<<< HEAD
+<<<<<<< HEAD
 		try {
 			in = new FileInputStream("lead.txt");
 			//in.read();
@@ -33,6 +34,11 @@ public class leaderboard
 			File leadFile = new File("/lead.txt");
 			e.printStackTrace();
 		}
+=======
+  JPanel pnlTime = new JPanel();
+  lead.getContentPane().add(pnlTime);
+  pnlTime.setLayout(new BorderLayout(0, 0));
+>>>>>>> parent of 2b83bec... Minor Edits to Formatting
 =======
   JPanel pnlTime = new JPanel();
   lead.getContentPane().add(pnlTime);
