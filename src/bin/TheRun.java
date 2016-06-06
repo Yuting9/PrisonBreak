@@ -2,6 +2,10 @@ package bin;
 
 import javax.swing.*;
 import java.awt.event.*;
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+>>>>>>> parent of 74d9a7f... Revert "Minor Edits to Formatting"
 import java.awt.BorderLayout;
 
 public class TheRun extends JPanel implements ActionListener
