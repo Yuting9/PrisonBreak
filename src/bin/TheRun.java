@@ -10,9 +10,9 @@ public class TheRun extends JPanel implements ActionListener
 {
  
  JFrame frame = new JFrame();
- ImageIcon prison, player;
+ ImageIcon prison, player, donut;
  int pX = 100, pY = 100;
-  int i = 0, d = 500, x = 700, t;
+  int i = 0, k = 0, d = 500, x = 700, t;
     JLabel holder = new JLabel();
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
@@ -22,6 +22,7 @@ public class TheRun extends JPanel implements ActionListener
  public TheRun() {
    player = Character.getPlayer(i);
    prison = Character.getPrison(i);
+   donut = Donut.getDonut(k);
    
    for (int t = 0; t < 50; t++)
           {
@@ -58,6 +59,7 @@ public class TheRun extends JPanel implements ActionListener
           }
           g.setColor(Color.darkGray);
           g.fillRect(0,450,900,30);
+          donut.paintIcon(this, g, 100, 350);
           player.paintIcon(this, g, 50, 338);
           prison.paintIcon(this, g, 300, 338);
             repaint();
@@ -72,7 +74,15 @@ public class TheRun extends JPanel implements ActionListener
         prison = Character.getPrison(i);
          //d-=(d/10);
         player = Character.getPlayer(i);
+        donut = Donut.getDonut(k);
         this.remove(holder);
+        
+        k++;
+        if (k == 4)
+        {
+            k = 0;
+        }
+        
         i++;
         if (i == 6 )
         {

@@ -1,0 +1,19 @@
+package bin;
+
+import javax.swing.ImageIcon;
+
+public class Donut {
+ private int invSpeed = 500, accel = 0;
+ 
+ static ImageIcon[] donut = new ImageIcon[4];
+ Donut(){
+  for(int i = 1; i<5; i++){
+   donut[i-1] = new ImageIcon(PrisonBreak.class.getResource("/img/donut" + i + ".png"));
+  }
+ }
+ 
+ public static ImageIcon getDonut(int i){
+  return donut[i];
+ }
+ 
+}
