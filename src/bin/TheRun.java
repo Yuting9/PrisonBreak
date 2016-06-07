@@ -52,17 +52,11 @@ public class TheRun extends JPanel implements ActionListener
             //bg[t].paintIcon(this, g, 700 + x, 100);
           //test.paintIcon(this, g, x, 100);
           //test.paintIcon(this,g,x+600,100);
-          bg[0].paintIcon(this, g, d, 100);
-          bg[1].paintIcon(this, g, d+300, 100);
-          bg[2].paintIcon(this, g, d+600, 100);
-          bg[3].paintIcon(this, g, d+900, 100);
-          bg[4].paintIcon(this, g, d+1200, 100);
-          bg[5].paintIcon(this, g, x+1500, 100);
-          bg[6].paintIcon(this, g, x+1800, 100);
-          bg[7].paintIcon(this, g, x+2100, 100);
-          bg[8].paintIcon(this, g, x+2400, 100);
-          bg[9].paintIcon(this, g, x+2700, 100);
-          repaint();
+          for (int p = 0; p < 10; p++)
+          {
+            bg[p].paintIcon(this, g, x + (p * 352), 100);
+          }
+            repaint();
         }
         
     @Override
