@@ -41,7 +41,8 @@ public class leaderboard
 	    lead.getContentPane().add(pnlTime);
 	    pnlTime.setLayout(new BorderLayout(0, 0));
 	    
-		JLabel lblHiScore = new JLabel("Leaderboards - High Score");
+		JLabel lblHiScore = new JLabel("<html>Leaderboards<br>---------------------------------------</html>");
+	    lblHiScore.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 32));
 		lblHiScore.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlTime.add(lblHiScore, BorderLayout.NORTH);
 		
@@ -67,21 +68,18 @@ public class leaderboard
 		lblNames.setHorizontalAlignment(SwingConstants.TRAILING);
 		//lblNames.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(lblNames, BorderLayout.WEST);
+	    lblNames.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 12));
 		
 		JLabel lblBuffer = new JLabel();
-		Dimension x = lblBuffer.getSize();
-		String replacer = "";
-		for(int i = 0; i<x.getWidth(); i++){
-			replacer+="-";
-		}
-		System.out.println(x.getWidth());
-		lblBuffer.setBorder(BorderFactory.createLineBorder(Color.black));
+		//lblBuffer.setBorder(BorderFactory.createLineBorder(Color.black));
 		panel.add(lblBuffer, BorderLayout.CENTER);
+	    lblBuffer.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 12));
 
 		JLabel lblScores = new JLabel();
 		//lblScores.setBorder(BorderFactory.createLineBorder(Color.blue));
 		panel.add(lblScores, BorderLayout.EAST);
 		lblScores.setHorizontalAlignment(SwingConstants.LEADING);
+	    lblScores.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 12));
 		
 
 		file.createNewFile();
@@ -92,16 +90,24 @@ public class leaderboard
              Scanner scanFile = new Scanner(new File("lead.info"));
              
              //Keep going until the end of the file
-             while (scanFile.hasNextLine())
+             for(int i = 1; i<=20; i++)
              {
-	              //read the current line
-	              holding = scanFile.nextLine();
-	              info = holding.split("<</>>");
-	              System.out.println(info[0]);
-	              System.out.println(info[1]);
-	              name += info[0] + "<br>";
-	              buff += replacer+"<br>";
-	              score += info[1] + "<br>";
+            	 if(scanFile.hasNextLine())
+            	 {
+            		 //read the current line
+		             holding = scanFile.nextLine();
+		             info = holding.split("<</>>");
+		             System.out.println(info[0]);
+		             System.out.println(info[1]);
+		             name += i + ". " + info[0] + "<br>";
+		             buff += "------------<br>";
+		             score += info[1] + "<br>";
+            	 }
+            	 else{
+		             name += i + ". " + "<br>";
+		             buff += "------------<br>";
+		             score += 0 + "<br>";
+            	 }
              }//end while
              
              //Close the file (IMPORTANT)
@@ -116,7 +122,10 @@ public class leaderboard
 		score += "</html>";
   
 		lblNames.setText(name);
+		System.out.println("lenlen"+lblNames.getWidth());
 		lblBuffer.setText(buff);
 		lblScores.setText(score);
+		lead.pack();
+		
 	}
 }
