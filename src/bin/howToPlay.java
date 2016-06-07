@@ -57,7 +57,7 @@ public class howToPlay
     pnlDonut.setLayout(new GridLayout(2, 1) );
     JLabel lblDonut = new JLabel("Donuts will slow you down.");
     JLabel donutImg = new JLabel();
-    ImageIcon donutIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png"));
+    ImageIcon donutIcon = new ImageIcon(PrisonBreak.class.getResource("/img/donut1.png"));
     donutImg.setIcon(donutIcon);
     pnlDonut.add(lblDonut);
     pnlDonut.add(donutImg);
