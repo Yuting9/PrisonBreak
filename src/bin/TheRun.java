@@ -22,7 +22,7 @@ public class TheRun extends JPanel implements ActionListener
    v = v + 250;
    for (int t = 0; t < 10; t++)
           {
-            bg[t] = test;
+            bg[t] = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int)(Math.random()*2)+1) + ".png"));
           }
   frame.setResizable(false);
   frame.setSize(900,500);
@@ -40,8 +40,8 @@ public class TheRun extends JPanel implements ActionListener
         clock.start();
         frame.getContentPane().add(this);
         frame.setVisible(true);
-        background = new JLabel();
-        add(background);       
+        //background = new JLabel();
+        //add(background);       
     }
     
         public void paintComponent(Graphics g)
@@ -49,9 +49,19 @@ public class TheRun extends JPanel implements ActionListener
           x--;
           super.paintComponent(g);
           //background.setIcon(bg[t]);
-            bg[t].paintIcon(this, g, 700 + x, 100);
+            //bg[t].paintIcon(this, g, 700 + x, 100);
           //test.paintIcon(this, g, x, 100);
           //test.paintIcon(this,g,x+600,100);
+          bg[0].paintIcon(this, g, d, 100);
+          bg[1].paintIcon(this, g, d+300, 100);
+          bg[2].paintIcon(this, g, d+600, 100);
+          bg[3].paintIcon(this, g, d+900, 100);
+          bg[4].paintIcon(this, g, d+1200, 100);
+          bg[5].paintIcon(this, g, x+1500, 100);
+          bg[6].paintIcon(this, g, x+1800, 100);
+          bg[7].paintIcon(this, g, x+2100, 100);
+          bg[8].paintIcon(this, g, x+2400, 100);
+          bg[9].paintIcon(this, g, x+2700, 100);
           repaint();
         }
         
@@ -59,12 +69,13 @@ public class TheRun extends JPanel implements ActionListener
     public void actionPerformed(ActionEvent e)
     {
         clock.setDelay(d);
-        if(d>=42)
+        if(d>=142)
          d-=(d/10);
         prison = Character.getPrison(i);
-         d-=(d/10);
+         //d-=(d/10);
         player = Character.getPlayer(i);
         this.remove(holder);
+        //holder = new JLabel(test);
         holder = new JLabel(prison);
         add(holder);
         i++;
