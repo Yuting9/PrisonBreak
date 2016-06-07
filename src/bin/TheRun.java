@@ -71,7 +71,6 @@ public class TheRun extends JPanel implements ActionListener
     class DrawPanel extends JPanel{
 
 		public void add(ImageIcon img, int x, int y) {
-			// TODO Auto-generated method stub
 			
 		}
     	
