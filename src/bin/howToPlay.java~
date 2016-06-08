@@ -67,7 +67,7 @@ public class howToPlay
     pnlCoffee.setLayout(new GridLayout(2, 1) );
     JLabel lblCoffee = new JLabel("Coffee will speed you up.");
     JLabel coffeeImg = new JLabel();
-    ImageIcon coffeeIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png"));
+    ImageIcon coffeeIcon = new ImageIcon(PrisonBreak.class.getResource("/img/coffee.png"));
     coffeeImg.setIcon(coffeeIcon);
     pnlCoffee.add(lblCoffee);
     pnlCoffee.add(coffeeImg);
