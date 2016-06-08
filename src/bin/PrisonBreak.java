@@ -6,6 +6,7 @@ import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -77,7 +78,10 @@ public class PrisonBreak implements ActionListener
 		if(e.getSource() == btnLead)
 		{
 			main.setVisible(false);
-			leaderboard second = new leaderboard(main);
+			try {
+				leaderboard second = new leaderboard(main);
+			} catch (IOException exept) {
+			}
 		}
 	}
   public static void main(String[] args) 
