@@ -99,12 +99,18 @@ public class leaderboard
 		             info = holding.split("<</>>");
 		             System.out.println(info[0]);
 		             System.out.println(info[1]);
-		             name += i + ". " + info[0] + "<br>";
+		             if(i<10)
+            			 name += i + "... " + info[0] + "<br>";
+            		 else
+            			 name += i + ". " + info[0] + "<br>";
 		             buff += "------------<br>";
 		             score += info[1] + "<br>";
             	 }
             	 else{
-		             name += i + ". " + "<br>";
+            		 if(i<10)
+            			 name += i + "... " + "<br>";
+            		 else
+            			 name += i + ". " + "<br>";
 		             buff += "------------<br>";
 		             score += 0 + "<br>";
             	 }
