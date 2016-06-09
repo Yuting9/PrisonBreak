@@ -1,3 +1,17 @@
+/*********************************************************************************
+ * Assignment: Final Summative
+ * Description: A sidescroller where you play as a police officer chasing down
+ * 				a runaway prisoner. You win if you catch the prisoner, and you
+ * 				lose if the prisoner gets too far away. Donuts give you points
+ * 				and coffee speeds you up. You also get a "Skill" bonus to your
+ * 				points if you catch the prisoner quickly or if you avoid a lot
+ * 				of obstacles.
+ *
+ * Author: Yuting L., Aunik D.
+ * Date: 19/05/16 through 13/06/16
+ * Course: ICS4U1
+ *********************************************************************************/
+
 package bin;
 import java.awt.BorderLayout;
 import java.awt.Component;
@@ -14,6 +28,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+
 public class PrisonBreak implements ActionListener
 {
 	JFrame main = new JFrame("On the Run - Main Menu");
@@ -22,8 +37,6 @@ public class PrisonBreak implements ActionListener
 	public PrisonBreak(){
 		main.setBounds(300,100,600,450);
 	    main.getContentPane().setLayout(new BorderLayout(0, 0));
-	    
-	    new Character();
 	    
 	    JPanel namePnl = new JPanel();
 	    main.getContentPane().add(namePnl, BorderLayout.NORTH);
@@ -68,7 +81,6 @@ public class PrisonBreak implements ActionListener
 		{
 			main.setVisible(false);
 			TheRun game = new TheRun();
-			game.Window();
 		}
 		if(e.getSource() == btnHow)
 		{

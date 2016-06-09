@@ -3,22 +3,115 @@ package bin;
 import javax.swing.ImageIcon;
 
 public class Character {
-	private int invSpeed = 500, accel = 0;
+	private int spd = 200, vert = 0, x = 0, y = 338;
+	private static int floor = 338;
+	String mode = "run";
+	ImageIcon[] imgs = new ImageIcon[6];
+	ImageIcon[] jumps = new ImageIcon[2];
+	ImageIcon[] rolls = new ImageIcon[6];
+	boolean released = false;
 	
-	static ImageIcon[] prison = new ImageIcon[6];
-	static ImageIcon[] player = new ImageIcon[6];
-	Character(){
-		for(int i = 1; i<7; i++){
-			prison[i-1] = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
-			player[i-1] = new ImageIcon(PrisonBreak.class.getResource("/img/cop" + i + ".png"));
+	
+	Character(boolean bool){
+		for(int i = 0; i<6; i++){
+			if(bool){
+				imgs[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
+				if(i<2)
+					jumps[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisjump" + i + ".png"));
+				if(i<4)
+					rolls[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisroll" + i + ".png"));
+			}
+			else{
+				System.out.println(i);
+				imgs[i] = new ImageIcon(PrisonBreak.class.getResource("/img/cop" + i + ".png"));
+				if(i<2)
+					jumps[i] = new ImageIcon(PrisonBreak.class.getResource("/img/copjump" + i + ".png"));
+				if(i<4)
+					rolls[i] = new ImageIcon(PrisonBreak.class.getResource("/img/coproll" + i + ".png"));
+			}
 		}
 	}
 	
-	public static ImageIcon getPrison(int i){
-		return prison[i];
-	}
-	public static ImageIcon getPlayer(int i){
-		return player[i];
+	public int getSpd(){
+		return spd;
 	}
 	
+	public int getVert(){
+		return vert;
+	}
+	
+	public int getHeight(){
+		return y;
+	}
+	
+	public ImageIcon getImage(int i){
+		if(mode.equals("jump"))
+			return jumps[i];
+		else if(mode.equals("roll"))
+			return rolls[i];
+		else
+			return imgs[i];
+	}
+	
+	public String getMode(){
+		return mode;
+	}
+	
+	public int getX(){
+		return x;
+	}
+	
+	public void isReleased(){
+		released = true;
+	}
+	
+	public void isNotReleased(){
+		released = false;
+	}
+	
+	public void setSpd(int set){
+		spd = set;
+	}
+	
+	public void setX(int set){
+		x = set;
+	}
+	
+	public void setVert(int set){
+		vert = set;
+	}
+
+	public void jump(){
+		y-=vert;
+		if(!released){
+			System.out.println("rising");
+			vert--;
+			if(vert <= 3){
+				released = true;
+			}
+		}
+		else{
+			System.out.println("falling");
+			vert-=5;
+		}
+		if(y > floor){
+			System.out.println("This is Ture");
+			y = 338;
+			vert = 0;
+			mode = "roll";
+			released = false;
+		}
+	}
+	
+	public void doRun(){
+		mode = "run";
+	}
+	
+	public void doJump(){
+		mode = "jump";
+	}
+	
+	public void doRoll(){
+		mode = "roll";
+	}
 }
