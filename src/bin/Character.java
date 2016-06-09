@@ -84,14 +84,12 @@ public class Character {
 	public void jump(){
 		y-=vert;
 		if(!released){
-			System.out.println("rising");
 			vert--;
 			if(vert <= 3){
 				released = true;
 			}
 		}
 		else{
-			System.out.println("falling");
 			vert-=5;
 		}
 		if(y > floor){

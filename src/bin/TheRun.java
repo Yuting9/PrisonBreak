@@ -43,7 +43,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     {
     	playerMode = player.getMode();
     	prisonMode = prison.getMode();
-    	clock.setDelay(250);
+    	clock.setDelay(1000);
     	if(preGame){
     		//Display countdown
     		if(panel.countDown <= 0){
@@ -51,10 +51,14 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     			plTime++;
     			clock.setDelay(50);
     		}
+    		else if(panel.countDown <= 1){
+    			clock.setDelay(250);
+    		}
     		panel.updateDown();
     	}
     	else{
 	    	spd = player.getSpd();
+	    	System.out.println(spd);
 	        clock.setDelay(spd);
 	        if(spd>=60){
 	            change = 50-(spd/10);
@@ -188,7 +192,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	      bg[p].paintIcon(this, g, x + (p * 200), 100);
     	    }
     	    g.setColor(Color.darkGray);
-    	    g.fillRect(0,450,900,40);
+    	    g.fillRect(0,450,1000,50);
     	}
     	
     	private void paintCop(Graphics g){
@@ -227,7 +231,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		}
 		
 		else if(e.getKeyCode() == 32){
-			if(!pressHold && !pressedOnce){;
+			if(!pressHold && !pressedOnce && spd == 54){;
 				player.doJump();
 				player.setVert(20);
 				pressHold = true;
@@ -239,7 +243,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 
 	@Override
 	public void keyReleased(KeyEvent e) {
-		if(e.getKeyCode() == 32){
+		if(e.getKeyCode() == 32 && spd == 54){
 			System.out.println("Space-Released");
 			pressHold = false;
 			player.isReleased();
