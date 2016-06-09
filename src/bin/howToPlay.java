@@ -21,63 +21,96 @@ public class howToPlay
   howToPlay(final JFrame main)
   {
     final JFrame howTo = new JFrame("On the Run - How To Play");
-    howTo.setLayout(new BorderLayout() );
+    howTo.getContentPane().setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 18));
     howTo.setVisible(true);
-    howTo.setBounds(300,100,700,550);
+    howTo.setBounds(300,100,700,450);
+    howTo.getContentPane().setLayout(new BoxLayout(howTo.getContentPane(), BoxLayout.Y_AXIS));
     
-    JPanel pnlInstructions = new JPanel();
-    pnlInstructions.setLayout(new GridLayout(2, 2) );
-    howTo.add(pnlInstructions);
+    JPanel panel_1 = new JPanel();
+    howTo.getContentPane().add(panel_1);
+    panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
     
     JLabel lblTitle = new JLabel("How To Play");
+    panel_1.add(lblTitle);
     lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-    howTo.add(lblTitle, BorderLayout.NORTH);
+    lblTitle.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 18));
+    
+    JPanel pnlInstructions = new JPanel();
+    howTo.getContentPane().add(pnlInstructions);
     
     JPanel pnlObjective = new JPanel();
     pnlObjective.setLayout(new GridLayout(2, 1) );
     JLabel lblObjective = new JLabel("The objective of the game is to catch the prisoner.");
+    lblObjective.setHorizontalAlignment(SwingConstants.CENTER);
     JLabel prisonerImg = new JLabel();
-    ImageIcon objectiveIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
-    prisonerImg.setIcon(objectiveIcon);
+    prisonerImg.setHorizontalAlignment(SwingConstants.CENTER);
+    ImageIcon objectiveIcon; 
+    pnlInstructions.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    prisonerImg.setIcon(new ImageIcon(howToPlay.class.getResource("/img/prisoner0.png")));
     pnlObjective.add(lblObjective);
     pnlObjective.add(prisonerImg);
     pnlInstructions.add(pnlObjective);
     
     JPanel pnlJump = new JPanel();
-    pnlJump.setLayout(new GridLayout(2, 1) );
     JLabel lblJump = new JLabel("You will use the spacebar to jump.");
-    JLabel jumpImg = new JLabel();
-    ImageIcon jumpIcon = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner1.png")); 
-    jumpImg.setIcon(jumpIcon);
+    ImageIcon jumpIcon;
+    pnlJump.setLayout(new BoxLayout(pnlJump, BoxLayout.X_AXIS));
     pnlJump.add(lblJump);
-    pnlJump.add(jumpImg);
+    
+    JPanel panel = new JPanel();
+    pnlJump.add(panel);
+    panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+    
+    JLabel label = new JLabel();
+    label.setIcon(new ImageIcon(howToPlay.class.getResource("/img/copjump0.png")));
+    panel.add(label);
+    
+    JLabel lblNewLabel = new JLabel("");
+    lblNewLabel.setIcon(new ImageIcon(howToPlay.class.getResource("/img/copjump1.png")));
+    panel.add(lblNewLabel);
     pnlInstructions.add(pnlJump);
     
     JPanel pnlDonut = new JPanel();
-    pnlDonut.setLayout(new GridLayout(2, 1) );
-    JLabel lblDonut = new JLabel("Donuts will slow you down.");
-    JLabel donutImg = new JLabel();
-    ImageIcon donutIcon = new ImageIcon(PrisonBreak.class.getResource("/img/donut1.png"));
-    donutImg.setIcon(donutIcon);
-    pnlDonut.add(lblDonut);
-    pnlDonut.add(donutImg);
+    ImageIcon donutIcon = new ImageIcon(PrisonBreak.class.getResource("/img/donut0.png"));
+    pnlDonut.setLayout(new BoxLayout(pnlDonut, BoxLayout.Y_AXIS));
     pnlInstructions.add(pnlDonut);
     
+    JPanel panel_2 = new JPanel();
+    pnlDonut.add(panel_2);
+    JLabel lblDonut = new JLabel("Donuts will slow you down.");
+    panel_2.add(lblDonut);
+    lblDonut.setHorizontalAlignment(SwingConstants.CENTER);
+    
+    JPanel panel_3 = new JPanel();
+    pnlDonut.add(panel_3);
+    JLabel donutImg = new JLabel();
+    panel_3.add(donutImg);
+    donutImg.setHorizontalAlignment(SwingConstants.CENTER);
+    donutImg.setIcon(donutIcon);
+    
     JPanel pnlCoffee = new JPanel();
-    pnlCoffee.setLayout(new GridLayout(2, 1) );
-    JLabel lblCoffee = new JLabel("Coffee will speed you up.");
-    JLabel coffeeImg = new JLabel();
     ImageIcon coffeeIcon = new ImageIcon(PrisonBreak.class.getResource("/img/coffee.png"));
-    coffeeImg.setIcon(coffeeIcon);
-    pnlCoffee.add(lblCoffee);
-    pnlCoffee.add(coffeeImg);
+    pnlCoffee.setLayout(new BoxLayout(pnlCoffee, BoxLayout.Y_AXIS));
     pnlInstructions.add(pnlCoffee);
     
+    JPanel panel_4 = new JPanel();
+    pnlCoffee.add(panel_4);
+    JLabel lblCoffee = new JLabel("Coffee will speed you up.");
+    panel_4.add(lblCoffee);
+    lblCoffee.setHorizontalAlignment(SwingConstants.CENTER);
+    
+    JPanel panel_5 = new JPanel();
+    pnlCoffee.add(panel_5);
+    JLabel coffeeImg = new JLabel();
+    panel_5.add(coffeeImg);
+    coffeeImg.setHorizontalAlignment(SwingConstants.CENTER);
+    coffeeImg.setIcon(coffeeIcon);
+    
     JPanel pnlBtn = new JPanel();
-    howTo.add(pnlBtn, BorderLayout.SOUTH);
-    pnlBtn.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+    howTo.getContentPane().add(pnlBtn);
     
     JButton btnRtn = new JButton("Return to Menu");
+    btnRtn.setVerticalAlignment(SwingConstants.BOTTOM);
     btnRtn.addActionListener(new ActionListener() {
       public void actionPerformed(ActionEvent e) 
       {
@@ -85,6 +118,7 @@ public class howToPlay
         howTo.dispose();
       }
     });
+    pnlBtn.setLayout(new BoxLayout(pnlBtn, BoxLayout.X_AXIS));
     pnlBtn.add(btnRtn);
   }
 }
