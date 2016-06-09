@@ -4,7 +4,7 @@ import javax.swing.ImageIcon;
 
 public class Character {
 	private int spd = 200, vert = 0, x = 0, y = 338;
-	private static int floor = 338;
+	private static int floor = 338, spdDiff = 0;
 	String mode = "run";
 	ImageIcon[] imgs = new ImageIcon[6];
 	ImageIcon[] jumps = new ImageIcon[2];
@@ -44,6 +44,10 @@ public class Character {
 		return y;
 	}
 	
+	public static int getDiff(){
+		return spdDiff;
+	}
+	
 	public ImageIcon getImage(int i){
 		if(mode.equals("jump"))
 			return jumps[i];
@@ -79,6 +83,10 @@ public class Character {
 	
 	public void setVert(int set){
 		vert = set;
+	}
+	
+	public static void addDiff(int set){
+		spdDiff += set;
 	}
 
 	public void jump(){

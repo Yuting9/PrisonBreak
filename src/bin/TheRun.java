@@ -24,13 +24,13 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	   //donut = Donut.getDonut(k);
 	   for (int t = 0; t < 50; t++)
 	   {
-		   bg[t] = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int)(Math.random()*2)) + ".png"));
+		   bg[t] = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int)(Math.random()*3)) + ".png"));
 	   }
 	   frame.addKeyListener(this);
 	   frame.setFocusable(true);
 	   frame.setResizable(false);
 	   frame.setSize(900,500);
-	   frame.getContentPane().add(panel, BorderLayout.CENTER);
+	   frame.getContentPane().add(panel);
 	   frame.setVisible(true);
 	   clock.start();
 	   frame.getContentPane().add(this);
@@ -58,7 +58,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	}
     	else{
 	    	spd = player.getSpd();
-	    	System.out.println(spd);
 	        clock.setDelay(spd);
 	        if(spd>=60){
 	            change = 50-(spd/10);
@@ -121,9 +120,10 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	        	
 	        }
 	        panel.update(change);
+	        panel.updatePrison(0);
 	        panel.updateDown();
 	        revalidate();
-	        if(prison.getX()-100 == player.getX()){
+	        if(prison.getX()-100 <= player.getX()){
 	        	win();
 	        }
     	}
@@ -156,7 +156,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	}
     	
         public void updatePrison(int change){
-        	prison.setX(prison.getX()-change);
+        	prison.setX(prison.getX()-change-Character.getDiff());
         }
     	
     	public void update(int diff){
@@ -187,12 +187,14 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	}
     	
     	private void paintBack(Graphics g){
+    		g.setColor(new Color(0, 128, 231));
+    		g.fillRect(0, 0, 1000, 600);
     	    for (int p = 0; p < 50; p++)
     	    {
     	      bg[p].paintIcon(this, g, x + (p * 200), 100);
     	    }
     	    g.setColor(Color.darkGray);
-    	    g.fillRect(0,450,1000,50);
+    	    g.fillRect(0,450,1000,100);
     	}
     	
     	private void paintCop(Graphics g){
@@ -223,11 +225,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		// TODO Auto-generated method stub
 		if(e.getKeyCode() == 39){
 			System.out.println("Right");
-			panel.updatePrison(5);
+			Character.addDiff(5);
 		}
 		else if(e.getKeyCode() == 37){
 			System.out.println("Left");
-			panel.updatePrison(-5);
+			Character.addDiff(-5);
 		}
 		
 		else if(e.getKeyCode() == 32){
