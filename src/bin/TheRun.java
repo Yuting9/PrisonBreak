@@ -12,15 +12,13 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	JFrame frame = new JFrame();
 	Character player = new Character(false);
 	Character prison = new Character(true);
-	boolean preGame = true;
-	int pX = 600, pY = 100;
-	int i = 0, k = 0, x = 700, change, spd;
+	boolean preGame = true, pressHold = false;
+	int plTime = 0, prTime = 0, x = 700, change, spd;
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
-    String playerMode = "run";
+    String playerMode = "run", prisonMode = "run";
     ImageIcon []bg = new ImageIcon [50];
     DrawPanel panel = new DrawPanel(player.getImage(0), prison.getImage(0));
-    ImageIcon test = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + (int)(Math.random()*2) + ".png"));
 	    
 	public TheRun() {
 	   //donut = Donut.getDonut(k);
@@ -37,20 +35,21 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	   clock.start();
 	   frame.getContentPane().add(this);
 	   frame.setVisible(true);
+	   prison.setX(600);
 	}
     
     @Override
     public void actionPerformed(ActionEvent e)
     {
     	playerMode = player.getMode();
-    	if(playerMode.equals("run"))
+    	prisonMode = prison.getMode();
     	clock.setDelay(250);
     	if(preGame){
     		//Display countdown
     		if(panel.countDown <= 0){
     			preGame = false;
-    			i++;
-    			clock.setDelay(5);
+    			plTime++;
+    			clock.setDelay(50);
     		}
     		panel.updateDown();
     	}
@@ -61,39 +60,82 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	            change = 50-(spd/10);
 	        	player.setSpd(spd-=(spd/10));
 	        }
-	        if(i<5){
-	        	i++;
-	        	panel.setPrisImage(prison.getImage(i));
-	        	i--;
+	        if(playerMode.equals("run")){
+		         //d-=(d/10);
+		        panel.setCopImage(player.getImage(plTime));
+		        //donut = Donut.getDonut(k);
+		        //this.remove(holder);
+		        
+		        plTime++;
+		        if (plTime == 6 )
+		        {
+		            plTime = 0;
+		        }
 	        }
-	        else{
-	        	panel.setPrisImage(prison.getImage(0));
+	        else if(playerMode.equals("jump")){
+	        	//clock.setDelay(500);
+	        	plTime = 0;
+	        	if(player.getVert() >= 0){
+		        	panel.setCopImage(player.getImage(0));
+		        }
+		        else{
+		        	panel.setCopImage(player.getImage(1));
+		        }
 	        }
-	         //d-=(d/10);
-	        panel.setCopImage(player.getImage(i));
-	        //donut = Donut.getDonut(k);
-	        //this.remove(holder);
-	        
-	        //if()
-	        
-	        k++;
-	        if (k == 4)
-	        {
-	            k = 0;
+	        else if(playerMode.equals("roll")){
+	        	if(plTime == 3){
+	        		player.doRun();
+	        	}
+	        	panel.setCopImage(player.getImage(plTime));
+	        	plTime++;
 	        }
-	        
-	        i++;
-	        if (i == 6 )
-	        {
-	            i = 0;
+	        if(prisonMode.equals("run")){
+		        if(prTime<5){
+		        	prTime++;
+		        	panel.setPrisImage(prison.getImage(prTime));
+		        	prTime--;
+		        }
+		        else{
+		        	panel.setPrisImage(prison.getImage(0));
+		        }
+		        
+		        prTime++;
+		        if (prTime == 6 )
+		        {
+		            prTime = 0;
+		        }
+	        }
+	        else if(prisonMode.equals("jump")){
+	        	if(prison.getVert() > 0){
+		        	panel.setCopImage(prison.getImage(0));
+		        }
+		        else{
+		        	panel.setCopImage(prison.getImage(1));
+		        }
+	        	
 	        }
 	        panel.update(change);
 	        panel.updateDown();
 	        revalidate();
+	        if(prison.getX()-100 == player.getX()){
+	        	win();
+	        }
     	}
     }
     
-    class DrawPanel extends JPanel{ 
+    private void win() {
+    	frame.dispose();
+    	clock.stop();
+    	Victory win = new Victory(true);
+	}
+    
+    private void lose() {
+    	frame.dispose();
+    	clock.stop();
+    	Victory win = new Victory(false);
+    }
+
+	class DrawPanel extends JPanel{ 
     	ImageIcon cop, prisoner;
     	String mode = "run";
     	int countDown = 4;
@@ -108,7 +150,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	}
     	
         public void updatePrison(int change){
-        	pX -= change;
+        	prison.setX(prison.getX()-change);
         }
     	
     	public void update(int diff){
@@ -117,6 +159,9 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	
     	public void setCopImage(ImageIcon newCop){
     		cop = newCop;
+    		if(player.getMode().equals("jump")){
+    			player.jump();
+    		}
     	}
     	
     	public void setPrisImage(ImageIcon newPris){
@@ -145,11 +190,14 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	}
     	
     	private void paintCop(Graphics g){
-    		cop.paintIcon(this, g, 50, 338);
+    		if(player.getMode().equals("jump")){
+    			cop.paintIcon(this, g, 50, player.getHeight());
+    		}
+    		cop.paintIcon(this, g, 50, player.getHeight());
     	}
     	
     	private void paintPrison(Graphics g){
-    		prisoner.paintIcon(this, g, pX, 338);
+    		prisoner.paintIcon(this, g, prison.getX(), 338);
     	}
     	
 		public void paintComponent(Graphics g)
@@ -167,7 +215,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	@Override
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
-		System.out.println(e.getKeyCode());
 		if(e.getKeyCode() == 39){
 			System.out.println("Right");
 			panel.updatePrison(5);
@@ -178,8 +225,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		}
 		
 		else if(e.getKeyCode() == 32){
-			System.out.println("Space");
-			player.doJump();
+			if(!pressHold){;
+				player.doJump();
+				player.setVert(20);
+				pressHold = true;
+			}
 		}
 	}
 
@@ -188,7 +238,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	public void keyReleased(KeyEvent e) {
 		if(e.getKeyCode() == 32){
 			System.out.println("Space-Released");
-			player.doRoll();
+			pressHold = false;
+			player.isReleased();
 		}
 	}
 
