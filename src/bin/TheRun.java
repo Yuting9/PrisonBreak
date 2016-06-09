@@ -12,8 +12,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	JFrame frame = new JFrame();
 	Character player = new Character(false);
 	Character prison = new Character(true);
-	boolean preGame = true, pressHold = false;
-	int plTime = 0, prTime = 0, x = 700, change, spd;
+	boolean preGame = true, pressHold = false, pressedOnce = false;
+	int plTime = 0, prTime = 0, x = 720, change, spd;
     JLabel background = new JLabel();
     Timer clock = new Timer(40, this);
     String playerMode = "run", prisonMode = "run";
@@ -83,6 +83,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		        }
 	        }
 	        else if(playerMode.equals("roll")){
+	        	pressedOnce = false;
+	        	player.isNotReleased();
 	        	if(plTime == 3){
 	        		player.doRun();
 	        	}
@@ -186,7 +188,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     	      bg[p].paintIcon(this, g, x + (p * 200), 100);
     	    }
     	    g.setColor(Color.darkGray);
-    	    g.fillRect(0,450,900,30);
+    	    g.fillRect(0,450,900,40);
     	}
     	
     	private void paintCop(Graphics g){
@@ -225,10 +227,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		}
 		
 		else if(e.getKeyCode() == 32){
-			if(!pressHold){;
+			if(!pressHold && !pressedOnce){;
 				player.doJump();
 				player.setVert(20);
 				pressHold = true;
+				pressedOnce = true;
 			}
 		}
 	}

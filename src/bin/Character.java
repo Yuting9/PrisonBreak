@@ -65,6 +65,10 @@ public class Character {
 		released = true;
 	}
 	
+	public void isNotReleased(){
+		released = false;
+	}
+	
 	public void setSpd(int set){
 		spd = set;
 	}
@@ -78,8 +82,9 @@ public class Character {
 	}
 
 	public void jump(){
+		y-=vert;
 		if(!released){
-			y-=vert;
+			System.out.println("rising");
 			vert--;
 			if(vert <= 3){
 				released = true;
@@ -87,7 +92,6 @@ public class Character {
 		}
 		else{
 			System.out.println("falling");
-			y-=vert;
 			vert-=5;
 		}
 		if(y > floor){
