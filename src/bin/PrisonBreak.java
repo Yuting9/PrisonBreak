@@ -31,9 +31,19 @@ import javax.swing.JPanel;
 
 public class PrisonBreak implements ActionListener
 {
+	//Sets up the frame for the Main Menu
 	JFrame main = new JFrame("On the Run - Main Menu");
+	
+	//The buttons used in the main menu
 	JButton btnNew,btnLead,btnHow;
 	
+	/**************************
+	 * Constructors
+	 **************************/
+	
+	/**
+	 * PrisonBreak
+	 */
 	public PrisonBreak(){
 		main.setBounds(300,100,600,450);
 	    main.getContentPane().setLayout(new BorderLayout(0, 0));

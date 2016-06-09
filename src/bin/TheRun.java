@@ -224,11 +224,9 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e) {
 		// TODO Auto-generated method stub
 		if(e.getKeyCode() == 39){
-			System.out.println("Right");
 			Character.addDiff(5);
 		}
 		else if(e.getKeyCode() == 37){
-			System.out.println("Left");
 			Character.addDiff(-5);
 		}
 		
