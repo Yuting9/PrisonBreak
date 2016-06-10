@@ -13,6 +13,7 @@
  *********************************************************************************/
 
 package bin;
+
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -28,86 +29,96 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-
 public class PrisonBreak implements ActionListener
 {
-	//Sets up the frame for the Main Menu
-	JFrame main = new JFrame("On the Run - Main Menu");
-	
-	//The buttons used in the main menu
-	JButton btnNew,btnLead,btnHow;
-	
+	// Sets up the frame for the Main Menu
+	JFrame	main	= new JFrame("On the Run - Main Menu");
+
+	// The buttons used in the main menu
+	JButton	btnNew, btnLead, btnHow;
+
 	/**************************
 	 * Constructors
 	 **************************/
-	
+
 	/**
-	 * PrisonBreak
+	 * Defualt PrisonBreak Constructor
 	 */
-	public PrisonBreak(){
-		main.setBounds(300,100,600,450);
-	    main.getContentPane().setLayout(new BorderLayout(0, 0));
-	    
-	    JPanel namePnl = new JPanel();
-	    main.getContentPane().add(namePnl, BorderLayout.NORTH);
-	    
-	    JPanel centerPnl = new JPanel();
-	    main.getContentPane().add(centerPnl, BorderLayout.CENTER);
-	    
-	    JPanel btnPnl = new JPanel();
-	    main.getContentPane().add(btnPnl, BorderLayout.SOUTH);
-	    btnPnl.setLayout(new GridLayout(1, 3));
-	    btnPnl.setPreferredSize(new Dimension(0, 40));
-	    
-	    btnNew = new JButton("New Game");
-	    btnNew.addActionListener(this);
-	    btnNew.setPreferredSize(new Dimension());
-	    btnPnl.add(btnNew);
-	   
-	    btnHow = new JButton("How to Play");
-	    btnHow.addActionListener(this);
-	    btnPnl.add(btnHow);
-	    
-	    btnLead = new JButton("Leaderboards");
-	    btnLead.addActionListener(this);
-	    btnLead.setAlignmentX(Component.CENTER_ALIGNMENT);
-	    btnPnl.add(btnLead);
-	    
-	    JLabel lblTitle = new JLabel("On The Run");
-	    lblTitle.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 38));
-	    namePnl.add(lblTitle);
-		
+	public PrisonBreak()
+	{
+		// Sets the size and layout of the main frame
+		main.setBounds(300, 100, 600, 450);
+		main.getContentPane().setLayout(new BorderLayout(0, 0));
+
+		// Initializes the panel containing the name of the project,
+		// as well as adding it to the north area of the main frame
+		JPanel namePnl = new JPanel();
+		main.getContentPane().add(namePnl, BorderLayout.NORTH);
+
+		// Initializes the panel containing the image, as well as adding it to the
+		// center of the panel
+		JPanel centerPnl = new JPanel();
+		main.getContentPane().add(centerPnl, BorderLayout.CENTER);
+
+		// Initializes and sets the layout of panel containing the buttons
+		// as well as
+		JPanel btnPnl = new JPanel();
+		btnPnl.setLayout(new GridLayout(1, 3));
+		btnPnl.setPreferredSize(new Dimension(0, 40));
+		main.getContentPane().add(btnPnl, BorderLayout.SOUTH);
+		btnNew = new JButton("New Game");
+		btnNew.addActionListener(this);
+		btnNew.setPreferredSize(new Dimension());
+		btnPnl.add(btnNew);
+
+		btnHow = new JButton("How to Play");
+		btnHow.addActionListener(this);
+		btnPnl.add(btnHow);
+
+		btnLead = new JButton("Leaderboards");
+		btnLead.addActionListener(this);
+		btnLead.setAlignmentX(Component.CENTER_ALIGNMENT);
+		btnPnl.add(btnLead);
+
+		JLabel lblTitle = new JLabel("On The Run");
+		lblTitle.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 38));
+		namePnl.add(lblTitle);
+
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setIcon(new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
 		centerPnl.add(lblNewLabel);
-		
+
 		main.setResizable(false);
 		main.setVisible(true);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) {
-		if(e.getSource() == btnNew)
+	public void actionPerformed(ActionEvent e)
+	{
+		if (e.getSource() == btnNew)
 		{
 			main.setVisible(false);
 			TheRun game = new TheRun();
 		}
-		if(e.getSource() == btnHow)
+		if (e.getSource() == btnHow)
 		{
 			main.setVisible(false);
 			howToPlay how = new howToPlay(main);
 		}
-		if(e.getSource() == btnLead)
+		if (e.getSource() == btnLead)
 		{
 			main.setVisible(false);
-			try {
+			try
+			{
 				leaderboard second = new leaderboard(main);
-			} catch (IOException exept) {
+			} catch (IOException exept)
+			{
 			}
 		}
 	}
-  public static void main(String[] args) 
-  {
-	  PrisonBreak game = new PrisonBreak();
-  }
+
+	public static void main(String[] args)
+	{
+		PrisonBreak game = new PrisonBreak();
+	}
 }
