@@ -10,15 +10,17 @@ import java.awt.Font;
 public class TheRun extends JPanel implements ActionListener, KeyListener
 {
 	JFrame			frame				= new JFrame();
+	Donut				donut				= new Donut();
 	Character		player			= new Character(false),
-							prison			= new Character(true);
+	            prison 			= new Character(true);
 	boolean			preGame			= true,
-	            pressHold 	= false, 
+	            pressHold   = false, 
 	            pressedOnce = false, 
-	            isUrban 		= true;
+	            isUrban     = true;
 	int					plTime			= 0,
-	            prTime 			= 0, 
-	            x 					= 720, 
+	            doTime 			= 0, 
+	            prTime      = 0, 
+	            x           = 720, 
 	            change, 
 	            spd;
 	JLabel			background	= new JLabel();
@@ -26,10 +28,12 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	String			playerMode	= "run",
 	            prisonMode 	= "run";
 	ImageIcon[]	bg					= new ImageIcon[50];
-	DrawPanel		panel				= new DrawPanel(player.getImage(0), prison.getImage(0));
+	DrawPanel		panel				= new DrawPanel();
+	// DrawPanel pnlDonut = new DrawPanel(donut.getImage(0));
 
 	public TheRun()
 	{
+		
 		// donut = Donut.getDonut(k);
 		for (int t = 0; t < 50; t++)
 		{
@@ -46,6 +50,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		panel = new DrawPanel(player.getImage(0), prison.getImage(0), Donut.getImage());
+		frame.getContentPane().add(panel);
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 		clock.start();
@@ -75,6 +81,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			panel.updateDown();
 		} else
 		{
+			panel.setDonutImage(donut.getImage());
 			spd = player.getSpd();
 			clock.setDelay(spd);
 			if (spd >= 60)
@@ -88,7 +95,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				panel.setCopImage(player.getImage(plTime));
 				// donut = Donut.getDonut(k);
 				// this.remove(holder);
-
 				plTime++;
 				if (plTime == 6)
 				{
@@ -147,6 +153,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			panel.update(change);
 			panel.updatePrison(0);
 			panel.updateDown();
+			if(prTime%3 == 0)
+				donut.advance();
 			revalidate();
 			if (prison.getX() - 100 <= player.getX())
 			{
@@ -171,14 +179,20 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 
 	class DrawPanel extends JPanel
 	{
-		ImageIcon	cop, prisoner;
+		ImageIcon	cop, prisoner, dondon;
 		String		mode			= "run";
 		int				countDown	= 4;
 
-		public DrawPanel(ImageIcon firstCop, ImageIcon firstPris)
+		public DrawPanel(ImageIcon firstCop, ImageIcon firstPris, ImageIcon donut)
 		{
 			cop = firstCop;
 			prisoner = firstPris;
+			dondon = donut;
+		}
+
+		public DrawPanel()
+		{
+			// TODO Auto-generated constructor stub
 		}
 
 		public void updateDown()
@@ -203,6 +217,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			{
 				player.jump();
 			}
+		}
+
+		public void setDonutImage(ImageIcon newDonut)
+		{
+			dondon = newDonut;
 		}
 
 		public void setPrisImage(ImageIcon newPris)
@@ -263,14 +282,24 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			prisoner.paintIcon(this, g, prison.getX(), 338);
 		}
 
+		private void paintDonut(Graphics g)
+		{
+			// if (donut != null)
+			// {
+			g.drawRect(100, 100, 50, 50);
+			dondon.paintIcon(this, g, 100, 100);
+			//.paintIcon(dondon, g, x, 100);
+			// }
+		}
+
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
-			// donut.paintIcon(this, g, 100, 350);
 			paintBack(g);
 			paintCop(g);
 			paintPrison(g);
 			paintCount(g);
+			paintDonut(g);
 			repaint();
 		}
 	}
