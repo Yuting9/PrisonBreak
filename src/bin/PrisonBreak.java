@@ -61,16 +61,19 @@ public class PrisonBreak implements ActionListener
 		main.getContentPane().add(centerPnl, BorderLayout.CENTER);
 
 		// Initializes and sets the layout of panel containing the buttons
-		// as well as
 		JPanel btnPnl = new JPanel();
 		btnPnl.setLayout(new GridLayout(1, 3));
 		btnPnl.setPreferredSize(new Dimension(0, 40));
+		
+		// Adds the panel to the main frame
 		main.getContentPane().add(btnPnl, BorderLayout.SOUTH);
+		
+		//Sets the New-Game button and adds it to the panel
 		btnNew = new JButton("New Game");
 		btnNew.addActionListener(this);
 		btnNew.setPreferredSize(new Dimension());
 		btnPnl.add(btnNew);
-
+		
 		btnHow = new JButton("How to Play");
 		btnHow.addActionListener(this);
 		btnPnl.add(btnHow);

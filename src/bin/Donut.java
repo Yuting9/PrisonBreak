@@ -3,18 +3,28 @@ package bin;
 import javax.swing.ImageIcon;
 
 public class Donut {
-  
+  static int doTime = 0;
   static ImageIcon[] donut = new ImageIcon[4];
-  Donut(){
-    for(int d = 0; d < 4; d++)
+  Donut()
+  {
+    for(int i = 0; i < 4; i++)
     {
-      donut[d] = new ImageIcon(PrisonBreak.class.getResource("/img/donut" + d + ".png"));
+      donut[i] = new ImageIcon(PrisonBreak.class.getResource("/img/donut" + i + ".png"));
     }
   }
   
-  public static ImageIcon getImage(int d)
+  public static ImageIcon getImage()
   {
-    return donut[d];
+    return donut[doTime];
+  }
+  
+  public static void advance()
+  {
+  	doTime++;
+  	if(doTime >= 4)
+  	{
+  		doTime = 0;
+  	}
   }
   
 }
