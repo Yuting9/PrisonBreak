@@ -18,6 +18,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
              pressedOnce = false, 
              isUrban   = true;
  int     plTime   = 0,
+         plTimeDonut = 0,
              prTime    = 0, 
              x      = 720, 
              change, 
@@ -78,7 +79,12 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
    panel.updateDown();
   } else
   {
-    panel.setDonutImage(donut.getImage(plTime));
+    panel.setDonutImage(donut.getImage(plTimeDonut));
+    plTimeDonut++;
+    if (plTimeDonut == 4)
+    {
+     plTimeDonut = 0;
+    }
    spd = player.getSpd();
    clock.setDelay(spd);
    if (spd >= 60)
@@ -92,7 +98,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     panel.setCopImage(player.getImage(plTime));
     // donut = Donut.getDonut(k);
     // this.remove(holder);
-
     plTime++;
     if (plTime == 6)
     {
@@ -275,7 +280,10 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
   
   private void paintDonut(Graphics g)
   {
-   donut.paintIcon(this, g, 100, 338);
+    //if (donut != null)
+    //{
+   donut.paintIcon(this, g, x, 100);
+    //}
   }
 
   public void paintComponent(Graphics g)
