@@ -7,7 +7,7 @@
  * 				points if you catch the prisoner quickly or if you avoid a lot
  * 				of obstacles.
  *
- * Author: Yuting L., Aunik D.
+ * Author: Yuting L.
  * Date: 19/05/16 through 13/06/16
  * Course: ICS4U1
  *********************************************************************************/
@@ -27,6 +27,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 public class PrisonBreak implements ActionListener
@@ -35,14 +36,16 @@ public class PrisonBreak implements ActionListener
 	JFrame	main	= new JFrame("On the Run - Main Menu");
 
 	// The buttons used in the main menu
-	JButton	btnNew, btnLead, btnHow;
+	JButton	btnNew, 
+					btnLead, 
+					btnHow;
 
 	/**************************
 	 * Constructors
 	 **************************/
 
 	/**
-	 * Defualt PrisonBreak Constructor
+	 * Default PrisonBreak Constructor
 	 */
 	public PrisonBreak()
 	{
@@ -68,60 +71,88 @@ public class PrisonBreak implements ActionListener
 		// Adds the panel to the main frame
 		main.getContentPane().add(btnPnl, BorderLayout.SOUTH);
 		
-		//Sets the New-Game button and adds it to the panel
+		// Sets the New-Game button and adds it to the button panel
 		btnNew = new JButton("New Game");
 		btnNew.addActionListener(this);
 		btnNew.setPreferredSize(new Dimension());
 		btnPnl.add(btnNew);
 		
+		// Sets the How-To-Play button and adds it to the button panel
 		btnHow = new JButton("How to Play");
 		btnHow.addActionListener(this);
 		btnPnl.add(btnHow);
 
+		// Sets the leaderboard button and adds it to the button panel
 		btnLead = new JButton("Leaderboards");
 		btnLead.addActionListener(this);
 		btnLead.setAlignmentX(Component.CENTER_ALIGNMENT);
 		btnPnl.add(btnLead);
-
+		
+		// Formats the label containing the title of the game 
+		// and adds it to the name panel
 		JLabel lblTitle = new JLabel("On The Run");
 		lblTitle.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 38));
 		namePnl.add(lblTitle);
 
-		JLabel lblNewLabel = new JLabel("");
-		lblNewLabel.setIcon(new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
-		centerPnl.add(lblNewLabel);
-
+		// Sets the icon for the image label and adds it to the panel
+		JLabel lblImage = new JLabel("");
+		lblImage.setIcon(new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
+		centerPnl.add(lblImage);
+		
+		// Sets the main frame as being not resizable and visible
 		main.setResizable(false);
 		main.setVisible(true);
-	}
+	}// End default constructor
 
-	@Override
+	/**
+	 * The actionPerformed method containing info on what to do if buttons are pushed
+	 * 
+	 * @param ActionEvent e
+	 */
 	public void actionPerformed(ActionEvent e)
 	{
+		// If the new game button was clicked
 		if (e.getSource() == btnNew)
 		{
+			// Set the main frame as invisible
 			main.setVisible(false);
+			// Run the game
 			TheRun game = new TheRun();
-		}
+		}// End If
+		
+		// If the how to play button was clicked
 		if (e.getSource() == btnHow)
 		{
+			// Set the main frame as invisible
 			main.setVisible(false);
+			// Run the how to play screen
 			howToPlay how = new howToPlay(main);
-		}
+		}// End If
+		
+		// If the leaderboards button was clicked
 		if (e.getSource() == btnLead)
 		{
+			// Set the main frame as invisible
 			main.setVisible(false);
+			
+			// Attempt to open leaderboards
 			try
 			{
+				// Run the leaderboards screen
 				leaderboard second = new leaderboard(main);
-			} catch (IOException exept)
+			} 
+			// If the leaderboard returns and error
+			catch (IOException exept)
 			{
-			}
-		}
-	}
+				// Create a popup informing the user of an error recieving leaderboard information
+				JOptionPane.showMessageDialog(main, "Error recieving leaderboard info");
+			}// End try-catch
+		}// End If
+	}// End actionPerformed
 
 	public static void main(String[] args)
 	{
+		//#main
 		PrisonBreak game = new PrisonBreak();
-	}
-}
+	}// End Main
+}// End PrisonBreak

@@ -1,3 +1,17 @@
+/*********************************************************************************
+ * Assignment: Final Summative
+ * Description: A sidescroller where you play as a police officer chasing down
+ * 				a runaway prisoner. You win if you catch the prisoner, and you
+ * 				lose if the prisoner gets too far away. Donuts give you points
+ * 				and coffee speeds you up. You also get a "Skill" bonus to your
+ * 				points if you catch the prisoner quickly or if you avoid a lot
+ * 				of obstacles.
+ *
+ * Author: Yuting L.
+ * Date: 19/05/16 through 13/06/16
+ * Course: ICS4U1
+ *********************************************************************************/
+
 package bin;
 
 import java.awt.BorderLayout;
@@ -25,12 +39,17 @@ import java.util.Scanner;
 
 public class leaderboard
 {
+	// The file in which all the information is stored
 	File					file		= new File("lead.info");
+	// The strings that contain information from the file
+	// These are written in HTML
 	String				name		= new String("<html>"),
 								buff		= new String("<html>"),
 								score		= new String("<html>"),
 								holding	= new String();
+	// The string array that holds the file information in array form
 	String[]			info		= new String[3];
+	// The main frame containing all the relevant panels
 	final JFrame	lead		= new JFrame("On the Run - Leaderboards");
 
 	leaderboard(final JFrame main) throws IOException
