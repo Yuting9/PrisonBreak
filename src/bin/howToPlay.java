@@ -14,6 +14,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.BoxLayout;
 import javax.swing.SwingConstants;
+import javax.swing.SwingUtilities;
+
 import java.awt.FlowLayout;
 
 public class howToPlay implements ActionListener
@@ -21,6 +23,7 @@ public class howToPlay implements ActionListener
  JButton btnRtn, btnNext, btnBack;
  final JFrame howTo, goBack;
  JPanel[] pnlHelp = new JPanel[2];
+ JLabel image;
  int page = 0;
  
   howToPlay(final JFrame main)
@@ -44,7 +47,7 @@ public class howToPlay implements ActionListener
     //if (page == 0)
     //{
       pnlHelp[page] = new JPanel();
-      JLabel image = new JLabel (new ImageIcon (howToPlay.class.getResource("/img/HowToPlayPage" + page + ".png") ) );
+      image = new JLabel (new ImageIcon (howToPlay.class.getResource("/img/HowToPlayPage" + page + ".png") ) );
       pnlHelp[page].add(image);
       howTo.getContentPane().add(pnlHelp[page]);
       System.out.println("one");
@@ -84,7 +87,7 @@ public class howToPlay implements ActionListener
    }
    if(e.getSource() == btnNext){
     page++;
-    System.out.println(page);
+    image.setIcon(new ImageIcon (howToPlay.class.getResource("/img/HowToPlayPage" + page + ".png") ) );
     btnBack.setEnabled(true);
     if(page >= pnlHelp.length){
      btnNext.setEnabled(false);
@@ -92,7 +95,7 @@ public class howToPlay implements ActionListener
    }
    if(e.getSource() == btnBack){
     page--;
-    System.out.println(page);
+    image.setIcon(new ImageIcon (howToPlay.class.getResource("/img/HowToPlayPage" + page + ".png") ) );
     btnNext.setEnabled(true);
     if(page == 0){
      btnBack.setEnabled(false);

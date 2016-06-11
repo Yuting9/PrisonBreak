@@ -51,7 +51,7 @@ public class Sprite
 		else
 		{
 			image = new ImageIcon(PrisonBreak.class.getResource(
-				"/img/Rural" + (int) (Math.random() * 3) + ".png")
+				"/img/Rural" + (int) (Math.random() * 5) + ".png")
 			);
 		}
 		x = 1000;
