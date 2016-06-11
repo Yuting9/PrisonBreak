@@ -125,9 +125,9 @@ public class Character
 	public void jump()
 	{
 		y -= vert;
-		if (!released && mode == "jump")
+		if (!released && mode.equals("jump"))
 		{
-			vert -= 2;
+			vert -= 3;
 			if (vert <= 3)
 			{
 				released = true;
