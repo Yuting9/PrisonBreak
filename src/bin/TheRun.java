@@ -10,59 +10,56 @@ import java.awt.Font;
 public class TheRun extends JPanel implements ActionListener, KeyListener
 {
 	// The main frame of the game
-	JFrame			frame				= new JFrame();
-	
+	JFrame				frame				= new JFrame();
+
 	// Initializing the Donut Class
-	Donut				donut				= new Donut();
+	Donut					donut				= new Donut();
 	// Initializing the Character class as a player and a prisoner
-	Character		player			= new Character(false),
-	            prison 			= new Character(true);
+	Character			player			= new Character(false),
+	              prison 			= new Character(true);
 	// Sets boolean values, preGame controls the countdown, pressHold determines
 	// if the jump key is pressed and held, pressedOnce prevents multi-jumping,
 	// and isUrban controls the background.
-	boolean			preGame			= true,
-	            pressHold 	= false, 
-	            pressedOnce = false, 
-	            isUrban 		= true;
+	boolean				preGame			= true,
+	              pressHold 	= false, 
+	              pressedOnce = false, 
+	              urban 		= true;
 	// Sets integer values, plTime is the frame the player character is to be at,
 	// doTime is the frame the donuts are to be at, and prTime is the frame the
 	// prisoner is to be at. x controls where the buildings start, xCoor
-	int					plTime			= 0,
-	            doTime 			= 0,
-	            prTime 			= 0,
-	            x 					= 720,
-	            xCoor 			= 0,
-	            dHeight			= 0,
-	            change,
-	            spd;
-	JLabel			background	= new JLabel();
-	Timer				clock				= new Timer(40, this);
-	String			playerMode	= "run",
-	            prisonMode 	= "run";
-	ImageIcon[]	bg					= new ImageIcon[50];
-	DrawPanel		panel				= new DrawPanel();
+	int						plTime			= 0,
+	              doTime 			= 0, 
+	              prTime 			= 0, 
+	              buildCount  = 0,
+	              x 					= 720, 
+	              xCoor 			= 0, 
+	              dHeight 		= 0, 
+	              change, 
+	              spd;
+	JLabel				background	= new JLabel();
+	Timer					clock				= new Timer(40, this);
+	String				playerMode	= "run",
+	              prisonMode 	= "run";
+	Sprite[]   		onScreen    = new Sprite[6];
+	DrawPanel			panel				= new DrawPanel();
 
 	public TheRun()
 	{
 		dHeight = (int) (Math.random() * 200);
 		xCoor = (int) ((Math.random() * 500) - 720);
-		for (int t = 0; t < 50; t++)
+		
+		for(int i = 0; i<6; i++)
 		{
-			bg[t] = new ImageIcon(PrisonBreak.class.getResource("/img/UrbanBuilding" + ((int) (Math.random() * 3)) + ".png"));
+			onScreen[i] = new Sprite(-100 + (210*i));
 		}
-
-		for (int r = 0; r < 50; r++)
-		{
-			bg[r] = new ImageIcon(PrisonBreak.class.getResource("/img/Rural" + ((int) (Math.random() * 3)) + ".png"));
-		}
-
+		
 		frame.addKeyListener(this);
 		frame.setFocusable(true);
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		panel = new DrawPanel(player.getImage(0), prison.getImage(0), Donut.getImage());
-		panel.setBounds(100,100,900,500);
+		panel.setBounds(100, 100, 900, 500);
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
 		clock.start();
@@ -160,6 +157,10 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			panel.update(change);
 			panel.updatePrison(0);
 			panel.updateDown();
+			for(int i = 0; i<6; i++)
+			{
+				onScreen[i].move(40);
+			}
 			if (prTime % 3 == 0)
 				donut.advance();
 			revalidate();
@@ -257,24 +258,23 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			g.setColor(new Color(0, 128, 231));
 			g.fillRect(0, 0, 1000, 600);
-
-			if (isUrban)
+			
+			for(int i = 0; i<6; i++)
 			{
-				for (int p = 0; p < 50; p++)
+				if(onScreen[i].getImage() != null)
+					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(), onScreen[i].getY());
+				if(onScreen[i].getX() < -300)
 				{
-					bg[p].paintIcon(this, g, x + (p * 200), 100);
-				}
-				isUrban = false;
-			}
-
-			else
-			{
-				for (int q = 0; q < 50; q++)
-				{
-					bg[q].paintIcon(this, g, x + (q * 270), 200);
+					onScreen[i].reGen(urban);
+					buildCount++;
+					if(buildCount >= 50)
+					{
+						buildCount = 0;
+						urban = !urban;
+					}
 				}
 			}
-
+			
 			g.setColor(Color.darkGray);
 			g.fillRect(0, 450, 1000, 100);
 		}
@@ -343,7 +343,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			System.out.println("Space-Released");
 			pressHold = false;
-			if(player.getMode().equals("jump"))
+			if (player.getMode().equals("jump"))
 			{
 				player.isReleased();
 			}
