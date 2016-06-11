@@ -3,7 +3,7 @@ package bin;
 import javax.swing.ImageIcon;
 
 public class Donut {
-  static int doTime = 0;
+  static int doTime = 0, x = 0, y = 0;
   static ImageIcon[] donut = new ImageIcon[4];
   Donut()
   {
@@ -20,11 +20,20 @@ public class Donut {
   
   public static void advance()
   {
-  	doTime++;
-  	if(doTime >= 4)
-  	{
-  		doTime = 0;
-  	}
+   doTime++;
+   if(doTime >= 4)
+   {
+    doTime = 0;
+   }
   }
   
+  public int getX()
+ {
+  return x;
+ }
+  
+  public int getHeight()
+ {
+  return y;
+ }
 }

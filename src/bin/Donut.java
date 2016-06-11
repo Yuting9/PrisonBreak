@@ -13,9 +13,9 @@ public class Donut {
     }
   }
   
-  public static ImageIcon getImage()
+  public static ImageIcon getImage(int d)
   {
-    return donut[doTime];
+    return donut[d];
   }
   
   public static void advance()
