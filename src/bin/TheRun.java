@@ -42,7 +42,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
  String    playerMode = "run",
                prisonMode  = "run";
  Sprite[]     onScreen    = new Sprite[6];
- Sprite[]  onScreenDonut  = new Sprite[4];
+ //Sprite[]  onScreenDonut  = new Sprite[4];
  DrawPanel   panel    = new DrawPanel();
 
  public TheRun()
@@ -50,10 +50,10 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
   dHeight = (int) (Math.random() * 200);
   xCoor = (int) ((Math.random() * 500) - 720);
   
-  for (int d = 0; d < 4; d++)
+  /*for (int d = 0; d < 4; d++)
   {
     onScreenDonut[d] = new Sprite(-100 + (210*d));
-  }
+  }*/
   
   for(int i = 0; i<6; i++)
   {
@@ -96,12 +96,12 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
    panel.updateDown();
   } else
   {
-   panel.setDonutImage(donut.getImage(doTime));
+   /*panel.setDonutImage(donut.getImage(doTime));
    doTime++;
    if (doTime == 4)
     {
      doTime = 0;
-    }
+    }*/
    spd = player.getSpd();
    clock.setDelay(spd);
    if (spd >= 60)
@@ -306,7 +306,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
    prisoner.paintIcon(this, g, prison.getX(), 338);
   }
 
-  private void paintDonut(Graphics g)
+  /*private void paintDonut(Graphics g)
   {
     for(int d = 0; d < 4; d++)
    {
@@ -316,7 +316,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
       System.out.println("donut");
     }
    }
-  }
+  }*/
 
   public void paintComponent(Graphics g)
   {
@@ -325,7 +325,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
    paintCop(g);
    paintPrison(g);
    paintCount(g);
-   paintDonut(g);
+   //paintDonut(g);
    repaint();
   }
  }
