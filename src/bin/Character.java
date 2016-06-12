@@ -19,7 +19,7 @@ public class Character
 {
 	private int					spd				= 200,
 	                    vert 			= 0, 
-	                    x 				= 0, 
+	                    x 				= 100, 
 	                    y 				= 338;
 	private static int	floor			= 338,
 	                    spdDiff 	= 0;

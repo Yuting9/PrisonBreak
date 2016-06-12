@@ -60,7 +60,10 @@ public class Donut
 	public void reGen(){
 		eaten = false;
 		x = (int) (Math.random() * 100) + 1000;
-		y = (int) (Math.random() * 10) + 300;
+		if((int)(Math.random()*6) >= 4)
+			y = 250;
+		else
+			y = 380;
 	}
 	
 	public void eaten(){

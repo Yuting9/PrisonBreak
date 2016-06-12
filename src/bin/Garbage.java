@@ -4,39 +4,30 @@ import javax.swing.ImageIcon;
 
 public class Garbage
 {
-	static int					doTime	= 0;
-	int									x = 0, 
-											y = 0;
-	static ImageIcon[]	donut	= new ImageIcon[] {null,null,null,null};
-	boolean hit = false;
+	static int				size	= 0;
+	int								x			= 0,
+	                  y 		= 0;
+	ImageIcon	garb	= null;
+	boolean						hit		= false;
 
 	Garbage(int i)
 	{
-		for (int doTime = 0; doTime < 4; doTime++)
-		{
-			donut[doTime] = new ImageIcon(PrisonBreak.class.getResource("/img/donut" + doTime + ".png"));
-		}
-		x = (int) (Math.random() * 1000) + 800*(i+1);
-		if((int)(Math.random()*6) >= 4)
-			y = 250;
-		else
-			y = 380;
+		garb = new ImageIcon(PrisonBreak.class.getResource("/img/garbage" + i + ".png"));
+		size = i;
+		x = (int) (Math.random() * 1000) + 800 * (i + 1);
+		y = 360;
 	}
 
-	public static ImageIcon getImage(int d)
+	public ImageIcon getImage()
 	{
-		return donut[d];
+		return garb;
 	}
 
-	public static void advance()
+	public int getSize()
 	{
-		doTime++;
-		if (doTime >= 4)
-		{
-			doTime = 0;
-		}
+		return size;
 	}
-
+	
 	public int getX()
 	{
 		return x;
@@ -56,18 +47,23 @@ public class Garbage
 	{
 		x -= dist;
 	}
-	
-	public void reGen(){
+
+	public void reGen(int i)
+	{
 		hit = false;
-		x = (int) (Math.random() * 100) + 1000;
-		y = (int) (Math.random() * 10) + 300;
+		size = i;
+		garb = new ImageIcon(PrisonBreak.class.getResource("/img/garbage" + i + ".png"));
+		x = (int) (Math.random() * 500) + 900;
+		y = 360;
 	}
-	
-	public void hit(){
+
+	public void hit()
+	{
 		hit = true;
 	}
-	
-	public boolean gethit(){
+
+	public boolean getHit()
+	{
 		return hit;
 	}
 }
