@@ -5,7 +5,7 @@ import javax.swing.ImageIcon;
 public class Sprite
 {
 	ImageIcon image = null;
-	int x = 700, y = 0;
+	int x = 700, y = 0, i = 0;
 	
 	Sprite(int i){
 		x = i;
@@ -57,5 +57,4 @@ public class Sprite
 		x = 1000;
 		y = 100;
 	}
-	
 }

@@ -62,7 +62,7 @@ public class Character
 		return vert;
 	}
 
-	public int getHeight()
+	public int getY()
 	{
 		return y;
 	}
@@ -122,6 +122,11 @@ public class Character
 		spdDiff += set;
 	}
 
+	public static void setDiff(int set)
+	{
+		spdDiff = set;
+	}
+	
 	public void jump()
 	{
 		y -= vert;

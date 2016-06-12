@@ -2,15 +2,15 @@ package bin;
 
 import javax.swing.ImageIcon;
 
-public class Donut
+public class Garbage
 {
 	static int					doTime	= 0;
 	int									x = 0, 
 											y = 0;
 	static ImageIcon[]	donut	= new ImageIcon[] {null,null,null,null};
-	boolean eaten = false;
+	boolean hit = false;
 
-	Donut(int i)
+	Garbage(int i)
 	{
 		for (int doTime = 0; doTime < 4; doTime++)
 		{
@@ -58,16 +58,16 @@ public class Donut
 	}
 	
 	public void reGen(){
-		eaten = false;
+		hit = false;
 		x = (int) (Math.random() * 100) + 1000;
 		y = (int) (Math.random() * 10) + 300;
 	}
 	
-	public void eaten(){
-		eaten = true;
+	public void hit(){
+		hit = true;
 	}
 	
-	public boolean getEaten(){
-		return eaten;
+	public boolean gethit(){
+		return hit;
 	}
 }
