@@ -6,34 +6,113 @@ import java.awt.*;
 public class Victory
 {
 	JFrame frame = new JFrame();
+
 	Victory(boolean really)
 	{
 		frame.setBounds(300, 100, 600, 450);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
-		
+
+		int pointD = PrisonBreak.game.pointD, 
+				pointC = PrisonBreak.game.pointC, 
+				pointT = PrisonBreak.game.pointT,
+				pointG = PrisonBreak.game.pointG, 
+				pointV;
+
 		JPanel pnlVerdict = new JPanel();
 		frame.getContentPane().add(pnlVerdict);
-		
+
 		JLabel lblVerdict = new JLabel("");
 		pnlVerdict.add(lblVerdict);
 		lblVerdict.setHorizontalAlignment(SwingConstants.CENTER);
-		
-		if(really)
+
+		if (really)
 			lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory0.png")));
-		
+
 		else
 			lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory1.png")));
+
 		lblVerdict.setPreferredSize(new Dimension(128, 128));
-		
+
 		JPanel pnlScore = new JPanel();
 		frame.getContentPane().add(pnlScore);
-		pnlScore.setLayout(new BoxLayout(pnlScore, BoxLayout.X_AXIS));
-		
-		JLabel lblReason = new JLabel("<html>");
-		pnlScore.add(lblReason);
-		
-		JLabel lblScore = new JLabel("<html>");
-		pnlScore.add(lblScore);
+		pnlScore.setLayout(new BoxLayout(pnlScore, BoxLayout.Y_AXIS));
+
+		JPanel pnlDonuts = new JPanel();
+		pnlScore.add(pnlDonuts);
+		pnlDonuts.setLayout(new BoxLayout(pnlDonuts, BoxLayout.X_AXIS));
+
+		JLabel lblDonut = new JLabel("Donuts  = ");
+		lblDonut.setToolTipText("The amount of Donuts you got");
+		lblDonut.setForeground(new Color(50, 205, 50));
+		pnlDonuts.add(lblDonut);
+
+		JLabel lblSDon = new JLabel(Integer.toString(pointD));
+		pnlDonuts.add(lblSDon);
+
+		JPanel pnlCoffee = new JPanel();
+		pnlScore.add(pnlCoffee);
+		pnlCoffee.setLayout(new BoxLayout(pnlCoffee, BoxLayout.X_AXIS));
+
+		JLabel lblCoffee = new JLabel("Coffee = ");
+		lblCoffee.setToolTipText("The amount of times you got coffee");
+		lblCoffee.setForeground(new Color(50, 205, 50));
+		pnlCoffee.add(lblCoffee);
+
+		JLabel lblSCof = new JLabel(Integer.toString(pointC));
+		pnlCoffee.add(lblSCof);
+
+		JPanel pnlGarb = new JPanel();
+		pnlScore.add(pnlGarb);
+		pnlGarb.setLayout(new BoxLayout(pnlGarb, BoxLayout.X_AXIS));
+
+		JLabel lblGarbage = new JLabel("Garbage = ");
+		lblGarbage.setToolTipText("The amount of times you hit a garbage can");
+		lblGarbage.setForeground(new Color(255, 0, 0));
+		pnlGarb.add(lblGarbage);
+
+		JLabel lblSGarb = new JLabel(Integer.toString(pointG));
+		pnlGarb.add(lblSGarb);
+
+		JPanel pnlTime = new JPanel();
+		pnlScore.add(pnlTime);
+		pnlTime.setLayout(new BoxLayout(pnlTime, BoxLayout.X_AXIS));
+
+		JLabel lblTime = new JLabel("Speed Bonus = ");
+		lblTime.setToolTipText("The faster you are at catching the prisoner, the higher this score");
+		lblTime.setForeground(new Color(50, 205, 50));
+		pnlTime.add(lblTime);
+
+		JLabel lblSTime = new JLabel(Integer.toString(pointT));
+		pnlTime.add(lblSTime);
+
+		JPanel pnlVictory = new JPanel();
+		pnlScore.add(pnlVictory);
+		pnlVictory.setLayout(new BoxLayout(pnlVictory, BoxLayout.X_AXIS));
+
+		JLabel lblVictory = new JLabel("");
+		lblVictory.setToolTipText("If you won or lost");
+		pnlVictory.add(lblVictory);
+
+		JLabel lblSVic = new JLabel("");
+		pnlVictory.add(lblSVic);
+
+		if (really)
+		{
+			lblVictory.setForeground(new Color(50, 205, 50));
+			lblVictory.setText("Victory = ");
+
+			pointV = 1000;
+			lblSVic.setText("1000");
+		}
+
+		else
+		{
+			lblVictory.setForeground(new Color(255, 0, 0));
+			lblVictory.setText("Failure = ");
+
+			pointV = -1000;
+			lblSVic.setText("-1000");
+		}
 		frame.pack();
 		frame.setVisible(true);
 	}

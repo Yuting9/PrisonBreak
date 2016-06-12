@@ -25,7 +25,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	// doTime is the frame the donuts are to be at, and prTime is the frame the
 	// prisoner is to be at. x controls where the buildings start, xCoor
 	int				plTime			= 0,
-	          doTime = 0, prTime = 0, buildCount = 0, change, spd, distance;
+	          doTime = 0, prTime = 0, buildCount = 0, change, spd, distance, pointD, pointC, pointT, pointG;
 	JLabel		background	= new JLabel();
 	Timer			clock				= new Timer(40, this);
 	String		playerMode	= "run",
@@ -196,12 +196,14 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     if (onDonut[i].getX() > player.getX()-20 && onDonut[i].getX() < player.getX() + 20
       && onDonut[i].getY() + 5 > player.getY() && onDonut[i].getY() < player.getY() + 100 && !onDonut[i].getEaten())
     {
+    	pointD+=10;
      onDonut[i].eaten();
     }
    }
    if (onCoffee.getX() > player.getX()-20 && onCoffee.getX() < player.getX() + 20
      && onCoffee.getY() + 5 > player.getY() && onCoffee.getY() < player.getY() + 100 && !onCoffee.getEaten())
    {
+  	pointC+=100;
     onCoffee.eaten();
     Character.addDiff(5);
    }
@@ -217,7 +219,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
    
    if (!onCoffee.isDeployed() && (int)(Math.random()*10) == 0)
    {
-    System.out.println("Deployed");
     onCoffee.deploy();
    }
    
@@ -231,12 +232,13 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
   	 		!onGarb[i].getHit())
   	 {
   		 System.out.println("Slowed" + player.getX() + ' ' + onGarb[i].getX());
+  		 pointG-=50;
   		 Character.addDiff(-5);
   		 onGarb[i].hit();
   	 }
   	 onGarb[i].move(20);
    }
-   
+   pointT++;
    if (prTime % 5 == 0)
     Donut.advance();
    revalidate();

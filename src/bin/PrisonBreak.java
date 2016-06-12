@@ -34,7 +34,8 @@ public class PrisonBreak implements ActionListener
 {
 	// Sets up the frame for the Main Menu
 	JFrame	main	= new JFrame("On the Run - Main Menu");
-
+	static PrisonBreak menu;
+	static TheRun game;
 	// The buttons used in the main menu
 	JButton	btnNew, 
 					btnLead, 
@@ -117,7 +118,7 @@ public class PrisonBreak implements ActionListener
 			// Set the main frame as invisible
 			main.setVisible(false);
 			// Run the game
-			TheRun game = new TheRun();
+			game = new TheRun();
 		}// End If
 		
 		// If the how to play button was clicked
@@ -153,6 +154,6 @@ public class PrisonBreak implements ActionListener
 	public static void main(String[] args)
 	{
 		//#main
-		PrisonBreak game = new PrisonBreak();
+		menu = new PrisonBreak();
 	}// End Main
 }// End PrisonBreak
