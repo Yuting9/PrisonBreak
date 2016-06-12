@@ -74,8 +74,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
   playerMode = player.getMode();
   prisonMode = prison.getMode();
   clock.setDelay(1000);
-    System.out.println("Test: "+(prison.getX() - player.getX())/10);
-    distance = (prison.getX() - player.getX()) / 10;
+  distance = ( (prison.getX() - player.getX()) / 10) - 10;
   if (preGame)
   {
    // Display countdown
