@@ -17,14 +17,19 @@ public class Victory
 		JLabel lblVerdict = new JLabel("");
 		pnlVerdict.add(lblVerdict);
 		lblVerdict.setHorizontalAlignment(SwingConstants.CENTER);
-		lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory0.png")));
+		
+		if(really)
+			lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory0.png")));
+		
+		else
+			lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory1.png")));
 		lblVerdict.setPreferredSize(new Dimension(128, 128));
 		
 		JPanel pnlScore = new JPanel();
 		frame.getContentPane().add(pnlScore);
 		pnlScore.setLayout(new BoxLayout(pnlScore, BoxLayout.X_AXIS));
 		
-		JLabel lblReason = new JLabel("New label");
+		JLabel lblReason = new JLabel("<html>");
 		pnlScore.add(lblReason);
 		
 		JLabel lblScore = new JLabel("<html>");
