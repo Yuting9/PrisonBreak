@@ -432,7 +432,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			g.setColor(Color.black);
 			g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 20));
-			g.drawString("Distance: " + distance, 50, 50);
+			g.drawString("Distance: " + distance + "m", 50, 50);
+			g.drawString("Points: " + (pointD+pointG+pointC), 600, 50);
 		}
 
 		public void paintComponent(Graphics g)

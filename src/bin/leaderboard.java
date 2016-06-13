@@ -40,17 +40,15 @@ import java.util.Scanner;
 public class leaderboard
 {
 	// The file in which all the information is stored
-	File					file		= new File("lead.info");
+	File					file	= new File("lead.info");
 	// The strings that contain information from the file
 	// These are written in HTML
-	String				name		= new String("<html>"),
-								buff		= new String("<html>"),
-								score		= new String("<html>"),
-								holding	= new String();
+	String				name	= new String("<html>"),
+	              buff = new String("<html>"), score = new String("<html>"), holding = new String();
 	// The string array that holds the file information in array form
-	String[]			info		= new String[3];
+	String[]			info	= new String[3];
 	// The main frame containing all the relevant panels
-	final JFrame	lead		= new JFrame("On the Run - Leaderboards");
+	final JFrame	lead	= new JFrame("On the Run - Leaderboards");
 
 	leaderboard(final JFrame main) throws IOException
 	{
@@ -62,7 +60,8 @@ public class leaderboard
 		lead.getContentPane().add(pnlTime);
 		pnlTime.setLayout(new BorderLayout(0, 0));
 
-		JLabel lblHiScore = new JLabel("<html>Leaderboards<br>---------------------------------------</html>");
+		JLabel lblHiScore = new JLabel(
+		"<html>Leaderboards<br>---------------------------------------</html>");
 		lblHiScore.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 32));
 		lblHiScore.setHorizontalAlignment(SwingConstants.CENTER);
 		pnlTime.add(lblHiScore, BorderLayout.NORTH);
@@ -98,6 +97,7 @@ public class leaderboard
 		lblBuffer.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 12));
 
 		JLabel lblScores = new JLabel();
+		lblScores.setVerticalAlignment(SwingConstants.TOP);
 		// lblScores.setBorder(BorderFactory.createLineBorder(Color.blue));
 		panel.add(lblScores, BorderLayout.EAST);
 		lblScores.setHorizontalAlignment(SwingConstants.LEADING);
@@ -118,28 +118,27 @@ public class leaderboard
 					// read the current line
 					holding = scanFile.nextLine();
 					info = holding.split("<</>>");
-					System.out.println(info[0]);
-					System.out.println(info[1]);
 					if (i < 10)
 						name += i + "... " + info[0] + "<br>";
 					else
 						name += i + ". " + info[0] + "<br>";
 					buff += "------------<br>";
 					score += info[1] + "<br>";
-				} else
+				}
+				else
 				{
 					if (i < 10)
 						name += i + "... " + "<br>";
 					else
 						name += i + ". " + "<br>";
 					buff += "------------<br>";
-					score += 0 + "<br>";
 				}
 			} // end while
 
 			// Close the file (IMPORTANT)
 			scanFile.close();
-		} catch (FileNotFoundException e)
+		}
+		catch (FileNotFoundException e)
 		{
 			System.out.println("The following problem reading from a file occurred:\n" + e);
 		} // end try/catch
