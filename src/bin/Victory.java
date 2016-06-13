@@ -14,10 +14,13 @@ public class Victory
 
 		int pointD = PrisonBreak.game.pointD, 
 				pointC = PrisonBreak.game.pointC, 
-				pointT = PrisonBreak.game.pointT,
+				pointT = 1100 - PrisonBreak.game.pointT,
 				pointG = PrisonBreak.game.pointG, 
 				pointV;
-
+		
+		if(pointT<0)
+			pointT = 0;
+		
 		JPanel pnlVerdict = new JPanel();
 		frame.getContentPane().add(pnlVerdict);
 

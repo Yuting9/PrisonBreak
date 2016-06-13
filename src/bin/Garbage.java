@@ -59,6 +59,7 @@ public class Garbage
 
 	public void hit()
 	{
+		garb = new ImageIcon(PrisonBreak.class.getResource("/img/knocked.png"));
 		hit = true;
 	}
 

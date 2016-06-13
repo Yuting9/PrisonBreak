@@ -227,9 +227,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
   	 if(onGarb[i].getX() < -300){
   		 onGarb[i].reGen((int)(Math.random()*2));
   	 }
-  	 if(player.getX() > onGarb[i].getX() && player.getX() < onGarb[i].getX() + 75*(onGarb[i].getSize()+1) &&
-  	 		player.getY() + 40 > onGarb[i].getY() && player.getY()< onGarb[i].getY() + 100 && 
-  	 		!onGarb[i].getHit())
+  	 if(player.getX() > onGarb[i].getX()-10 && player.getX() < onGarb[i].getX() + 75*(onGarb[i].getSize()+1) &&
+  	 		player.getY() + 60 > onGarb[i].getY() && !onGarb[i].getHit())
   	 {
   		 System.out.println("Slowed" + player.getX() + ' ' + onGarb[i].getX());
   		 pointG-=50;
