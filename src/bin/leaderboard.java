@@ -40,7 +40,7 @@ import java.util.Scanner;
 public class leaderboard
 {
 	// The file in which all the information is stored
-	File					file	= new File("lead.info");
+	static File					file	= new File("lead.info");
 	// The strings that contain information from the file
 	// These are written in HTML
 	String				name	= new String("<html>"),
@@ -108,7 +108,7 @@ public class leaderboard
 		try
 		{
 			// Create a file Scanner
-			Scanner scanFile = new Scanner(new File("lead.info"));
+			Scanner scanFile = new Scanner(file);
 
 			// Keep going until the end of the file
 			for (int i = 1; i <= 20; i++)
@@ -147,7 +147,6 @@ public class leaderboard
 		score += "</html>";
 
 		lblNames.setText(name);
-		System.out.println("lenlen" + lblNames.getWidth());
 		lblBuffer.setText(buff);
 		lblScores.setText(score);
 		lead.pack();

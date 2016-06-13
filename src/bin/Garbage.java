@@ -42,6 +42,7 @@ public class Garbage
 		return garb;
 	}
 
+	// Returns 
 	public int getSize()
 	{
 		return size;
