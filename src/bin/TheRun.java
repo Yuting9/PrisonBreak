@@ -2,7 +2,6 @@ package bin;
 
 import javax.swing.*;
 import java.awt.event.*;
-import java.awt.BorderLayout;
 import java.awt.Graphics;
 import java.awt.Color;
 import java.awt.Font;
@@ -256,9 +255,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				difi += 1;
 				Garbage[] temp = new Garbage[difi];
 				for(int i = 0; i<difi-1; i++)
-				{
-					System.out.println(i);
-					System.out.println(temp.length + " == " + onGarb.length);
+				{ 
 					temp[i] = onGarb[i];
 				}
 				temp[difi-1] = new Garbage((int) Math.random() * 2);

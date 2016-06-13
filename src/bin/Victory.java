@@ -8,8 +8,7 @@ public class Victory
 	JFrame	frame		= new JFrame();
 	int			pointD	= PrisonBreak.game.pointD,
 	        pointC = PrisonBreak.game.pointC, pointT = (1100 - PrisonBreak.game.pointT) * 2,
-	        pointG = PrisonBreak.game.pointG, pointV = 0,
-	        totP = pointD + pointC + pointT + pointG + pointV;
+	        pointG = PrisonBreak.game.pointG, totP;
 
 	Victory(boolean really)
 	{
@@ -114,7 +113,7 @@ public class Victory
 			lblVictory.setForeground(new Color(50, 205, 50));
 			lblVictory.setText("Victory = ");
 
-			pointV = 1000;
+			totP += 1000;
 			lblSVic.setText("1000");
 		}
 
@@ -123,10 +122,12 @@ public class Victory
 			lblVictory.setForeground(new Color(255, 0, 0));
 			lblVictory.setText("Failure = ");
 
-			pointV = -1000;
-			lblSVic.setText("-1000");
+			totP -= 500;
+			lblSVic.setText("-500");
 		}
-
+		
+		totP += pointD + pointC + pointG + pointT;
+		
 		lblTotal.setText("Total = " + Integer.toString(totP));
 
 		frame.pack();
