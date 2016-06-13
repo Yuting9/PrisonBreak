@@ -42,7 +42,6 @@ public class Character
 					rolls[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisroll" + i + ".png"));
 			} else
 			{
-				System.out.println(i);
 				imgs[i] = new ImageIcon(PrisonBreak.class.getResource("/img/cop" + i + ".png"));
 				if (i < 2)
 					jumps[i] = new ImageIcon(PrisonBreak.class.getResource("/img/copjump" + i + ".png"));
@@ -143,7 +142,6 @@ public class Character
 		}
 		if (y > floor)
 		{
-			System.out.println("This is Ture");
 			y = 338;
 			vert = 0;
 			mode = "roll";

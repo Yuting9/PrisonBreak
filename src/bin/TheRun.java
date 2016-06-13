@@ -186,10 +186,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
     if (onDonut[i].getX() < -300)
     {
      int x = (int) (Math.random() * 5);
-     System.out.println(x);
      if (x == 2)
      {
-      System.out.println("New Donut");
       onDonut[i].reGen();
      }
     }
@@ -205,7 +203,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
    {
   	pointC+=100;
     onCoffee.eaten();
-    Character.addDiff(5);
+    Character.addDiff(1);
    }
    if (onCoffee.isDeployed())
    {
@@ -230,9 +228,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
   	 if(player.getX() > onGarb[i].getX()-10 && player.getX() < onGarb[i].getX() + 75*(onGarb[i].getSize()+1) &&
   	 		player.getY() + 60 > onGarb[i].getY() && !onGarb[i].getHit())
   	 {
-  		 System.out.println("Slowed" + player.getX() + ' ' + onGarb[i].getX());
   		 pointG-=50;
-  		 Character.addDiff(-5);
+  		 Character.addDiff(-1);
   		 onGarb[i].hit();
   	 }
   	 onGarb[i].move(20);
@@ -294,10 +291,12 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		public void updatePrison(int change)
 		{
 			prison.setX(prison.getX() - change - Character.getDiff());
-			if (Character.getDiff() > 1)
-				Character.setDiff(Character.getDiff() - 1);
-			if (Character.getDiff() < -1)
-				Character.setDiff(Character.getDiff() + 1);
+			if(Character.getDiff()>2){
+				Character.addDiff(-1);
+			}
+			if(Character.getDiff()<-2){
+				Character.addDiff(1);
+			}
 		}
 
 		public void setCopImage(ImageIcon newCop)
@@ -427,11 +426,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		// TODO Auto-generated method stub
 		if (e.getKeyCode() == 39)
 		{
-			Character.addDiff(5);
+			Character.addDiff(1);
 		}
 		else if (e.getKeyCode() == 37)
 		{
-			Character.addDiff(-5);
+			Character.addDiff(-1);
 		}
 
 		else if (e.getKeyCode() == 32)
@@ -452,7 +451,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	{
 		if (e.getKeyCode() == 32 && spd == 54)
 		{
-			System.out.println("Space-Released");
 			pressHold = false;
 			if (player.getMode().equals("jump"))
 			{
