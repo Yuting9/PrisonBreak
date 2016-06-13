@@ -25,7 +25,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	// doTime is the frame the donuts are to be at, and prTime is the frame the
 	// prisoner is to be at. x controls where the buildings start, xCoor
 	int				plTime			= 0,
-	          doTime = 0, prTime = 0, buildCount = 0, change, spd, distance, pointD, pointC, pointT, pointG;
+	          doTime = 0, prTime = 0, buildCount = 0, change, spd, distance,
+	          pointD, pointC, pointT, pointG, difi = 2;
 	JLabel		background	= new JLabel();
 	Timer			clock				= new Timer(40, this);
 	String		playerMode	= "run",
@@ -33,7 +34,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	Sprite[]	onScreen		= new Sprite[6];
 	Donut[]		onDonut			= new Donut[5];
 	Coffee		onCoffee		= new Coffee();
-	Garbage[]	onGarb			= new Garbage[2];
+	Garbage[]	onGarb			= new Garbage[difi];
 	DrawPanel	panel				= new DrawPanel();
 
 	public TheRun()
@@ -52,7 +53,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			onDonut[i] = new Donut(i);
 		}
 
-		for (int i = 0; i < 2; i++)
+		for (int i = 0; i < difi; i++)
 		{
 			onGarb[i] = new Garbage((int) Math.random() * 2);
 		}
@@ -62,7 +63,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		frame.setResizable(false);
 		frame.setBounds(100, 100, 900, 500);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel = new DrawPanel(player.getImage(0), prison.getImage(0), Donut.getImage(0));
+		panel = new DrawPanel(player.getImage(0), prison.getImage(0),
+		Donut.getImage());
 		panel.setBounds(100, 100, 900, 500);
 		frame.getContentPane().add(panel);
 		frame.setVisible(true);
@@ -73,183 +75,208 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	}
 
 	@Override
- public void actionPerformed(ActionEvent e)
- {
-  playerMode = player.getMode();
-  prisonMode = prison.getMode();
-  clock.setDelay(1000);
-  distance = ( (prison.getX() - player.getX()) / 10);
-  if (preGame)
-  {
-   // Display countdown
-   if (panel.countDown <= 0)
-   {
-    preGame = false;
-    plTime++;
-    clock.setDelay(50);
-   }
-   else if (panel.countDown <= 1)
-   {
-    clock.setDelay(250);
-   }
-   panel.updateDown();
-  }
-  else
-  {
-   panel.setDonutImage(Donut.getImage(doTime));
-   doTime++;
-   if (doTime == 4)
-   {
-    doTime = 0;
-   }
+	public void actionPerformed(ActionEvent e)
+	{
+		playerMode = player.getMode();
+		prisonMode = prison.getMode();
+		clock.setDelay(1000);
+		distance = ((prison.getX() - player.getX()) / 10);
+		if (preGame)
+		{
+			// Display countdown
+			if (panel.countDown <= 0)
+			{
+				preGame = false;
+				plTime++;
+				clock.setDelay(50);
+			}
+			else if (panel.countDown <= 1)
+			{
+				clock.setDelay(250);
+			}
+			panel.updateDown();
+		}
+		else
+		{
+			panel.setDonutImage(Donut.getImage());
+			doTime++;
+			if (doTime == 4)
+			{
+				doTime = 0;
+			}
 
-   spd = player.getSpd();
-   clock.setDelay(spd);
-   if (spd >= 60)
-   {
-    change = 50 - (spd / 5);
-    player.setSpd(spd -= (spd / 5));
-   }
-   if (playerMode.equals("run"))
-   {
-    panel.setCopImage(player.getImage(plTime));
-    plTime++;
-    if (plTime == 6)
-    {
-     plTime = 0;
-    }
-   }
-   else if (playerMode.equals("jump"))
-   {
-    plTime = 0;
-    if (player.getVert() >= 0)
-    {
-     panel.setCopImage(player.getImage(0));
-    }
-    else
-    {
-     panel.setCopImage(player.getImage(1));
-    }
-   }
-   else if (playerMode.equals("roll"))
-   {
-    pressedOnce = false;
-    player.isNotReleased();
-    if (plTime == 3)
-    {
-     player.doRun();
-    }
-    panel.setCopImage(player.getImage(plTime));
-    plTime++;
-   }
-   if (prisonMode.equals("run"))
-   {
-    if (prTime < 5)
-    {
-     prTime++;
-     panel.setPrisImage(prison.getImage(prTime));
-     prTime--;
-    }
-    else
-    {
-     panel.setPrisImage(prison.getImage(0));
-    }
+			spd = player.getSpd();
+			clock.setDelay(spd);
+			if (spd >= 60)
+			{
+				change = 50 - (spd / 5);
+				player.setSpd(spd -= (spd / 5));
+			}
+			if (playerMode.equals("run"))
+			{
+				panel.setCopImage(player.getImage(plTime));
+				plTime++;
+				if (plTime == 6)
+				{
+					plTime = 0;
+				}
+			}
+			else if (playerMode.equals("jump"))
+			{
+				plTime = 0;
+				if (player.getVert() >= 0)
+				{
+					panel.setCopImage(player.getImage(0));
+				}
+				else
+				{
+					panel.setCopImage(player.getImage(1));
+				}
+			}
+			else if (playerMode.equals("roll"))
+			{
+				pressedOnce = false;
+				player.isNotReleased();
+				if (plTime == 3)
+				{
+					player.doRun();
+				}
+				panel.setCopImage(player.getImage(plTime));
+				plTime++;
+			}
+			if (prisonMode.equals("run"))
+			{
+				if (prTime < 5)
+				{
+					prTime++;
+					panel.setPrisImage(prison.getImage(prTime));
+					prTime--;
+				}
+				else
+				{
+					panel.setPrisImage(prison.getImage(0));
+				}
 
-    prTime++;
-    if (prTime == 6)
-    {
-     prTime = 0;
-    }
-   }
+				prTime++;
+				if (prTime == 6)
+				{
+					prTime = 0;
+				}
+			}
 
-   else if (prisonMode.equals("jump"))
-   {
-    if (prison.getVert() > 0)
-    {
-     panel.setCopImage(prison.getImage(0));
-    }
-    else
-    {
-     panel.setCopImage(prison.getImage(1));
-    }
+			else if (prisonMode.equals("jump"))
+			{
+				if (prison.getVert() > 0)
+				{
+					panel.setCopImage(prison.getImage(0));
+				}
+				else
+				{
+					panel.setCopImage(prison.getImage(1));
+				}
 
-   }
-   panel.updatePrison(0);
-   panel.updateDown();
-   for (int i = 0; i < 6; i++)
-   {
-    onScreen[i].move(40);
-   }
-   for (int i = 0; i < 5; i++)
-   {
-    onDonut[i].move(20);
-    if (onDonut[i].getX() < -300)
-    {
-     int x = (int) (Math.random() * 5);
-     if (x == 2)
-     {
-      onDonut[i].reGen();
-     }
-    }
-    if (onDonut[i].getX() > player.getX()-20 && onDonut[i].getX() < player.getX() + 20
-      && onDonut[i].getY() + 5 > player.getY() && onDonut[i].getY() < player.getY() + 100 && !onDonut[i].getEaten())
-    {
-    	pointD+=10;
-     onDonut[i].eaten();
-    }
-   }
-   if (onCoffee.getX() > player.getX()-20 && onCoffee.getX() < player.getX() + 20
-     && onCoffee.getY() + 5 > player.getY() && onCoffee.getY() < player.getY() + 100 && !onCoffee.getEaten())
-   {
-  	pointC+=100;
-    onCoffee.eaten();
-    Character.addDiff(1);
-   }
-   if (onCoffee.isDeployed())
-   {
-    onCoffee.move(20);
-   }
-   
-   if (onCoffee.getX() < -300)
-   {
-    onCoffee.eaten();
-   }
-   
-   if (!onCoffee.isDeployed() && (int)(Math.random()*10) == 0)
-   {
-    onCoffee.deploy();
-   }
-   
-   for(int i = 0; i<2; i++)
-   {
-  	 if(onGarb[i].getX() < -300){
-  		 onGarb[i].reGen((int)(Math.random()*2));
-  	 }
-  	 if(player.getX() > onGarb[i].getX()-10 && player.getX() < onGarb[i].getX() + 75*(onGarb[i].getSize()+1) &&
-  	 		player.getY() + 60 > onGarb[i].getY() && !onGarb[i].getHit())
-  	 {
-  		 pointG-=50;
-  		 Character.addDiff(-1);
-  		 onGarb[i].hit();
-  	 }
-  	 onGarb[i].move(20);
-   }
-   pointT++;
-   if (prTime % 5 == 0)
-    Donut.advance();
-   revalidate();
-   if (prison.getX() <= player.getX())
-   {
-    win();
-    notEnd = false;
-   }
-   else if (prison.getX() > 900)
-   {
-  	 lose();
-  	 notEnd = false;
-   }
-  }
- }
+			}
+			panel.updatePrison(0);
+			panel.updateDown();
+			for (int i = 0; i < 6; i++)
+			{
+				onScreen[i].move(40);
+			}
+			for (int i = 0; i < 5; i++)
+			{
+				onDonut[i].move(20);
+				if (onDonut[i].getX() < -300)
+				{
+					int x = (int) (Math.random() * 5);
+					if (x == 2)
+					{
+						onDonut[i].reGen();
+					}
+				}
+				if (onDonut[i].getX() > player.getX() - 20
+				&& onDonut[i].getX() < player.getX() + 20
+				&& onDonut[i].getY() + 5 > player.getY()
+				&& onDonut[i].getY() < player.getY() + 100 && !onDonut[i].getEaten())
+				{
+					pointD += 10;
+					onDonut[i].eaten();
+				}
+			}
+			if (onCoffee.getX() > player.getX() - 20
+			&& onCoffee.getX() < player.getX() + 20
+			&& onCoffee.getY() + 5 > player.getY()
+			&& onCoffee.getY() < player.getY() + 100 && !onCoffee.getEaten())
+			{
+				pointC += 100;
+				onCoffee.eaten();
+				Character.addDiff(1);
+				if (Character.getDiff() == 3)
+				{
+					Character.addDiff(4);
+				}
+			}
+			if (onCoffee.isDeployed())
+			{
+				onCoffee.move(20);
+			}
+
+			if (onCoffee.getX() < -300)
+			{
+				onCoffee.eaten();
+			}
+
+			if (!onCoffee.isDeployed() && (int) (Math.random() * 10) == 0)
+			{
+				onCoffee.deploy();
+			}
+
+			for (int i = 0; i < difi; i++)
+			{
+				if (onGarb[i].getX() < -300)
+				{
+					onGarb[i].reGen((int) (Math.random() * 2));
+				}
+				if (player.getX() > onGarb[i].getX() - 10
+				&& player.getX() < onGarb[i].getX() + 75 * (onGarb[i].getSize() + 1)
+				&& player.getY() + 60 > onGarb[i].getY() && !onGarb[i].getHit())
+				{
+					pointG -= 75;
+					Character.addDiff(-1);
+					if (Character.getDiff() == -3)
+					{
+						Character.addDiff(-4);
+					}
+					onGarb[i].hit();
+				}
+				onGarb[i].move(20);
+			}
+			pointT++;
+			if (2 + pointT / 500 > difi)
+			{
+				difi += 1;
+				Garbage[] temp = new Garbage[difi];
+				for(int i = 0; i<difi-1; i++)
+				{
+					System.out.println(i);
+					System.out.println(temp.length + " == " + onGarb.length);
+					temp[i] = onGarb[i];
+				}
+				temp[difi-1] = new Garbage((int) Math.random() * 2);
+				onGarb = temp;
+			}
+			revalidate();
+			if (prison.getX() <= player.getX())
+			{
+				win();
+				notEnd = false;
+			}
+			else if (prison.getX() > 900)
+			{
+				lose();
+				notEnd = false;
+			}
+		}
+	}
 
 	private void win()
 	{
@@ -291,10 +318,12 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		public void updatePrison(int change)
 		{
 			prison.setX(prison.getX() - change - Character.getDiff());
-			if(Character.getDiff()>2){
+			if (Character.getDiff() > 2)
+			{
 				Character.addDiff(-1);
 			}
-			if(Character.getDiff()<-2){
+			if (Character.getDiff() < -2)
+			{
 				Character.addDiff(1);
 			}
 		}
@@ -340,7 +369,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			for (int i = 0; i < 6; i++)
 			{
 				if (onScreen[i].getImage() != null)
-					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(), onScreen[i].getY());
+					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(),
+					onScreen[i].getY());
 				if (onScreen[i].getX() < -300)
 				{
 					onScreen[i].reGen(urban);
@@ -375,9 +405,10 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			for (int i = 0; i < 5; i++)
 			{
-				if (onDonut[i].getImage(doTime) != null && !onDonut[i].getEaten())
+				if (onDonut[i].getImage() != null && !onDonut[i].getEaten())
 				{
-					onDonut[i].getImage(doTime).paintIcon(this, g, onDonut[i].getX(), onDonut[i].getY());
+					onDonut[i].getImage().paintIcon(this, g, onDonut[i].getX(),
+					onDonut[i].getY());
 				}
 			}
 		}
@@ -386,15 +417,17 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			if (onCoffee.isDeployed())
 			{
-				onCoffee.getImage().paintIcon(this, g, onCoffee.getX(), onCoffee.getY());
+				onCoffee.getImage().paintIcon(this, g, onCoffee.getX(),
+				onCoffee.getY());
 			}
 		}
 
 		private void paintGarbage(Graphics g)
 		{
-			for (int i = 0; i < 2; i++)
+			for (int i = 0; i < difi; i++)
 			{
-				onGarb[i].getImage().paintIcon(this, g, onGarb[i].getX(), onGarb[i].getY());
+				onGarb[i].getImage().paintIcon(this, g, onGarb[i].getX(),
+				onGarb[i].getY());
 			}
 		}
 

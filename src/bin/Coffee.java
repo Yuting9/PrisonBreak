@@ -4,10 +4,11 @@ import javax.swing.ImageIcon;
 
 public class Coffee
 {
-	int									x = 0, 
-											y = 0;
-	static ImageIcon coffee = new ImageIcon();
-	boolean eaten = false, deployed = false;
+	int								x				= 0,
+	                  y = 0;
+	static ImageIcon	coffee	= new ImageIcon();
+	boolean						eaten		= false,
+	                  deployed = false;
 
 	Coffee()
 	{
@@ -23,7 +24,7 @@ public class Coffee
 	{
 		return deployed;
 	}
-	
+
 	public int getX()
 	{
 		return x;
@@ -43,23 +44,26 @@ public class Coffee
 	{
 		x -= dist;
 	}
-	
-	public void deploy(){
+
+	public void deploy()
+	{
 		eaten = false;
 		deployed = true;
 		x = (int) (Math.random() * 100) + 1000;
-		if((int)(Math.random()*6) >= 4)
+		if ((int) (Math.random() * 6) >= 4)
 			y = 250;
 		else
 			y = 380;
 	}
-	
-	public void eaten(){
+
+	public void eaten()
+	{
 		eaten = true;
 		deployed = false;
 	}
-	
-	public boolean getEaten(){
+
+	public boolean getEaten()
+	{
 		return eaten;
 	}
 }

@@ -5,22 +5,20 @@ import java.awt.*;
 
 public class Victory
 {
-	JFrame frame = new JFrame();
+	JFrame	frame		= new JFrame();
+	int			pointD	= PrisonBreak.game.pointD,
+	        pointC = PrisonBreak.game.pointC, pointT = (1100 - PrisonBreak.game.pointT) * 2,
+	        pointG = PrisonBreak.game.pointG, pointV = 0,
+	        totP = pointD + pointC + pointT + pointG + pointV;
 
 	Victory(boolean really)
 	{
 		frame.setBounds(300, 100, 600, 450);
 		frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
 
-		int pointD = PrisonBreak.game.pointD, 
-				pointC = PrisonBreak.game.pointC, 
-				pointT = 1100 - PrisonBreak.game.pointT,
-				pointG = PrisonBreak.game.pointG, 
-				pointV;
-		
-		if(pointT<0)
+		if (pointT < 0)
 			pointT = 0;
-		
+
 		JPanel pnlVerdict = new JPanel();
 		frame.getContentPane().add(pnlVerdict);
 
@@ -29,10 +27,15 @@ public class Victory
 		lblVerdict.setHorizontalAlignment(SwingConstants.CENTER);
 
 		if (really)
+		{
 			lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory0.png")));
+		}
 
 		else
+		{
+			pointT = 0;
 			lblVerdict.setIcon(new ImageIcon(Victory.class.getResource("/img/Victory1.png")));
+		}
 
 		lblVerdict.setPreferredSize(new Dimension(128, 128));
 
@@ -99,6 +102,13 @@ public class Victory
 		JLabel lblSVic = new JLabel("");
 		pnlVictory.add(lblSVic);
 
+		JPanel pnlTotal = new JPanel();
+		pnlScore.add(pnlTotal);
+
+		JLabel lblTotal = new JLabel("");
+		lblTotal.setForeground(Color.BLUE);
+		pnlTotal.add(lblTotal);
+
 		if (really)
 		{
 			lblVictory.setForeground(new Color(50, 205, 50));
@@ -116,6 +126,9 @@ public class Victory
 			pointV = -1000;
 			lblSVic.setText("-1000");
 		}
+
+		lblTotal.setText("Total = " + Integer.toString(totP));
+
 		frame.pack();
 		frame.setVisible(true);
 	}
