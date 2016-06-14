@@ -1,11 +1,14 @@
 /*********************************************************************************
- * Assignment: Final Summative Description: A sidescroller where you play as a
+ * Assignment: Final Summative 
+ * Description: A sidescroller where you play as a
  * police officer chasing down a runaway prisoner. You win if you catch the
  * prisoner, and you lose if the prisoner gets too far away. Donuts give you
  * points and coffee speeds you up. You also get a "Skill" bonus to your points
  * if you catch the prisoner quickly or if you avoid a lot of obstacles.
  *
- * Author: Yuting L. Date: 19/05/16 through 13/06/16 Course: ICS4U1
+ * Main Author: Yuting L.
+ * Date: 19/05/16 through 13/06/16 
+ * Course: ICS4U1
  *********************************************************************************/
 
 package bin;
@@ -29,11 +32,11 @@ import javax.swing.JPanel;
 public class PrisonBreak implements ActionListener
 {
 	// Sets up the frame for the Main Menu
-	JFrame							main	= new JFrame("On the Run - Main Menu");
-	static PrisonBreak	menu;
-	static TheRun				game;
+	JFrame main = new JFrame("On the Run - Main Menu");
+	static PrisonBreak menu;
+	static TheRun game;
 	// The buttons used in the main menu
-	JButton							btnNew, btnLead, btnHow;
+	JButton btnNew, btnLead, btnHow;
 
 	/**************************
 	 * Constructors
@@ -91,8 +94,7 @@ public class PrisonBreak implements ActionListener
 
 		// Sets the icon for the image label and adds it to the panel
 		JLabel lblImage = new JLabel("");
-		lblImage.setIcon(
-		new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
+		lblImage.setIcon(new ImageIcon(PrisonBreak.class.getResource("/img/mainMenuIcon.jpg")));
 		centerPnl.add(lblImage);
 
 		// Sets the main frame as being not resizable and visible
@@ -115,7 +117,7 @@ public class PrisonBreak implements ActionListener
 			// Set the main frame as invisible
 			main.setVisible(false);
 			// Run the game
-			game = new TheRun();
+			game = new TheRun(main);
 		} // End If
 
 		// If the how to play button was clicked
