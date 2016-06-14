@@ -1,13 +1,8 @@
 /*********************************************************************************
  * Assignment: Final Summative
- * Description: A sidescroller where you play as a police officer chasing down
- * 				a runaway prisoner. You win if you catch the prisoner, and you
- * 				lose if the prisoner gets too far away. Donuts give you points
- * 				and coffee speeds you up. You also get a "Skill" bonus to your
- * 				points if you catch the prisoner quickly or if you avoid a lot
- * 				of obstacles.
+ * Description: A class containing all parts of the character and the prisoner
  *
- * Author: Yuting L.
+ * Main Author: Yuting L.
  * Date: 19/05/16 through 13/06/16
  * Course: ICS4U1
  *********************************************************************************/
@@ -17,12 +12,26 @@ import javax.swing.ImageIcon;
 
 public class Character// #define
 {
-	private int spd = 200, vert = 0, x = 100, y = 338;
+	/*****************
+	 * Class Variables
+	 *****************/
+	
 	private static int floor = 338, spdDiff = 0;
+	
+	/********************
+	 * Instance Variables
+	 ********************/
+	
+	private int spd = 200, vert = 0, x = 100, y = 338;
 	String mode = "run";
 	ImageIcon[] imgs = new ImageIcon[6], jumps = new ImageIcon[2], rolls = new ImageIcon[6];
 	boolean released = false;
 
+	
+	/*******************
+	 * Constructors
+	 *******************/
+	
 	Character(boolean bool)
 	{
 		for (int i = 0; i < 6; i++)

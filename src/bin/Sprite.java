@@ -1,17 +1,38 @@
+/*********************************************************************************
+ * Assignment: Final Summative
+ * Description: The class containing all the needed values for buildings
+ *
+ * Main Author: Yuting L.
+ * Date: 19/05/16 through 13/06/16
+ * Course: ICS4U1
+ *********************************************************************************/
 package bin;
 
 import javax.swing.ImageIcon;
 
 public class Sprite
 {
+	/********************
+	 * Instance Variables
+	 ********************/
+	
 	ImageIcon image = null;
 	int x = 700, y = 0, i = 0;
 
+	
+	/********************
+	 * Constructors
+	 ********************/
+	
 	Sprite(int i)
 	{
 		x = i;
-	}
-
+	}	
+	
+	/********************
+	 * Get Methods
+	 ********************/
+	
 	public ImageIcon getImage()
 	{
 		return image;
@@ -27,6 +48,10 @@ public class Sprite
 		return y;
 	}
 
+	/*******************
+	 * Set Methods
+	 ******************/
+	
 	public void setX(int set)
 	{
 		x = set;
@@ -37,6 +62,12 @@ public class Sprite
 		y = set;
 	}
 
+
+	/*********************
+	 * Instance Methods
+	 *********************/
+	
+	
 	public void move(int dist)
 	{
 		x -= dist;

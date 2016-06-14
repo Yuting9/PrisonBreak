@@ -1,3 +1,12 @@
+/*********************************************************************************
+ * Assignment: Final Summative
+ * Description: The main game file, with all the actionListeners and
+ * 							keyListeners necessary to control the characters.
+ *
+ * Author: Yuting L.
+ * Date: 19/05/16 through 13/06/16
+ * Course: ICS4U1
+ *********************************************************************************/
 package bin;
 
 import javax.swing.*;
@@ -598,7 +607,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		 * @param g
 		 *          - The graphics variable
 		 */
-		private void paintCop(Graphics g)
+		private void paintCop(Graphics g)// #Aunik
 		{
 			cop.paintIcon(this, g, 50, player.getY());
 		}// End paintCop
@@ -609,7 +618,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		 * @param g
 		 *          - The graphics variable
 		 */
-		private void paintPrison(Graphics g)
+		private void paintPrison(Graphics g)// #Aunik
 		{
 			prisoner.paintIcon(this, g, prison.getX(), 338);
 		}// End paintPrison
@@ -675,11 +684,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		private void paintInfo(Graphics g)
 		{
 			// Sets the color and font
-			g.setColor(Color.black);
-			g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 20));
+			g.setColor(Color.black);// #Aunik
+			g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 20));// #Aunik
 
 			// Paints the distance and points
-			g.drawString("Distance: " + distance + "m", 50, 50);
+			g.drawString("Distance: " + distance + "m", 50, 50);// #Aunik
 			g.drawString("Points: " + (pointD + pointG + pointC), 600, 50);
 		}// End paintInfo
 
