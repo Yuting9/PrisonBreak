@@ -3,6 +3,8 @@ package bin;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.util.Scanner;
+import java.io.*;
 
 public class Victory implements ActionListener, KeyListener
 {
@@ -11,9 +13,16 @@ public class Victory implements ActionListener, KeyListener
     pointC = PrisonBreak.game.pointC, pointT = (1100 - PrisonBreak.game.pointT) * 2,
     pointG = PrisonBreak.game.pointG, totP;
   JButton btnSubmit;
+  String holding;
+  String [] info = new String[3];
+  String score;
+  int[] scoreList;
+  int c = 0;
   
   Victory(boolean really)
   {
+    //frame.addKeyListener(this);
+    frame.setFocusable(true);
     frame.setBounds(300, 100, 600, 450);
     frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
     
@@ -148,11 +157,79 @@ public class Victory implements ActionListener, KeyListener
     frame.setVisible(true);
   }
   
+  public void submitScore()
+  {
+    //Attempt to open and read the file
+    try
+    {
+      //Create a file Scanner
+      Scanner scanFile = new Scanner(new File("lead.info"));
+      scoreList = new int[20];
+      //for (int i = 0; i < 20; i++)
+      
+      //Keep going until the end of the file
+      while (scanFile.hasNextLine())
+      {
+        //read the current line
+        holding = scanFile.nextLine();
+        info = holding.split("<</>>");
+        score = info[1];
+        scoreList[c] = Integer.parseInt(score);
+        
+        int item = scoreList [c];
+        int i = c;
+        while (i > 0 && item < scoreList[i-1])
+        {
+          scoreList[i] = scoreList [i-1] ;
+          i--;
+        }
+        scoreList[i] = item;
+
+        //Print the file content to console
+        //System.out.println(scoreList[i]);
+        
+       
+        
+        c++;
+      }//end while
+      for (int a = 0; a < scoreList.length; a++)
+        {
+          System.out.println(scoreList[a]);
+        }
+      //Close the file (IMPORTANT)
+      scanFile.close();
+    }
+    catch(FileNotFoundException e)
+    {
+      System.out.println("The following problem reading from a file occurred:\n" + e);
+    }//end try/catch
+          
+    /*int [] scoreList = new int[20];
+    
+    for (int top = 1; top < scoreList.length; top++)
+    {
+      int item = scoreList [top] ;
+      int i = top;
+      while (i > 0 && item < scoreList[i-1])
+      {
+        scoreList[i] = scoreList [i-1] ;
+        i--;
+      }
+      scoreList[i] = item;
+    }
+    
+    for (int i = 0; i < scoreList.length; i++)
+    {
+      System.out.println(scoreList[i]);
+    }*/
+    
+  }
+  
   public void actionPerformed(ActionEvent e)
   {
-    if (e.getSource() == btnSubmit /*|| e.getSource() == enter button*/ )
+    if (e.getSource() == btnSubmit)
     {
-      
+      submitScore();
     }
   }
   
@@ -165,8 +242,12 @@ public class Victory implements ActionListener, KeyListener
  {
  }
 
- public void keyTyped(KeyEvent arg0)
+ public void keyTyped(KeyEvent e)
  {
+   if (e.getKeyCode() == 13)
+   {
+     submitScore();
+   }
  }
 }
 
