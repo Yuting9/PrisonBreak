@@ -306,7 +306,7 @@ public class Victory implements ActionListener, KeyListener
 		if (e.getSource() == btnSubmit)
 		{
 			// If the text has the special split character, popup an error
-			if (name.getText().contains("<</>>"))
+			if (name.getText().contains("<</>>"))// #error
 			{
 				JOptionPane.showMessageDialog(null, "You are using <</>>, which is not allowed.");
 			}
@@ -340,7 +340,7 @@ public class Victory implements ActionListener, KeyListener
 		if (e.getSource() == btnSubmit)
 		{
 			// If the text has the special split character, popup an error
-			if (name.getText().contains("<</>>"))
+			if (name.getText().contains("<</>>"))// #error
 			{
 				JOptionPane.showMessageDialog(null, "You are using <</>>, which is not allowed.");
 			}
