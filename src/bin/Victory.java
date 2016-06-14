@@ -12,21 +12,15 @@ public class Victory implements ActionListener, KeyListener
   JFrame frame  = new JFrame();
   int   pointD = PrisonBreak.game.pointD,
     pointC = PrisonBreak.game.pointC, pointT = (1100 - PrisonBreak.game.pointT) * 2,
-    pointG = PrisonBreak.game.pointG, totP;
+    pointG = PrisonBreak.game.pointG, index = 20, totP;
   JButton btnSubmit;
   String holding;
-  String [] info = new String[3];
+  String[] info = new String[3], name = new String[21];
   String score;
-  ArrayList<Integer> scoreList = new ArrayList<Integer>();
-  int c = 0;
+  int[] scoreList = new int[21];
   
   Victory(boolean really)
   {
-    for (int i = 0; i < 20; i++)
-    {
-      scoreList.add(0);
-    }
-    
     frame.setFocusable(true);
     frame.setBounds(300, 100, 600, 450);
     frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
@@ -165,35 +159,25 @@ public class Victory implements ActionListener, KeyListener
   
   public void sort()
   {
-    int item, i;
-    for (int top = 0; top < scoreList.size(); top++)
-    {
-      item = scoreList.get(top);
-      i = top;
-      while (i > 0 && item < scoreList.get(i-1))
-        {
-          scoreList.set(i, scoreList.get(i-1) ) ;
-          i--;
-        }
-      scoreList.set(i, item);
-    }
-    
-    for (int x = 0; x < scoreList.size(); x++)
-    {
-      if (scoreList.get(x) != 0)
-      {
-        scoreList.set(x, 0);
-        continue;
-      }
-      scoreList.set(x, scoreList.get(scoreList.size() - (1 + x) ) );
-    }
-    for (int a = 0; a < scoreList.size(); a++)
-        {
-          System.out.println(scoreList.get(a) );
-        }
+  	int temp;
+  	
+  	for(int i = 20; i>0; i--)
+  	{
+  		if(scoreList[i] > scoreList[i-1])
+  		{
+  			temp = scoreList[i];
+  			scoreList[i] = scoreList[i-1];
+  			scoreList[i-1] = temp;
+  			index--;
+  		}
+  		else
+  		{
+  			break;
+  		}
+  	}
   }
   
-  public void submitScore()
+  public void read()
   {
     //Attempt to open and read the file
     try
@@ -202,33 +186,59 @@ public class Victory implements ActionListener, KeyListener
       Scanner scanFile = new Scanner(new File("lead.info"));
       
       //Keep going until the end of the file
-      while (scanFile.hasNextLine())
+      for(int i = 0; i<20; i++)
       {
         //read the current line
-        holding = scanFile.nextLine();
-        info = holding.split("<</>>");
-        score = info[1];
-        scoreList.set(c, Integer.parseInt(score) );
-        c++;
-      }//end while
-     
+      	if(scanFile.hasNextLine())
+      	{
+	        holding = scanFile.nextLine();
+	        info = holding.split("<</>>");
+	        scoreList[i]=  Integer.parseInt(info[1]);
+      	}
+      	else
+      	{
+      		scoreList[i] = -9999;
+      	}
+      }//end for
       //Close the file
       scanFile.close();
-      
     }
     catch(FileNotFoundException e)
     {
       System.out.println("The following problem reading from a file occurred:\n" + e);
     }//end try/catch
-    
   }
+  
+  public void write()
+  {
+  	try{
+	    //Create a file Scanner
+	    FileWriter write = new FileWriter("lead.info");
+	    PrintWriter file = new PrintWriter(write);
+	    
+	    //Keep going until the end of the file
+	    for(int i = 0; i<20; i++)
+	    {
+	      
+	    }//end for
+	  }
+	  catch(FileNotFoundException e)
+	  {
+	    System.out.println("The following problem writing from a file occurred:\n" + e);
+	  }//end try/catch
+		catch (IOException e)
+		{
+			System.out.println("The following problem writing from a file occurred:\n" + e);
+		}
+  }
+  	
   
   public void actionPerformed(ActionEvent e)
   {
     if (e.getSource() == btnSubmit)
     {
-      scoreList.add(totP);
-      submitScore();
+      scoreList[20] = totP;
+      read();
       sort();
     }
   }
@@ -246,7 +256,9 @@ public class Victory implements ActionListener, KeyListener
  {
    if (e.getKeyCode() == 13)
    {
-     submitScore();
+     scoreList[20] = totP;
+     read();
+     sort();
    }
  }
 }
