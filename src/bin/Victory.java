@@ -4,6 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
 import java.util.Scanner;
+import java.util.ArrayList;
 import java.io.*;
 
 public class Victory implements ActionListener, KeyListener
@@ -16,12 +17,16 @@ public class Victory implements ActionListener, KeyListener
   String holding;
   String [] info = new String[3];
   String score;
-  int[] scoreList;
+  ArrayList<Integer> scoreList = new ArrayList<Integer>();
   int c = 0;
   
   Victory(boolean really)
   {
-    //frame.addKeyListener(this);
+    for (int i = 0; i < 20; i++)
+    {
+      scoreList.add(0);
+    }
+    
     frame.setFocusable(true);
     frame.setBounds(300, 100, 600, 450);
     frame.getContentPane().setLayout(new BoxLayout(frame.getContentPane(), BoxLayout.Y_AXIS));
@@ -157,6 +162,37 @@ public class Victory implements ActionListener, KeyListener
     frame.setVisible(true);
   }
   
+  
+  public void sort()
+  {
+    int item, i;
+    for (int top = 0; top < scoreList.size(); top++)
+    {
+      item = scoreList.get(top);
+      i = top;
+      while (i > 0 && item < scoreList.get(i-1))
+        {
+          scoreList.set(i, scoreList.get(i-1) ) ;
+          i--;
+        }
+      scoreList.set(i, item);
+    }
+    
+    for (int x = 0; x < scoreList.size(); x++)
+    {
+      if (scoreList.get(x) != 0)
+      {
+        scoreList.set(x, 0);
+        continue;
+      }
+      scoreList.set(x, scoreList.get(scoreList.size() - (1 + x) ) );
+    }
+    for (int a = 0; a < scoreList.size(); a++)
+        {
+          System.out.println(scoreList.get(a) );
+        }
+  }
+  
   public void submitScore()
   {
     //Attempt to open and read the file
@@ -164,8 +200,6 @@ public class Victory implements ActionListener, KeyListener
     {
       //Create a file Scanner
       Scanner scanFile = new Scanner(new File("lead.info"));
-      scoreList = new int[20];
-      //for (int i = 0; i < 20; i++)
       
       //Keep going until the end of the file
       while (scanFile.hasNextLine())
@@ -174,30 +208,13 @@ public class Victory implements ActionListener, KeyListener
         holding = scanFile.nextLine();
         info = holding.split("<</>>");
         score = info[1];
-        scoreList[c] = Integer.parseInt(score);
-        
-        int item = scoreList [c];
-        int i = c;
-        while (i > 0 && item < scoreList[i-1])
-        {
-          scoreList[i] = scoreList [i-1] ;
-          i--;
-        }
-        scoreList[i] = item;
-
-        //Print the file content to console
-        //System.out.println(scoreList[i]);
-        
-       
-        
+        scoreList.set(c, Integer.parseInt(score) );
         c++;
       }//end while
-      for (int a = 0; a < scoreList.length; a++)
-        {
-          System.out.println(scoreList[a]);
-        }
-      //Close the file (IMPORTANT)
+     
+      //Close the file
       scanFile.close();
+      
     }
     catch(FileNotFoundException e)
     {
@@ -210,7 +227,9 @@ public class Victory implements ActionListener, KeyListener
   {
     if (e.getSource() == btnSubmit)
     {
+      scoreList.add(totP);
       submitScore();
+      sort();
     }
   }
   
@@ -231,6 +250,3 @@ public class Victory implements ActionListener, KeyListener
    }
  }
 }
-
-
-
