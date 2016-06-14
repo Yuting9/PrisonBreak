@@ -137,7 +137,7 @@ public class PrisonBreak implements ActionListener
 			try
 			{
 				// Run the leaderboards screen
-				leaderboard second = new leaderboard(main);
+				Leaderboard second = new Leaderboard(main);
 			}
 			// If the leaderboard returns and error
 			catch (IOException exept)

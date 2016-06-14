@@ -17,7 +17,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	          prison = new Character(true);
 	// Sets boolean values, preGame controls the countdown, pressHold determines
 	// if the jump key is pressed and held, pressedOnce prevents multi-jumping,
-	// and isUrban controls the background.
+	// and isUrban controls how the background looks.
 	boolean		preGame			= true,
 	          pressHold = false, pressedOnce = false, urban = true, notEnd = true;
 	// Sets integer values, plTime is the frame the player character is to be at,
@@ -26,7 +26,6 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	int				plTime			= 0,
 	          doTime = 0, prTime = 0, buildCount = 0, change, spd, distance,
 	          pointD, pointC, pointT, pointG, difi = 2;
-	JLabel		background	= new JLabel();
 	Timer			clock				= new Timer(40, this);
 	String		playerMode	= "run",
 	          prisonMode = "run";
@@ -455,11 +454,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e)
 	{
 		// TODO Auto-generated method stub
-		if (e.getKeyCode() == 39)
+		if (e.getKeyCode() == 39)//#cheat
 		{
 			Character.addDiff(1);
 		}
-		else if (e.getKeyCode() == 37)
+		else if (e.getKeyCode() == 37)//#cheat
 		{
 			Character.addDiff(-1);
 		}
