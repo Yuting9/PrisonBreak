@@ -68,7 +68,7 @@ public class Character// #define
 		return spdDiff;
 	}
 
-	public ImageIcon getImage(int i)
+	public ImageIcon getImage(int i)// #instance
 	{
 		if (mode.equals("jump"))
 			return jumps[i];
