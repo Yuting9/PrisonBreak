@@ -37,7 +37,7 @@ import java.awt.FlowLayout;
 import java.io.*;
 import java.util.Scanner;
 
-public class leaderboard
+public class Leaderboard
 {
 	// The file in which all the information is stored
 	static File					file	= new File("lead.info");
@@ -50,7 +50,7 @@ public class leaderboard
 	// The main frame containing all the relevant panels
 	final JFrame	lead	= new JFrame("On the Run - Leaderboards");
 
-	leaderboard(final JFrame main) throws IOException
+	Leaderboard(final JFrame main) throws IOException
 	{
 		lead.getContentPane().setLayout(new BoxLayout(lead.getContentPane(), BoxLayout.X_AXIS));
 		lead.setVisible(true);
@@ -105,7 +105,7 @@ public class leaderboard
 
 		file.createNewFile();
 		// Attempt to open and read the file
-		try
+		try//#read
 		{
 			// Create a file Scanner
 			Scanner scanFile = new Scanner(file);
