@@ -9,46 +9,51 @@ import java.awt.Font;
 public class TheRun extends JPanel implements ActionListener, KeyListener
 {
 	// The main frame of the game
-	JFrame		frame				= new JFrame();
+	JFrame frame = new JFrame();
 
 	// Initializing the Donut Class
 	// Initializing the Character class as a player and a prisoner
-	Character	player			= new Character(false),
-	          prison = new Character(true);
+	Character player = new Character(false), prison = new Character(true);
+
 	// Sets boolean values, preGame controls the countdown, pressHold determines
 	// if the jump key is pressed and held, pressedOnce prevents multi-jumping,
 	// and isUrban controls how the background looks.
-	boolean		preGame			= true,
-	          pressHold = false, pressedOnce = false, urban = true, notEnd = true;
+	boolean preGame = true, pressHold = false, pressedOnce = false, urban = true;
+
 	// Sets integer values:
 	// plTime is the frame the player character is to be at.
 	// prTime is the frame the prisoner is to be at.
 	// buildCount counts the amount of buildings that have passed and changes the
-	//   background accordingly
+	// background accordingly
 	// change is the speed the buildings move at
 	// spd is the player's speed
 	// distance is the distance between the player and the prisoner
 	// pointD, pointC, pointT, and pointG represent the points received
-	//   by Donuts, Coffee, Speed, and Garbage Cans respectively.
+	// by Donuts, Coffee, Speed, and Garbage Cans respectively.
 	// difi is the difficulty that increments with playtime.
-	int				plTime			= 0,
-	          prTime = 1, buildCount = 0, change, spd, distance, pointD, pointC, pointT, pointG,
-	          difi = 2;
+	int plTime = 0, prTime = 1, buildCount = 0, change, spd, distance, pointD, pointC, pointT,
+	pointG, difi = 2;
+
 	// The timer used to animate the screen
-	Timer			clock				= new Timer(40, this);
+	Timer clock = new Timer(40, this);
+
 	// The modes the player and prisoner are in
-	String		playerMode	= "run",
-	          prisonMode = "run";
+	String playerMode = "run", prisonMode = "run";
+
 	// The array containing all the buildings on-screen at one moment
-	Sprite[]	onScreen		= new Sprite[6];																											// #object
+	Sprite[] onScreen = new Sprite[6];// #object
+
 	// The array containing all the donuts on-screen at one moment
-	Donut[]		onDonut			= new Donut[5];																												// #object
+	Donut[] onDonut = new Donut[5];// #object
+
 	// The variable controlling the coffee cup
-	Coffee		onCoffee		= new Coffee();																												// #object
+	Coffee onCoffee = new Coffee();// #object
+
 	// The array containing all the garbage cans on-screen at one moment
-	Garbage[]	onGarb			= new Garbage[difi];																									// #object
+	Garbage[] onGarb = new Garbage[difi];// #object
+
 	// The DrawPanel used to contain all the items in the game
-	DrawPanel	panel				= new DrawPanel();																										// #object
+	DrawPanel panel = null;// #object
 
 	// Game Class
 	public TheRun()
@@ -89,7 +94,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// #error
 
 		// Initializes the drawPanel with the images required to start off
-		panel = new DrawPanel(player.getImage(0), prison.getImage(1), Donut.getImage());
+		panel = new DrawPanel(player.getImage(0), prison.getImage(1));
 
 		// Sets the boundaries for the drawPanel
 		panel.setBounds(0, 0, 900, 500);
@@ -279,7 +284,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 					} // End If
 				} // End If
 
-				// If the donut is in contact with the player
+				// If the donut is in contact with the player and not already eaten
 				if (onDonut[i].getX() > player.getX() - 20 && onDonut[i].getX() < player.getX() + 20
 				&& onDonut[i].getY() + 5 > player.getY() && onDonut[i].getY() < player.getY() + 100
 				&& !onDonut[i].getEaten())
@@ -289,195 +294,307 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 
 					// Set the donut to eaten
 					onDonut[i].eaten();
-				}// End If
-			}// End For
+				} // End If
+			} // End For
+
+			// If the coffee is in contact with the player and not already eaten
 			if (onCoffee.getX() > player.getX() - 20 && onCoffee.getX() < player.getX() + 20
 			&& onCoffee.getY() + 5 > player.getY() && onCoffee.getY() < player.getY() + 100
 			&& !onCoffee.getEaten())
 			{
+				// Adds points to the coffee point counter
 				pointC += 100;
+
+				// Sets the coffee to eaten
 				onCoffee.eaten();
+
+				// Speeds up the character
 				Character.addDiff(1);
+
+				// If the character's speed after incrementing is 3, add another 4 .
 				if (Character.getDiff() == 3)
 				{
 					Character.addDiff(4);
-				}
-			}
+				} // End If
+			} // End if
+
+			// If the coffee is deployed
 			if (onCoffee.isDeployed())
 			{
+				// Move the coffee
 				onCoffee.move(20);
-			}
+			} // End If
 
+			// If the coffee is off the screen
 			if (onCoffee.getX() < -300)
 			{
+				// Set the coffee to eaten
 				onCoffee.eaten();
-			}
+			} // End If
 
-			if (!onCoffee.isDeployed() && (int) (Math.random() * 10) == 0)
+			// If the coffee is not deployed, randomly pass this if check
+			if (!onCoffee.isDeployed() && (int) (Math.random() * 7) == 0)
 			{
+				// Deploys the coffee
 				onCoffee.deploy();
-			}
+			} // End If
 
+			// For all garbage cans
 			for (int i = 0; i < difi; i++)
 			{
+				// If the garbage is off the screen
 				if (onGarb[i].getX() < -300)
 				{
+					// Regenerate the garbage
 					onGarb[i].reGen((int) (Math.random() * 2));
-				}
+				} // End If
+
+				// If the garbage is in contact with the player
 				if (player.getX() > onGarb[i].getX() - 10
 				&& player.getX() < onGarb[i].getX() + 75 * (onGarb[i].getSize() + 1)
 				&& player.getY() + 60 > onGarb[i].getY() && !onGarb[i].getHit())
 				{
+					// Reduce the garbage point counter
 					pointG -= 75;
+
+					// Slow down the player
 					Character.addDiff(-1);
+
+					// If the player's speed is -3 after decrementing
 					if (Character.getDiff() == -3)
 					{
+						// Decremate the speed further by 4
 						Character.addDiff(-4);
-					}
+					} // End If
+
+					// Set garbage to Hit
 					onGarb[i].hit();
-				}
+				} // End If
+
+				// Move the garbage
 				onGarb[i].move(20);
-			}
+			} // End For
+
+			// Increment the Speed points counter
 			pointT++;
+
+			// If the points counter divided by five plus two is larger than the
+			// current difficulty
 			if (2 + pointT / 500 > difi)
 			{
+				// Increment the difficulty
 				difi += 1;
+
+				// Create a temporary garbage array
 				Garbage[] temp = new Garbage[difi];
+
+				// For all but the last index in that array
 				for (int i = 0; i < difi - 1; i++)
 				{
+					// Copy the current garbage's info
 					temp[i] = onGarb[i];
 				}
+
+				// Set the last index in that array
 				temp[difi - 1] = new Garbage((int) Math.random() * 2);
+
+				// Set the main garbage array to the temporary
 				onGarb = temp;
-			}
-			revalidate();
+			}// End If
+
+			// If the prisoner is in contact with the player
 			if (prison.getX() <= player.getX())
 			{
-				win();
-				notEnd = false;
+				// You win
+
+				// Dispose of the current frame
+				frame.dispose();
+
+				// Stop the timer
+				clock.stop();
+
+				// Initialize a new Victory screen with true
+				Victory win = new Victory(true);
 			}
+
+			// If the prisoner is off the screen
 			else if (prison.getX() > 900)
 			{
-				lose();
-				notEnd = false;
-			}
-		}
-	}
+				// You lose
 
-	private void win()
-	{
-		frame.dispose();
-		clock.stop();
-		Victory win = new Victory(true);
-	}
+				// Dispose of the current frame
+				frame.dispose();
 
-	private void lose()
-	{
-		frame.dispose();
-		clock.stop();
-		Victory win = new Victory(false);
-	}
+				// Stop the timer
+				clock.stop();
 
+				// Initialize a new Victory screen with false
+				Victory win = new Victory(false);
+			}// End If
+		}// End If
+	}// End actionPerformed
+
+	/**
+	 * The panel used to display all game objects
+	 * 
+	 * @author Yuting, Aunik
+	 */
 	class DrawPanel extends JPanel
 	{
-		ImageIcon	cop, prisoner, dondon;
-		String		mode			= "run";
-		int				countDown	= 4;
+		// ImageIcons for the player and prisoner
+		ImageIcon cop, prisoner;
 
-		public DrawPanel(ImageIcon firstCop, ImageIcon firstPris, ImageIcon donut)
+		// The integer used for the countdown
+		int countDown = 4;
+
+		/**
+		 * Recieves the initial states of the images and sets them as Instance
+		 * ImageIcons
+		 * 
+		 * @param firstCop
+		 *          - The first frame of the player
+		 * @param firstPris
+		 *          - The first frame of the prisoner
+		 */
+		public DrawPanel(ImageIcon firstCop, ImageIcon firstPris)
 		{
 			cop = firstCop;
 			prisoner = firstPris;
-			dondon = donut;
-		}
+		}// End Constructor
 
-		public DrawPanel()
-		{
-			// TODO Auto-generated constructor stub
-		}
-
+		/**
+		 * Decrements the countdown
+		 */
 		public void updateDown()
 		{
 			countDown--;
-		}
+		}// End updateDown
 
+		/**
+		 * Updates the prisoner's position
+		 * 
+		 * @param change - Any change made other than simple character speed difference
+		 */
 		public void updatePrison(int change)
 		{
+			// Sets the prisoner's new X
 			prison.setX(prison.getX() - change - Character.getDiff());
+			
+			// If the difference between speeds is greater than 2, decrement;
 			if (Character.getDiff() > 2)
 			{
 				Character.addDiff(-1);
-			}
+			}// End If
+			
+			// If the difference between speeds is smaller than -2, increment;
 			if (Character.getDiff() < -2)
 			{
 				Character.addDiff(1);
-			}
-		}
+			}// End If
+		}// End updatePrison
 
+		/**
+		 * Sets the player's new image
+		 * 
+		 * @param newCop - The new image
+		 */
 		public void setCopImage(ImageIcon newCop)
 		{
+			// Assigns the new image to the instance variable
 			cop = newCop;
+			
+			// If the mode is jump, jump.
 			if (player.getMode().equals("jump"))
 			{
 				player.jump();
-			}
-		}
-
-		public void setDonutImage(ImageIcon newDonut)
-		{
-			dondon = newDonut;
-		}
-
+			}// End If
+		}// End setCopImage
+		
+		/**
+		 * Sets the prisoner's new image
+		 * 
+		 * @param newPris - The new image
+		 */
 		public void setPrisImage(ImageIcon newPris)
 		{
+			// Assigns the new image to the instance variable
 			prisoner = newPris;
-		}
+		}// End setPrisImage
 
+		/**
+		 * Paints the countdown
+		 * 
+		 * @param g - The graphics variable
+		 */
 		private void paintCount(Graphics g)
 		{
+			// If the countdown is larger than 0
 			if (countDown > 0)
 			{
+				// Print out the number in black
 				g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 100));
 				g.drawString(Integer.toString(countDown), 150, 300);
 			}
+			// If the countdown is zero
 			else if (countDown == 0)
 			{
+				// Print out "Go!"
 				g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 200));
 				g.drawString("Go!", 150, 300);
-			}
-		}
+			}// End If
+		}// End paintCount
 
+		/**
+		 * Paints the background
+		 * 
+		 * @param g - The graphics variable
+		 */
 		private void paintBack(Graphics g)
 		{
+			// Sets the color of the background and draws it
 			g.setColor(new Color(0, 128, 231));
 			g.fillRect(0, 0, 1000, 600);
 
+			// For every building
 			for (int i = 0; i < 6; i++)
 			{
+				// If there's an image, draw the image
 				if (onScreen[i].getImage() != null)
 					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(), onScreen[i].getY());
+				
+				// If the building is off the screen
 				if (onScreen[i].getX() < -300)
 				{
+					// Regenerate the building
 					onScreen[i].reGen(urban);
+					
+					// Increment building counter
 					buildCount++;
+					
+					// If the building counter is 50
 					if (buildCount >= 50)
 					{
+						// Set the building counter to 0
 						buildCount = 0;
+						// Invert urban
 						urban = !urban;
-					}
-				}
-			}
+					}// End If
+				}// End If
+			}// End For
 
+			// Sets the color and draws the ground
 			g.setColor(Color.darkGray);
-			g.fillRect(0, 450, 1000, 100);
-		}
+			g.fillRect(0, 440, 1000, 100);
+		}// End paintBack
 
+		/**
+		 * Paints the player
+		 * 
+		 * @param g - The graphics variable
+		 */
 		private void paintCop(Graphics g)
 		{
-			if (player.getMode().equals("jump"))
-			{
-				cop.paintIcon(this, g, 50, player.getY());
-			}
+			
 			cop.paintIcon(this, g, 50, player.getY());
 		}
 
