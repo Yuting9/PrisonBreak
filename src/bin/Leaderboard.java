@@ -40,15 +40,15 @@ import java.util.Scanner;
 public class Leaderboard
 {
 	// The file in which all the information is stored
-	static File					file	= new File("lead.info");
+	static File file = new File("lead.info");
 	// The strings that contain information from the file
 	// These are written in HTML
-	String				name	= new String("<html>"),
-	              buff = new String("<html>"), score = new String("<html>"), holding = new String();
+	String name = new String("<html>"), buff = new String("<html>"),
+	score = new String("<html>"), holding = new String();
 	// The string array that holds the file information in array form
-	String[]			info	= new String[3];
+	String[] info = new String[3];
 	// The main frame containing all the relevant panels
-	final JFrame	lead	= new JFrame("On the Run - Leaderboards");
+	final JFrame lead = new JFrame("On the Run - Leaderboards");
 
 	Leaderboard(final JFrame main) throws IOException
 	{
@@ -77,7 +77,7 @@ public class Leaderboard
 			{
 				main.setVisible(true);
 				lead.dispose();
-			}
+			}// End actionPerformed
 		});
 		pnlBtn.add(btnRtn);
 
@@ -105,7 +105,7 @@ public class Leaderboard
 
 		file.createNewFile();
 		// Attempt to open and read the file
-		try//#read
+		try// #read
 		{
 			// Create a file Scanner
 			Scanner scanFile = new Scanner(file);
@@ -132,8 +132,8 @@ public class Leaderboard
 					else
 						name += i + ". " + "<br>";
 					buff += "------------<br>";
-				}
-			} // end while
+				}// End if
+			} // End while
 
 			// Close the file (IMPORTANT)
 			scanFile.close();
@@ -141,7 +141,7 @@ public class Leaderboard
 		catch (FileNotFoundException e)
 		{
 			System.out.println("The following problem reading from a file occurred:\n" + e);
-		} // end try/catch
+		} // End try/catch
 		name += "</html>";
 		buff += "</html>";
 		score += "</html>";
