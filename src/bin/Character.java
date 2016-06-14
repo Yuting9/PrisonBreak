@@ -15,19 +15,13 @@ package bin;
 
 import javax.swing.ImageIcon;
 
-public class Character
+public class Character// #define
 {
-	private int					spd				= 200,
-	                    vert 			= 0, 
-	                    x 				= 100, 
-	                    y 				= 338;
-	private static int	floor			= 338,
-	                    spdDiff 	= 0;
-	String							mode			= "run";
-	ImageIcon[]					imgs			= new ImageIcon[6],
-											jumps			= new ImageIcon[2],
-											rolls			= new ImageIcon[6];
-	boolean							released	= false;
+	private int spd = 200, vert = 0, x = 100, y = 338;
+	private static int floor = 338, spdDiff = 0;
+	String mode = "run";
+	ImageIcon[] imgs = new ImageIcon[6], jumps = new ImageIcon[2], rolls = new ImageIcon[6];
+	boolean released = false;
 
 	Character(boolean bool)
 	{
@@ -37,10 +31,13 @@ public class Character
 			{
 				imgs[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisoner" + i + ".png"));
 				if (i < 2)
-					jumps[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisjump" + i + ".png"));
+					jumps[i] = new ImageIcon(
+					PrisonBreak.class.getResource("/img/prisjump" + i + ".png"));
 				if (i < 4)
-					rolls[i] = new ImageIcon(PrisonBreak.class.getResource("/img/prisroll" + i + ".png"));
-			} else
+					rolls[i] = new ImageIcon(
+					PrisonBreak.class.getResource("/img/prisroll" + i + ".png"));
+			}
+			else
 			{
 				imgs[i] = new ImageIcon(PrisonBreak.class.getResource("/img/cop" + i + ".png"));
 				if (i < 2)
@@ -125,7 +122,7 @@ public class Character
 	{
 		spdDiff = set;
 	}
-	
+
 	public void jump()
 	{
 		y -= vert;
@@ -136,7 +133,8 @@ public class Character
 			{
 				released = true;
 			}
-		} else
+		}
+		else
 		{
 			vert -= 5;
 		}

@@ -145,7 +145,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			{
 				// Slow down the delay
 				clock.setDelay(250);
-			} // End If
+			} // End if
 
 			// Update the countdown painter
 			panel.updateDown();
@@ -216,14 +216,14 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				{
 					// Return to running
 					player.doRun();
-				} // End If
+				} // End if
 
 				// Set the image to be the rolling image
 				panel.setCopImage(player.getImage(plTime));
 
 				// Increment the frame
 				plTime++;
-			} // End If
+			} // End if
 
 			// If the prisoner is running (Used for possible future expansion allowing
 			// for prisoner jumping)
@@ -240,7 +240,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				{
 					// Reset the frame
 					prTime = 0;
-				} // End If
+				} // End if
 			}
 
 			// If the prisoner is jumping
@@ -256,9 +256,9 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				{
 					// Set the prisoner's down image
 					panel.setPrisImage(prison.getImage(1));
-				} // End If
+				} // End if
 
-			} // End If
+			} // End if
 
 			// Updates the prisoner's position
 			panel.updatePrison(0);
@@ -267,7 +267,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			for (int i = 0; i < 6; i++)
 			{
 				onScreen[i].move(40);
-			} // End For
+			} // End for
 			  // For every donut on screen
 			for (int i = 0; i < 5; i++)
 			{
@@ -281,8 +281,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 					if ((int) (Math.random() * 5) == 2)
 					{
 						onDonut[i].reGen();
-					} // End If
-				} // End If
+					} // End if
+				} // End if
 
 				// If the donut is in contact with the player and not already eaten
 				if (onDonut[i].getX() > player.getX() - 20 && onDonut[i].getX() < player.getX() + 20
@@ -294,8 +294,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 
 					// Set the donut to eaten
 					onDonut[i].eaten();
-				} // End If
-			} // End For
+				} // End if
+			} // End for
 
 			// If the coffee is in contact with the player and not already eaten
 			if (onCoffee.getX() > player.getX() - 20 && onCoffee.getX() < player.getX() + 20
@@ -315,7 +315,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				if (Character.getDiff() == 3)
 				{
 					Character.addDiff(4);
-				} // End If
+				} // End if
 			} // End if
 
 			// If the coffee is deployed
@@ -323,21 +323,21 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			{
 				// Move the coffee
 				onCoffee.move(20);
-			} // End If
+			} // End if
 
 			// If the coffee is off the screen
 			if (onCoffee.getX() < -300)
 			{
 				// Set the coffee to eaten
 				onCoffee.eaten();
-			} // End If
+			} // End if
 
 			// If the coffee is not deployed, randomly pass this if check
 			if (!onCoffee.isDeployed() && (int) (Math.random() * 7) == 0)
 			{
 				// Deploys the coffee
 				onCoffee.deploy();
-			} // End If
+			} // End if
 
 			// For all garbage cans
 			for (int i = 0; i < difi; i++)
@@ -347,7 +347,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				{
 					// Regenerate the garbage
 					onGarb[i].reGen((int) (Math.random() * 2));
-				} // End If
+				} // End if
 
 				// If the garbage is in contact with the player
 				if (player.getX() > onGarb[i].getX() - 10
@@ -365,15 +365,15 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 					{
 						// Decremate the speed further by 4
 						Character.addDiff(-4);
-					} // End If
+					} // End if
 
 					// Set garbage to Hit
 					onGarb[i].hit();
-				} // End If
+				} // End if
 
 				// Move the garbage
 				onGarb[i].move(20);
-			} // End For
+			} // End for
 
 			// Increment the Speed points counter
 			pointT++;
@@ -400,7 +400,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 
 				// Set the main garbage array to the temporary
 				onGarb = temp;
-			}// End If
+			}// End if
 
 			// If the prisoner is in contact with the player
 			if (prison.getX() <= player.getX())
@@ -430,8 +430,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 
 				// Initialize a new Victory screen with false
 				Victory win = new Victory(false);
-			}// End If
-		}// End If
+			}// End if
+		}// End if
 	}// End actionPerformed
 
 	/**
@@ -473,47 +473,50 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		/**
 		 * Updates the prisoner's position
 		 * 
-		 * @param change - Any change made other than simple character speed difference
+		 * @param change
+		 *          - Any change made other than simple character speed difference
 		 */
 		public void updatePrison(int change)
 		{
 			// Sets the prisoner's new X
 			prison.setX(prison.getX() - change - Character.getDiff());
-			
+
 			// If the difference between speeds is greater than 2, decrement;
 			if (Character.getDiff() > 2)
 			{
 				Character.addDiff(-1);
-			}// End If
-			
+			}// End if
+
 			// If the difference between speeds is smaller than -2, increment;
 			if (Character.getDiff() < -2)
 			{
 				Character.addDiff(1);
-			}// End If
+			}// End if
 		}// End updatePrison
 
 		/**
 		 * Sets the player's new image
 		 * 
-		 * @param newCop - The new image
+		 * @param newCop
+		 *          - The new image
 		 */
 		public void setCopImage(ImageIcon newCop)
 		{
 			// Assigns the new image to the instance variable
 			cop = newCop;
-			
+
 			// If the mode is jump, jump.
 			if (player.getMode().equals("jump"))
 			{
 				player.jump();
-			}// End If
+			}// End if
 		}// End setCopImage
-		
+
 		/**
 		 * Sets the prisoner's new image
 		 * 
-		 * @param newPris - The new image
+		 * @param newPris
+		 *          - The new image
 		 */
 		public void setPrisImage(ImageIcon newPris)
 		{
@@ -524,7 +527,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		/**
 		 * Paints the countdown
 		 * 
-		 * @param g - The graphics variable
+		 * @param g
+		 *          - The graphics variable
 		 */
 		private void paintCount(Graphics g)
 		{
@@ -541,13 +545,14 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				// Print out "Go!"
 				g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 200));
 				g.drawString("Go!", 150, 300);
-			}// End If
+			}// End if
 		}// End paintCount
 
 		/**
 		 * Paints the background
 		 * 
-		 * @param g - The graphics variable
+		 * @param g
+		 *          - The graphics variable
 		 */
 		private void paintBack(Graphics g)
 		{
@@ -561,16 +566,16 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				// If there's an image, draw the image
 				if (onScreen[i].getImage() != null)
 					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(), onScreen[i].getY());
-				
+
 				// If the building is off the screen
 				if (onScreen[i].getX() < -300)
 				{
 					// Regenerate the building
 					onScreen[i].reGen(urban);
-					
+
 					// Increment building counter
 					buildCount++;
-					
+
 					// If the building counter is 50
 					if (buildCount >= 50)
 					{
@@ -578,9 +583,9 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 						buildCount = 0;
 						// Invert urban
 						urban = !urban;
-					}// End If
-				}// End If
-			}// End For
+					}// End if
+				}// End if
+			}// End for
 
 			// Sets the color and draws the ground
 			g.setColor(Color.darkGray);
@@ -590,7 +595,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		/**
 		 * Paints the player
 		 * 
-		 * @param g - The graphics variable
+		 * @param g
+		 *          - The graphics variable
 		 */
 		private void paintCop(Graphics g)
 		{
@@ -600,7 +606,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		/**
 		 * Paints the prisoner
 		 * 
-		 * @param g - The graphics variable
+		 * @param g
+		 *          - The graphics variable
 		 */
 		private void paintPrison(Graphics g)
 		{
@@ -610,7 +617,8 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		/**
 		 * Paints the donuts
 		 * 
-		 * @param g - The graphics variable
+		 * @param g
+		 *          - The graphics variable
 		 */
 		private void paintDonut(Graphics g)
 		{
@@ -622,89 +630,139 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				{
 					// Paint the donut
 					onDonut[i].getImage().paintIcon(this, g, onDonut[i].getX(), onDonut[i].getY());
-				}// End If
-			}// End For
+				}// End if
+			}// End for
 		}// End paintDonut
 
+		/**
+		 * Paints coffee onto the screen
+		 * 
+		 * @param g
+		 *          - The graphics variable
+		 */
 		private void paintCoffee(Graphics g)
 		{
+			// If the coffee is deployed
 			if (onCoffee.isDeployed())
 			{
+				// Paint it onto the screen
 				onCoffee.getImage().paintIcon(this, g, onCoffee.getX(), onCoffee.getY());
-			}
-		}
+			}// End if
+		}// End paintCoffee
 
+		/**
+		 * Paints garbage cans onto the screen
+		 * 
+		 * @param g
+		 *          - The graphics variable
+		 */
 		private void paintGarbage(Graphics g)
 		{
+			// For all garbage cans in the array
 			for (int i = 0; i < difi; i++)
 			{
+				// Paint the garbage cans
 				onGarb[i].getImage().paintIcon(this, g, onGarb[i].getX(), onGarb[i].getY());
-			}
-		}
+			}// End for
+		}// End paintGarbage
 
-		private void paintDistance(Graphics g)
+		/**
+		 * Paints the information, like score and distance
+		 * 
+		 * @param g
+		 *          - The graphics variable
+		 */
+		private void paintInfo(Graphics g)
 		{
+			// Sets the color and font
 			g.setColor(Color.black);
 			g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 20));
+
+			// Paints the distance and points
 			g.drawString("Distance: " + distance + "m", 50, 50);
 			g.drawString("Points: " + (pointD + pointG + pointC), 600, 50);
-		}
+		}// End paintInfo
 
+		/**
+		 * Paints the whole thing
+		 * 
+		 * @param g
+		 *          - The graphics variable
+		 */
 		public void paintComponent(Graphics g)
 		{
 			super.paintComponent(g);
+
+			// Paints everything in order
 			paintBack(g);
 			paintCop(g);
 			paintPrison(g);
 			paintCount(g);
 			paintDonut(g);
 			paintCoffee(g);
-			paintDistance(g);
+			paintInfo(g);
 			paintGarbage(g);
 			repaint();
-		}
-	}
+		}// End paintComponent
+	}// End DrawPanel
 
-	@Override
+	/**
+	 * If a key has been pressed
+	 */
 	public void keyPressed(KeyEvent e)
 	{
-		// TODO Auto-generated method stub
+		// If the key is the right arrow key
 		if (e.getKeyCode() == 39)// #cheat
 		{
+			// Speed up by 1
 			Character.addDiff(1);
 		}
+		// If the key is the left arrow key
 		else if (e.getKeyCode() == 37)// #cheat
 		{
+			// Slow down by 1
 			Character.addDiff(-1);
 		}
-
+		// If the key is the space bar
 		else if (e.getKeyCode() == 32)
 		{
-			if (!pressHold && !pressedOnce && spd == 54)
+			// If the spacebar is not pressed while jumping and is not being held
+			if (!pressHold && !pressedOnce && spd == 54) //#error
 			{
-				;
+				// Set vertical movement to 30, jump, and
 				player.doJump();
 				player.setVert(30);
+
+				// The spacebar is now for all intents and purposes being held, and the
+				// character is now jumping
 				pressHold = true;
 				pressedOnce = true;
-			}
-		}
-	}
+			}// End if
+		}// End if
+	}// End keyPressed
 
-	@Override
+	/**
+	 * If a key was released
+	 */
 	public void keyReleased(KeyEvent e)
 	{
+		// If the key is a spacebar and it isn't the acceleration period
 		if (e.getKeyCode() == 32 && spd == 54)
 		{
+			// You are no longer holding the spacebar down
 			pressHold = false;
+			// If you are jumping, you are released.
 			if (player.getMode().equals("jump"))
 			{
 				player.isReleased();
-			}
-		}
-	}
+			}// End if
+		}// End if
+	}// End keyReleased
 
+	/**
+	 * Empty Class, required for Implements
+	 */
 	public void keyTyped(KeyEvent arg0)
 	{
-	}
-}
+	}// End keyTyped
+}// End The Run
