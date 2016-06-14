@@ -4,87 +4,94 @@ import javax.swing.ImageIcon;
 
 public class Garbage
 {
-	// Which type and difficulty the garbage cans are at
-	static int	size	= 0,
-	            difi 	= 0;
-	
-	// The X and Y values of the garbage cans
-	int					x			= 0,
-	            y 		= 0;
-	
-	// The image of garbage
-	ImageIcon		garb	= null;
-	
-	// Whether or not the garbage can has been hit
-	boolean			hit		= false;
+ // Which type and difficulty the garbage cans are at
+ static int size = 0,
+             difi  = 0;
+ 
+ // The X and Y values of the garbage cans
+ int     x   = 0,
+             y   = 0;
+ 
+ // The image of garbage
+ ImageIcon  garb = null;
+ 
+ // Whether or not the garbage can has been hit
+ boolean   hit  = false;
 
-	/**
-	 * The constructor used to prepare the image and position
-	 * 
-	 * @param i - The type of garbage can to be used
-	 */
-	Garbage(int i)
-	{
-		// Sets the image
-		garb = new ImageIcon(PrisonBreak.class.getResource("/img/garbage" + i + ".png"));
-		
-		// Sets the size
-		size = i;
-		
-		// Sets the location of the garbage can
-		x = (int) (Math.random() * 1000) + 800 * (i + 1);
-		y = 360;
-	}// End Constructor
-	
-	// Returns the Image
-	public ImageIcon getImage()
-	{
-		return garb;
-	}
+ /**
+  * The constructor used to prepare the image and position
+  * 
+  * @param i - The type of garbage can to be used
+  */
+ Garbage(int i)
+ {
+  // Sets the image
+  garb = new ImageIcon(PrisonBreak.class.getResource("/img/garbage" + i + ".png"));
+  
+  // Sets the size
+  size = i;
+  
+  // Sets the location of the garbage can
+  x = (int) (Math.random() * 1000) + 800 * (i + 1);
+  y = 360;
+ }// End Constructor
+ 
+ // Returns the Image
+ public ImageIcon getImage()
+ {
+  return garb;
+ }// End getImage
 
-	// Returns 
-	public int getSize()
-	{
-		return size;
-	}
+ // Returns size 
+ public int getSize()
+ {
+  return size;
+ }// End getSize
 
-	public int getX()
-	{
-		return x;
-	}
+ // Returns x value 
+ public int getX()
+ {
+  return x;
+ }// End getX
 
-	public int getY()
-	{
-		return y;
-	}
+ // Returns y value
+ public int getY()
+ {
+  return y;
+ }// End getY
 
-	public int getHeight()
-	{
-		return y;
-	}
+ // Returns height 
+ public int getHeight()
+ {
+  return y;
+ }// End getHeight
 
-	public void move(int dist)
-	{
-		x -= dist;
-	}
+ // Moves the x value
+ public void move(int dist)
+ {
+  x -= dist;
+ }// End move
 
-	public void reGen(int i)
-	{
-		hit = false;
-		size = i;
-		garb = new ImageIcon(PrisonBreak.class.getResource("/img/garbage" + i + ".png"));
-		x = (int) (Math.random() * 500) + 900;
-		y = 360;
-	}
+ // Regenerates the garbage can
+ public void reGen(int i)
+ {
+  hit = false;
+  size = i;
+  garb = new ImageIcon(PrisonBreak.class.getResource("/img/garbage" + i + ".png"));
+  x = (int) (Math.random() * 500) + 900;
+  y = 360;
+ }// End reGen
 
-	public void hit()
-	{
-		garb = new ImageIcon(PrisonBreak.class.getResource("/img/knocked.png"));
-		hit = true;
-	}
+ // The garbage can is knocked over
+ public void hit()
+ {
+  garb = new ImageIcon(PrisonBreak.class.getResource("/img/knocked.png"));
+  hit = true;
+ }// End hit
 
-	public boolean getHit()
-	{
-		return hit;
-	}
-}
+ // Returns is hit
+ public boolean getHit()
+ {
+  return hit;
+ }// End getHit
+}// End Garbage

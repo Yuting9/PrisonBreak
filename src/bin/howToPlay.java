@@ -100,7 +100,7 @@ public class howToPlay implements ActionListener
     btnNext = new JButton("Next");
     btnNext.addActionListener(this);
     pnlBtn.add(btnNext);
-  }
+  }//End default Constructor
   
   /**
    * The actionPerformed method containing info on what to do if buttons are pushed
