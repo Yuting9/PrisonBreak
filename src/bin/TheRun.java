@@ -594,25 +594,37 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		 */
 		private void paintCop(Graphics g)
 		{
-			
 			cop.paintIcon(this, g, 50, player.getY());
-		}
+		}// End paintCop
 
+		/**
+		 * Paints the prisoner
+		 * 
+		 * @param g - The graphics variable
+		 */
 		private void paintPrison(Graphics g)
 		{
 			prisoner.paintIcon(this, g, prison.getX(), 338);
-		}
+		}// End paintPrison
 
+		/**
+		 * Paints the donuts
+		 * 
+		 * @param g - The graphics variable
+		 */
 		private void paintDonut(Graphics g)
 		{
+			// For all the images in the donut array
 			for (int i = 0; i < 5; i++)
 			{
+				// If the donut is not eaten and exists
 				if (onDonut[i].getImage() != null && !onDonut[i].getEaten())
 				{
+					// Paint the donut
 					onDonut[i].getImage().paintIcon(this, g, onDonut[i].getX(), onDonut[i].getY());
-				}
-			}
-		}
+				}// End If
+			}// End For
+		}// End paintDonut
 
 		private void paintCoffee(Graphics g)
 		{
