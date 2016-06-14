@@ -20,190 +20,280 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	// and isUrban controls how the background looks.
 	boolean		preGame			= true,
 	          pressHold = false, pressedOnce = false, urban = true, notEnd = true;
-	// Sets integer values, plTime is the frame the player character is to be at,
-	// doTime is the frame the donuts are to be at, and prTime is the frame the
-	// prisoner is to be at. x controls where the buildings start, xCoor
+	// Sets integer values:
+	// plTime is the frame the player character is to be at.
+	// prTime is the frame the prisoner is to be at.
+	// buildCount counts the amount of buildings that have passed and changes the
+	//   background accordingly
+	// change is the speed the buildings move at
+	// spd is the player's speed
+	// distance is the distance between the player and the prisoner
+	// pointD, pointC, pointT, and pointG represent the points received
+	//   by Donuts, Coffee, Speed, and Garbage Cans respectively.
+	// difi is the difficulty that increments with playtime.
 	int				plTime			= 0,
-	          doTime = 0, prTime = 0, buildCount = 0, change, spd, distance,
-	          pointD, pointC, pointT, pointG, difi = 2;
+	          prTime = 1, buildCount = 0, change, spd, distance, pointD, pointC, pointT, pointG,
+	          difi = 2;
+	// The timer used to animate the screen
 	Timer			clock				= new Timer(40, this);
+	// The modes the player and prisoner are in
 	String		playerMode	= "run",
 	          prisonMode = "run";
-	Sprite[]	onScreen		= new Sprite[6];
-	Donut[]		onDonut			= new Donut[5];
-	Coffee		onCoffee		= new Coffee();
-	Garbage[]	onGarb			= new Garbage[difi];
-	DrawPanel	panel				= new DrawPanel();
+	// The array containing all the buildings on-screen at one moment
+	Sprite[]	onScreen		= new Sprite[6];																											// #object
+	// The array containing all the donuts on-screen at one moment
+	Donut[]		onDonut			= new Donut[5];																												// #object
+	// The variable controlling the coffee cup
+	Coffee		onCoffee		= new Coffee();																												// #object
+	// The array containing all the garbage cans on-screen at one moment
+	Garbage[]	onGarb			= new Garbage[difi];																									// #object
+	// The DrawPanel used to contain all the items in the game
+	DrawPanel	panel				= new DrawPanel();																										// #object
 
+	// Game Class
 	public TheRun()
 	{
 
-		/*
-		 * for (int d = 0; d < 2; d++) { onDonut[d] = new Sprite(-100 + (210*d)); }
-		 */
+		// Initializes all the buildings
 		for (int i = 0; i < 6; i++)
 		{
 			onScreen[i] = new Sprite(-100 + (210 * i));
 		}
 
+		// Initializes all the donuts
 		for (int i = 0; i < 5; i++)
 		{
 			onDonut[i] = new Donut(i);
 		}
 
+		// Initializes all the garbage cans
 		for (int i = 0; i < difi; i++)
 		{
 			onGarb[i] = new Garbage((int) Math.random() * 2);
 		}
 
+		// Adds a key listener to the frame
 		frame.addKeyListener(this);
+
+		// Focuses the frame to ensure keyboard listening
 		frame.setFocusable(true);
+
+		// Restricts resizing of the frame
 		frame.setResizable(false);
+
+		// Creates the bounds for the frame
 		frame.setBounds(100, 100, 900, 500);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		panel = new DrawPanel(player.getImage(0), prison.getImage(0),
-		Donut.getImage());
-		panel.setBounds(100, 100, 900, 500);
+
+		// Creates a default close operation to ensure the game stops even though
+		// the use force-exited
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// #error
+
+		// Initializes the drawPanel with the images required to start off
+		panel = new DrawPanel(player.getImage(0), prison.getImage(1), Donut.getImage());
+
+		// Sets the boundaries for the drawPanel
+		panel.setBounds(0, 0, 900, 500);
+
+		// Adds the panel to the content pane of the frame
 		frame.getContentPane().add(panel);
+
+		// Makes the frame visible
 		frame.setVisible(true);
+
+		// Starts the timer
 		clock.start();
-		frame.getContentPane().add(this);
-		frame.setVisible(true);
+
+		// Deploys the prisoner
 		prison.setX(600);
 	}
 
-	@Override
+	// Contains the majority of the actionable code
 	public void actionPerformed(ActionEvent e)
 	{
+		// Recieves the mode the player and prisoner are in
 		playerMode = player.getMode();
 		prisonMode = prison.getMode();
+
+		// Sets the delay for the clock
 		clock.setDelay(1000);
+
+		// Recieves the distance between the player and the prisoner
 		distance = ((prison.getX() - player.getX()) / 10);
+
+		// If it is before the game (countdown)
 		if (preGame)
 		{
-			// Display countdown
+			// If the coundown timer is past zero
 			if (panel.countDown <= 0)
 			{
+				// It is no longer before the game (Game starts)
 				preGame = false;
+
+				// Increments the frame the player is at
 				plTime++;
+
+				// Sets the delay to a much shorter one
 				clock.setDelay(50);
 			}
+			// If the countdown is past one
 			else if (panel.countDown <= 1)
 			{
+				// Slow down the delay
 				clock.setDelay(250);
-			}
+			} // End If
+
+			// Update the countdown painter
 			panel.updateDown();
 		}
+		// The game has started already
 		else
 		{
-			panel.setDonutImage(Donut.getImage());
-			doTime++;
-			if (doTime == 4)
-			{
-				doTime = 0;
-			}
-
+			// Get the player's initial speed
 			spd = player.getSpd();
+
+			// Sets the clock's delay to that speed
 			clock.setDelay(spd);
+
+			// If the speed is larger than 60
 			if (spd >= 60)
 			{
+				// Move the buildings a set amount
 				change = 50 - (spd / 5);
+
+				// Chenge the speed of the players
 				player.setSpd(spd -= (spd / 5));
 			}
+
+			// If the player is running
 			if (playerMode.equals("run"))
 			{
+				// Set the frame the player is at
 				panel.setCopImage(player.getImage(plTime));
+
+				// Increment the frame
 				plTime++;
+
+				// If the frame is the last frame, restart from beginning
 				if (plTime == 6)
-				{
 					plTime = 0;
-				}
 			}
+
+			// If the player is jumping
 			else if (playerMode.equals("jump"))
 			{
+				// Sets the player's frame to 0
 				plTime = 0;
+
+				// If the player is moving up
 				if (player.getVert() >= 0)
 				{
+					// Get the player's moving up image
 					panel.setCopImage(player.getImage(0));
 				}
 				else
 				{
+					// Get the player's moving down image
 					panel.setCopImage(player.getImage(1));
 				}
 			}
+
+			// If the player is rolling
 			else if (playerMode.equals("roll"))
 			{
+				// Resets the button press variable
 				pressedOnce = false;
+
+				// Releases the player
 				player.isNotReleased();
+
+				// If the player is at the last frame
 				if (plTime == 3)
 				{
+					// Return to running
 					player.doRun();
-				}
+				} // End If
+
+				// Set the image to be the rolling image
 				panel.setCopImage(player.getImage(plTime));
+
+				// Increment the frame
 				plTime++;
-			}
+			} // End If
+
+			// If the prisoner is running (Used for possible future expansion allowing
+			// for prisoner jumping)
 			if (prisonMode.equals("run"))
 			{
-				if (prTime < 5)
-				{
-					prTime++;
-					panel.setPrisImage(prison.getImage(prTime));
-					prTime--;
-				}
-				else
-				{
-					panel.setPrisImage(prison.getImage(0));
-				}
+				// Set the prisoner's image
+				panel.setPrisImage(prison.getImage(prTime));
 
+				// Increments the frame
 				prTime++;
+
+				// If the frame is past the end
 				if (prTime == 6)
 				{
+					// Reset the frame
 					prTime = 0;
-				}
+				} // End If
 			}
 
+			// If the prisoner is jumping
 			else if (prisonMode.equals("jump"))
 			{
+				// If the prisoner is going up
 				if (prison.getVert() > 0)
 				{
-					panel.setCopImage(prison.getImage(0));
+					// Set the prisoner's up image
+					panel.setPrisImage(prison.getImage(0));
 				}
 				else
 				{
-					panel.setCopImage(prison.getImage(1));
-				}
+					// Set the prisoner's down image
+					panel.setPrisImage(prison.getImage(1));
+				} // End If
 
-			}
+			} // End If
+
+			// Updates the prisoner's position
 			panel.updatePrison(0);
-			panel.updateDown();
+
+			// Moves the buildings a set amount
 			for (int i = 0; i < 6; i++)
 			{
 				onScreen[i].move(40);
-			}
+			} // End For
+			  // For every donut on screen
 			for (int i = 0; i < 5; i++)
 			{
+				// Move the donuts
 				onDonut[i].move(20);
+
+				// If the donut is off the screen
 				if (onDonut[i].getX() < -300)
 				{
-					int x = (int) (Math.random() * 5);
-					if (x == 2)
+					// Randomly chooses to generate another
+					if ((int) (Math.random() * 5) == 2)
 					{
 						onDonut[i].reGen();
-					}
-				}
-				if (onDonut[i].getX() > player.getX() - 20
-				&& onDonut[i].getX() < player.getX() + 20
-				&& onDonut[i].getY() + 5 > player.getY()
-				&& onDonut[i].getY() < player.getY() + 100 && !onDonut[i].getEaten())
+					} // End If
+				} // End If
+
+				// If the donut is in contact with the player
+				if (onDonut[i].getX() > player.getX() - 20 && onDonut[i].getX() < player.getX() + 20
+				&& onDonut[i].getY() + 5 > player.getY() && onDonut[i].getY() < player.getY() + 100
+				&& !onDonut[i].getEaten())
 				{
+					// Add points to the player's donut counter
 					pointD += 10;
+
+					// Set the donut to eaten
 					onDonut[i].eaten();
-				}
-			}
-			if (onCoffee.getX() > player.getX() - 20
-			&& onCoffee.getX() < player.getX() + 20
-			&& onCoffee.getY() + 5 > player.getY()
-			&& onCoffee.getY() < player.getY() + 100 && !onCoffee.getEaten())
+				}// End If
+			}// End For
+			if (onCoffee.getX() > player.getX() - 20 && onCoffee.getX() < player.getX() + 20
+			&& onCoffee.getY() + 5 > player.getY() && onCoffee.getY() < player.getY() + 100
+			&& !onCoffee.getEaten())
 			{
 				pointC += 100;
 				onCoffee.eaten();
@@ -253,11 +343,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			{
 				difi += 1;
 				Garbage[] temp = new Garbage[difi];
-				for(int i = 0; i<difi-1; i++)
-				{ 
+				for (int i = 0; i < difi - 1; i++)
+				{
 					temp[i] = onGarb[i];
 				}
-				temp[difi-1] = new Garbage((int) Math.random() * 2);
+				temp[difi - 1] = new Garbage((int) Math.random() * 2);
 				onGarb = temp;
 			}
 			revalidate();
@@ -365,8 +455,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			for (int i = 0; i < 6; i++)
 			{
 				if (onScreen[i].getImage() != null)
-					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(),
-					onScreen[i].getY());
+					onScreen[i].getImage().paintIcon(this, g, onScreen[i].getX(), onScreen[i].getY());
 				if (onScreen[i].getX() < -300)
 				{
 					onScreen[i].reGen(urban);
@@ -403,8 +492,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			{
 				if (onDonut[i].getImage() != null && !onDonut[i].getEaten())
 				{
-					onDonut[i].getImage().paintIcon(this, g, onDonut[i].getX(),
-					onDonut[i].getY());
+					onDonut[i].getImage().paintIcon(this, g, onDonut[i].getX(), onDonut[i].getY());
 				}
 			}
 		}
@@ -413,8 +501,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			if (onCoffee.isDeployed())
 			{
-				onCoffee.getImage().paintIcon(this, g, onCoffee.getX(),
-				onCoffee.getY());
+				onCoffee.getImage().paintIcon(this, g, onCoffee.getX(), onCoffee.getY());
 			}
 		}
 
@@ -422,8 +509,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		{
 			for (int i = 0; i < difi; i++)
 			{
-				onGarb[i].getImage().paintIcon(this, g, onGarb[i].getX(),
-				onGarb[i].getY());
+				onGarb[i].getImage().paintIcon(this, g, onGarb[i].getX(), onGarb[i].getY());
 			}
 		}
 
@@ -432,7 +518,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 			g.setColor(Color.black);
 			g.setFont(new Font("Copperplate Gothic Bold", Font.PLAIN, 20));
 			g.drawString("Distance: " + distance + "m", 50, 50);
-			g.drawString("Points: " + (pointD+pointG+pointC), 600, 50);
+			g.drawString("Points: " + (pointD + pointG + pointC), 600, 50);
 		}
 
 		public void paintComponent(Graphics g)
@@ -454,11 +540,11 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 	public void keyPressed(KeyEvent e)
 	{
 		// TODO Auto-generated method stub
-		if (e.getKeyCode() == 39)//#cheat
+		if (e.getKeyCode() == 39)// #cheat
 		{
 			Character.addDiff(1);
 		}
-		else if (e.getKeyCode() == 37)//#cheat
+		else if (e.getKeyCode() == 37)// #cheat
 		{
 			Character.addDiff(-1);
 		}
