@@ -203,25 +203,6 @@ public class Victory implements ActionListener, KeyListener
     {
       System.out.println("The following problem reading from a file occurred:\n" + e);
     }//end try/catch
-          
-    /*int [] scoreList = new int[20];
-    
-    for (int top = 1; top < scoreList.length; top++)
-    {
-      int item = scoreList [top] ;
-      int i = top;
-      while (i > 0 && item < scoreList[i-1])
-      {
-        scoreList[i] = scoreList [i-1] ;
-        i--;
-      }
-      scoreList[i] = item;
-    }
-    
-    for (int i = 0; i < scoreList.length; i++)
-    {
-      System.out.println(scoreList[i]);
-    }*/
     
   }
   
