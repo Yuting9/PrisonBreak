@@ -15,14 +15,13 @@ import javax.swing.ImageIcon;
 public class Donut
 {
 	// The X and Y values for the donut
-	int								x			= 0,
-	                  y = 0;
+	int x = 0, y = 0;
 
 	// The image for the donut
-	static ImageIcon	donut	= null;
+	static ImageIcon donut = null;
 
 	// Whether or not the donut has been eaten
-	boolean						eaten	= false;
+	boolean eaten = false;
 
 	// Default Constructor
 	Donut(int i)

@@ -15,23 +15,22 @@ public class Character// #define
 	/*****************
 	 * Class Variables
 	 *****************/
-	
+
 	private static int floor = 338, spdDiff = 0;
-	
+
 	/********************
 	 * Instance Variables
 	 ********************/
-	
+
 	private int spd = 200, vert = 0, x = 100, y = 338;
 	String mode = "run";
 	ImageIcon[] imgs = new ImageIcon[6], jumps = new ImageIcon[2], rolls = new ImageIcon[6];
 	boolean released = false;
 
-	
 	/*******************
 	 * Constructors
 	 *******************/
-	
+
 	Character(boolean bool)
 	{
 		for (int i = 0; i < 6; i++)

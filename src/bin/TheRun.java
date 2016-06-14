@@ -364,7 +364,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 				&& player.getY() + 60 > onGarb[i].getY() && !onGarb[i].getHit())
 				{
 					// Reduce the garbage point counter
-					pointG -= 75;
+					pointG -= 50;
 
 					// Slow down the player
 					Character.addDiff(-1);
@@ -736,7 +736,7 @@ public class TheRun extends JPanel implements ActionListener, KeyListener
 		else if (e.getKeyCode() == 32)
 		{
 			// If the spacebar is not pressed while jumping and is not being held
-			if (!pressHold && !pressedOnce && spd == 54) //#error
+			if (!pressHold && !pressedOnce && spd == 54) // #error
 			{
 				// Set vertical movement to 30, jump, and
 				player.doJump();

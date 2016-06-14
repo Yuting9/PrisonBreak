@@ -13,16 +13,14 @@ import javax.swing.ImageIcon;
 // Coffee Class
 public class Coffee
 {
-	//The X and Y values of Coffee
-	int								x				= 0,
-	                  y 			= 0;
-	
+	// The X and Y values of Coffee
+	int x = 0, y = 0;
+
 	// The image of the coffee
-	static ImageIcon	coffee	= null;
-	
+	static ImageIcon coffee = null;
+
 	// Whether or not the coffee has been deployed to the screen and/or consumed
-	boolean						eaten		= false,
-	                  deployed = false;
+	boolean eaten = false, deployed = false;
 
 	// Default Constructor
 	Coffee()
